@@ -196,6 +196,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 .ca{color:#2E7D4F;font-weight:700;}
 .wa{color:#C94040;font-weight:700;}
 
+/* NOTES */
+.note-box{background:#F0F7FF;border:1px solid #B5D4F4;border-radius:8px;padding:8px 10px;margin-top:6px;}
+.note-label{font-size:11px;color:#1A5C9A;font-weight:700;margin-bottom:4px;}
+.note-textarea{width:100%;border:1px solid #B5D4F4;border-radius:6px;padding:7px 10px;font-size:13px;direction:rtl;text-align:right;resize:none;outline:none;background:#fff;font-family:inherit;line-height:1.5;}
+.note-textarea:focus{border-color:#1A5C9A;}
+.note-save{font-size:12px;padding:5px 14px;border:1px solid #1A5C9A;background:#EEF4FB;color:#1A5C9A;border-radius:6px;cursor:pointer;margin-top:5px;}
+.note-saved{font-size:11px;color:#2E7D4F;margin-right:8px;display:none;}
+.note-display{font-size:12px;color:#1A5C9A;background:#EEF4FB;border-radius:6px;padding:5px 8px;margin-top:5px;line-height:1.5;cursor:pointer;}
+.note-display:before{content:"📝 ";}
+
 /* SELF MARK SCREEN */
 .self-mark-header{background:#FFFBEB;border:1px solid #D4A017;border-radius:12px;padding:1rem;margin-bottom:1rem;}
 .self-mark-title{font-size:14px;font-weight:700;color:#B8860B;}
@@ -231,6 +241,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <div class="header">
     <div class="logo">מילים <span>לפסיכומטרי</span></div>
     <div style="display:flex;align-items:center;gap:8px">
+      <button id="sound-btn" onclick="toggleSound()" style="font-size:18px;background:none;border:none;cursor:pointer;padding:2px 4px;opacity:0.8" title="צלילים">🔊</button>
       <span class="user-chip" id="user-chip" onclick="switchUser()">👤</span>
       <div class="stats-row">
         <div class="stat"><div class="stat-val" id="tot-m">0</div><div class="stat-lbl">שלטתי</div></div>
@@ -310,6 +321,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <div class="ar" id="fc-ar" style="display:none">
     <button class="btn-fail" onclick="markCard(false)">✗ לא ידעתי</button>
     <button class="btn-pass" onclick="markCard(true)">✓ ידעתי!</button>
+  </div>
+  <div id="fc-note-wrap" style="display:none;margin-top:10px">
+    <div class="note-box">
+      <div class="note-label">📝 הערה אישית</div>
+      <div id="fc-note-display" class="note-display" style="display:none" onclick="openNoteEdit()"></div>
+      <div id="fc-note-edit" style="display:none">
+        <textarea class="note-textarea" id="fc-note-input" rows="2" placeholder="כתבי הערה, דוגמה, אסוציאציה..."></textarea>
+        <div style="display:flex;align-items:center;margin-top:4px">
+          <button class="note-save" onclick="saveNote()">שמור</button>
+          <span class="note-saved" id="note-saved-msg">✓ נשמר</span>
+        </div>
+      </div>
+      <button id="fc-note-add-btn" style="font-size:12px;color:#1A5C9A;background:none;border:none;cursor:pointer;padding:2px 0" onclick="openNoteEdit()">+ הוסיפי הערה</button>
+    </div>
   </div>
 </div>
 
@@ -508,9 +533,17 @@ function renderList(f){
   list.innerHTML='';
   arr.forEach(w=>{
     const st=gs(w.e);
+    const note=S.ws[w.e+'_note']||'';
     const d=document.createElement('div');
     d.className='wi'+(st==='mastered'?' mastered':st==='failed'?' failed':'');
-    d.innerHTML=`<div class="wdot"></div><div class="weng">${w.e}</div><div class="wheb">${w.h}</div>
+    d.innerHTML=`<div class="wdot"></div>
+    <div style="flex:1;min-width:0">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="weng">${w.e}</div>
+        <div class="wheb">${w.h}</div>
+      </div>
+      ${note?`<div style="font-size:11px;color:#1A5C9A;margin-top:2px">📝 ${note}</div>`:''}
+    </div>
     <div class="self-mark-btns">
       <button class="sm-btn sm-ok" onclick="quickMark('${w.e}','mastered',event)">✓</button>
       <button class="sm-btn sm-no" onclick="quickMark('${w.e}','failed',event)">✗</button>
@@ -557,12 +590,72 @@ function renderFlash(){
   card.classList.remove('flipped');
   document.getElementById('btn-flip').style.display='';
   document.getElementById('fc-ar').style.display='none';
+  document.getElementById('fc-note-wrap').style.display='none';
   flashFlipped=false;
 }
-function flipCard(){if(flashFlipped)return;flashFlipped=true;document.getElementById('flashcard').classList.add('flipped');document.getElementById('btn-flip').style.display='none';document.getElementById('fc-ar').style.display='flex';}
+
+function showNoteSection(eng){
+  const wrap=document.getElementById('fc-note-wrap');
+  wrap.style.display='block';
+  const note=S.ws[eng+'_note']||'';
+  const disp=document.getElementById('fc-note-display');
+  const edit=document.getElementById('fc-note-edit');
+  const addBtn=document.getElementById('fc-note-add-btn');
+  const inp=document.getElementById('fc-note-input');
+  if(note){
+    disp.textContent=note;
+    disp.style.display='block';
+    edit.style.display='none';
+    addBtn.style.display='none';
+  } else {
+    disp.style.display='none';
+    edit.style.display='none';
+    addBtn.style.display='block';
+    inp.value='';
+  }
+  document.getElementById('note-saved-msg').style.display='none';
+}
+
+function openNoteEdit(){
+  const w=flashQ[flashI];
+  const note=S.ws[w.e+'_note']||'';
+  document.getElementById('fc-note-input').value=note;
+  document.getElementById('fc-note-display').style.display='none';
+  document.getElementById('fc-note-edit').style.display='block';
+  document.getElementById('fc-note-add-btn').style.display='none';
+  document.getElementById('fc-note-input').focus();
+}
+
+function saveNote(){
+  const w=flashQ[flashI];
+  const val=document.getElementById('fc-note-input').value.trim();
+  if(val) S.ws[w.e+'_note']=val;
+  else delete S.ws[w.e+'_note'];
+  saveS();
+  playTone('save');
+  const msg=document.getElementById('note-saved-msg');
+  msg.style.display='inline';
+  setTimeout(()=>{msg.style.display='none';},1500);
+  if(val){
+    document.getElementById('fc-note-display').textContent=val;
+    document.getElementById('fc-note-display').style.display='block';
+    document.getElementById('fc-note-edit').style.display='none';
+  }
+}
+function flipCard(){
+  if(flashFlipped)return;
+  flashFlipped=true;
+  playTone('flip');
+  document.getElementById('flashcard').classList.add('flipped');
+  document.getElementById('btn-flip').style.display='none';
+  document.getElementById('fc-ar').style.display='flex';
+  const w=flashQ[flashI];
+  showNoteSection(w.e);
+}
 function markCard(passed){
   const w=flashQ[flashI];
-  if(passed){sPass++;ss(w.e,'mastered');}else{sFail++;ss(w.e,'failed');}
+  if(passed){sPass++;ss(w.e,'mastered');playTone('correct');}
+  else{sFail++;ss(w.e,'failed');playTone('wrong');}
   flashI++;
   if(flashI>=flashQ.length)showResults('flash');else renderFlash();
 }
@@ -585,7 +678,8 @@ function renderSelfMark(){
 }
 function selfMark(knew){
   const w=smQ[smI];
-  if(knew){sPass++;ss(w.e,'mastered');}else{sFail++;ss(w.e,'failed');}
+  if(knew){sPass++;ss(w.e,'mastered');playTone('correct');}
+  else{sFail++;ss(w.e,'failed');playTone('wrong');}
   smI++;
   if(smI>=smQ.length)showResults('self');else renderSelfMark();
 }
@@ -617,8 +711,8 @@ function renderQuiz(){
 function answerQ(btn,chosen,correct,q){
   if(quizAnswered)return;quizAnswered=true;
   document.querySelectorAll('.qopt').forEach(b=>b.classList.add('locked'));
-  if(chosen===correct){btn.classList.add('correct');document.getElementById('q-fb').textContent='✓ נכון!';sPass++;ss(q.e,'mastered');}
-  else{btn.classList.add('wrong');document.querySelectorAll('.qopt').forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});document.getElementById('q-fb').textContent='✗ התשובה: '+correct;sFail++;ss(q.e,'failed');}
+  if(chosen===correct){btn.classList.add('correct');document.getElementById('q-fb').textContent='✓ נכון!';sPass++;ss(q.e,'mastered');playTone('correct');}
+  else{btn.classList.add('wrong');document.querySelectorAll('.qopt').forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});document.getElementById('q-fb').textContent='✗ התשובה: '+correct;sFail++;ss(q.e,'failed');playTone('wrong');}
   document.getElementById('q-next').style.display='block';
 }
 function nextQuiz(){quizI++;if(quizI>=quizQ.length)showResults('quiz');else renderQuiz();}
@@ -641,7 +735,7 @@ function selMatch(card){
   if(matchSel===card){card.classList.remove('selected');matchSel=null;return;}
   const prev=matchSel;const ok=prev.dataset.pair===card.dataset.id&&card.dataset.pair===prev.dataset.id;
   prev.classList.remove('selected');matchSel=null;
-  if(ok){prev.classList.add('matched');card.classList.add('matched');matchPairs--;document.getElementById('mpairs').textContent=matchPairs;if(matchPairs===0)setTimeout(()=>alert('מעולה! 🎉'),200);}
+  if(ok){prev.classList.add('matched');card.classList.add('matched');matchPairs--;document.getElementById('mpairs').textContent=matchPairs;playTone('match');if(matchPairs===0){playTone('complete');setTimeout(()=>alert('מעולה! 🎉'),200);}}
   else{prev.classList.add('wrong-s');card.classList.add('wrong-s');setTimeout(()=>{prev.classList.remove('wrong-s');card.classList.remove('wrong-s');},500);}
 }
 
@@ -673,8 +767,8 @@ function answerPsycho(btn,chosen,q){
   if(psychoAnswered)return;psychoAnswered=true;clearInterval(psychoTimer);
   document.querySelectorAll('.psych-opt').forEach(b=>b.classList.add('locked'));
   const wordObj=WORDS.find(w=>w.e===q.word)||{e:q.word,h:'',t:''};
-  if(chosen===q.word){btn.classList.add('correct');sPass++;psychoAnswers[psychoI]=true;ss(q.word,'mastered');}
-  else{btn.classList.add('wrong');document.querySelectorAll('.psych-opt').forEach(b=>{if(b.querySelector('div:last-child').textContent===q.word)b.classList.add('correct');});sFail++;psychoAnswers[psychoI]=false;ss(q.word,'failed');}
+  if(chosen===q.word){btn.classList.add('correct');sPass++;psychoAnswers[psychoI]=true;ss(q.word,'mastered');playTone('correct');}
+  else{btn.classList.add('wrong');document.querySelectorAll('.psych-opt').forEach(b=>{if(b.querySelector('div:last-child').textContent===q.word)b.classList.add('correct');});sFail++;psychoAnswers[psychoI]=false;ss(q.word,'failed');playTone('wrong');}
   const exp=document.getElementById('psych-explain');
   exp.innerHTML=`<strong>המילה הנכונה:</strong> ${q.word} = ${wordObj.h}<br><strong>טריק:</strong> ${wordObj.t}`;
   exp.className='psych-explain show';
@@ -693,6 +787,7 @@ function autoSkip(q){
 }
 function skipPsycho(){
   if(psychoAnswered)return;clearInterval(psychoTimer);psychoAnswered=true;sSkip++;
+  playTone('skip');
   const q=psychoQ[psychoI];psychoAnswers[psychoI]=null;
   document.querySelectorAll('.psych-opt').forEach(b=>{b.classList.add('locked');if(b.querySelector('div:last-child').textContent===q.word)b.classList.add('correct');});
   const wordObj=WORDS.find(w=>w.e===q.word)||{e:q.word,h:'',t:''};
@@ -707,6 +802,7 @@ function nextPsycho(){psychoI++;if(psychoI>=psychoQ.length)showResults('psycho')
 function showResults(mode){
   clearInterval(psychoTimer);
   addSession(mode,sPass,sFail,sSkip);
+  playTone('complete');
   showScreen('results');
   const tot=sPass+sFail+sSkip;
   const pct=tot?Math.round(sPass/tot*100):0;
@@ -736,8 +832,20 @@ function showResults(mode){
   } else if(failedWords.length){
     ft.textContent='מילים לתרגול נוסף ('+failedWords.length+'):';
     failedWords.forEach(w=>{
+      const note=S.ws[w.e+'_note']||'';
       const d=document.createElement('div');d.className='wi failed';
-      d.innerHTML=`<div class="wdot"></div><div class="weng">${w.e}</div><div class="wheb">${w.h}</div><div class="self-mark-btns"><button class="sm-btn sm-ok" onclick="quickMark('${w.e}','mastered',event)">✓</button></div>`;
+      d.style.flexDirection='column';d.style.alignItems='stretch';
+      d.innerHTML=`<div style="display:flex;align-items:center;gap:8px">
+        <div class="wdot"></div>
+        <div class="weng">${w.e}</div><div class="wheb">${w.h}</div>
+        <div class="self-mark-btns" style="margin-right:auto"><button class="sm-btn sm-ok" onclick="quickMark('${w.e}','mastered',event)">✓</button></div>
+      </div>
+      ${note?`<div style="font-size:11px;color:#1A5C9A;margin-top:4px;padding-right:15px">📝 ${note}</div>`:''}
+      <div style="margin-top:6px;padding-right:15px">
+        <textarea id="note-res-${w.e}" class="note-textarea" rows="1" placeholder="הוסיפי הערה..." style="font-size:12px">${note}</textarea>
+        <button class="note-save" onclick="saveNoteFromResult('${w.e}')">שמור הערה</button>
+        <span id="note-res-saved-${w.e}" class="note-saved">✓ נשמר</span>
+      </div>`;
       rev.appendChild(d);
     });
   } else {
@@ -748,6 +856,121 @@ function showResults(mode){
   document.getElementById('btn-retry-psycho').style.display=mode==='psycho'?'':'none';
   const msgs=[[90,'מצוין! כמעט מושלם! 🏆'],[75,'כל הכבוד! 💪'],[60,'טוב! עוד קצת תרגול 📚'],[0,'המשך להתאמן! 💡']];
   document.getElementById('res-title').textContent=msgs.find(([t])=>pct>=t)[1];
+}
+
+// ========== AUDIO ENGINE ==========
+let audioCtx=null;
+let soundOn=true;
+
+function getAudioCtx(){
+  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function toggleSound(){
+  soundOn=!soundOn;
+  document.getElementById('sound-btn').textContent=soundOn?'🔊':'🔇';
+  if(soundOn) playTone('flip');
+}
+
+function playTone(type){
+  if(!soundOn) return;
+  try{
+    const ctx=getAudioCtx();
+    const now=ctx.currentTime;
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    if(type==='correct'){
+      // עולה בשני צלילים — ניצחון
+      osc.type='sine';
+      osc.frequency.setValueAtTime(440,now);
+      osc.frequency.setValueAtTime(660,now+0.12);
+      gain.gain.setValueAtTime(0,now);
+      gain.gain.linearRampToValueAtTime(0.25,now+0.02);
+      gain.gain.setValueAtTime(0.25,now+0.18);
+      gain.gain.linearRampToValueAtTime(0,now+0.35);
+      osc.start(now);osc.stop(now+0.35);
+
+    } else if(type==='wrong'){
+      // יורד — שגיאה
+      osc.type='sawtooth';
+      osc.frequency.setValueAtTime(320,now);
+      osc.frequency.linearRampToValueAtTime(180,now+0.25);
+      gain.gain.setValueAtTime(0,now);
+      gain.gain.linearRampToValueAtTime(0.18,now+0.02);
+      gain.gain.linearRampToValueAtTime(0,now+0.28);
+      osc.start(now);osc.stop(now+0.28);
+
+    } else if(type==='flip'){
+      // קליק עדין — הפיכת כרטיסייה
+      osc.type='sine';
+      osc.frequency.setValueAtTime(800,now);
+      osc.frequency.linearRampToValueAtTime(600,now+0.08);
+      gain.gain.setValueAtTime(0,now);
+      gain.gain.linearRampToValueAtTime(0.1,now+0.01);
+      gain.gain.linearRampToValueAtTime(0,now+0.1);
+      osc.start(now);osc.stop(now+0.1);
+
+    } else if(type==='complete'){
+      // סיום סשן — מנצח!
+      const notes=[523,659,784,1047];
+      notes.forEach((freq,i)=>{
+        const o=ctx.createOscillator();
+        const g=ctx.createGain();
+        o.connect(g);g.connect(ctx.destination);
+        o.type='sine';
+        const t=now+i*0.13;
+        o.frequency.setValueAtTime(freq,t);
+        g.gain.setValueAtTime(0,t);
+        g.gain.linearRampToValueAtTime(0.2,t+0.02);
+        g.gain.linearRampToValueAtTime(0,t+0.18);
+        o.start(t);o.stop(t+0.2);
+      });
+
+    } else if(type==='match'){
+      // שידוך נכון — פינג נעים
+      osc.type='sine';
+      osc.frequency.setValueAtTime(523,now);
+      osc.frequency.setValueAtTime(784,now+0.08);
+      gain.gain.setValueAtTime(0,now);
+      gain.gain.linearRampToValueAtTime(0.2,now+0.02);
+      gain.gain.setValueAtTime(0.2,now+0.1);
+      gain.gain.linearRampToValueAtTime(0,now+0.22);
+      osc.start(now);osc.stop(now+0.22);
+
+    } else if(type==='skip'){
+      // דילוג — טיק
+      osc.type='square';
+      osc.frequency.setValueAtTime(200,now);
+      gain.gain.setValueAtTime(0,now);
+      gain.gain.linearRampToValueAtTime(0.07,now+0.01);
+      gain.gain.linearRampToValueAtTime(0,now+0.07);
+      osc.start(now);osc.stop(now+0.07);
+
+    } else if(type==='save'){
+      // שמירת הערה — טון קצר נעים
+      osc.type='sine';
+      osc.frequency.setValueAtTime(660,now);
+      gain.gain.setValueAtTime(0,now);
+      gain.gain.linearRampToValueAtTime(0.12,now+0.01);
+      gain.gain.linearRampToValueAtTime(0,now+0.12);
+      osc.start(now);osc.stop(now+0.12);
+    }
+  }catch(e){}
+}
+
+function saveNoteFromResult(eng){
+  const val=document.getElementById('note-res-'+eng).value.trim();
+  if(val) S.ws[eng+'_note']=val;
+  else delete S.ws[eng+'_note'];
+  saveS();
+  const msg=document.getElementById('note-res-saved-'+eng);
+  msg.style.display='inline';
+  setTimeout(()=>{msg.style.display='none';},1500);
 }
 
 function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
