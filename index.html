@@ -3,220 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>מילים לפסיכומטרי</title>
+<title>אנגלית בחיי היומיום</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f5f5f5;color:#1a1a1a;min-height:100vh;}
 #app{max-width:600px;margin:0 auto;padding:1rem;}
 .screen{display:none;}.screen.active{display:block;}
-
-/* LOGIN */
 .login-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:85vh;text-align:center;}
-.login-logo{font-size:30px;font-weight:700;margin-bottom:6px;}
-.login-logo span{color:#2E7D4F;}
-.login-sub{font-size:13px;color:#888;margin-bottom:2rem;}
+.login-logo{font-size:28px;font-weight:700;margin-bottom:6px;color:#1a1a1a;}
+.login-logo span{color:#1565C0;}
+.login-sub{font-size:14px;color:#888;margin-bottom:2rem;line-height:1.6;}
 .login-box{background:#fff;border:1px solid #e0e0e0;border-radius:16px;padding:2rem;width:100%;max-width:340px;}
-.login-label{font-size:13px;color:#444;margin-bottom:8px;text-align:right;}
-.login-input{width:100%;padding:12px 14px;border:1px solid #e0e0e0;border-radius:8px;font-size:15px;text-align:right;direction:rtl;outline:none;transition:.15s;}
-.login-input:focus{border-color:#2E7D4F;}
-.login-btn{width:100%;margin-top:1rem;padding:13px;background:#2E7D4F;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;}
-.login-btn:hover{background:#256040;}
-.login-hint{margin-top:.75rem;font-size:12px;color:#aaa;}
-
-/* HEADER */
+.login-label{font-size:14px;color:#444;margin-bottom:8px;text-align:right;}
+.login-input{width:100%;padding:13px 14px;border:1px solid #e0e0e0;border-radius:8px;font-size:15px;text-align:right;direction:rtl;outline:none;transition:.15s;}
+.login-input:focus{border-color:#1565C0;}
+.login-btn{width:100%;margin-top:1rem;padding:14px;background:#1565C0;color:white;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
+.login-btn:hover{background:#0D47A1;}
+.login-hint{margin-top:.75rem;font-size:13px;color:#aaa;}
 .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid #e0e0e0;}
-.logo{font-size:17px;font-weight:700;}
-.logo span{color:#2E7D4F;}
-.user-chip{font-size:12px;background:#F0F7F3;color:#2E7D4F;border:1px solid #2E7D4F;border-radius:99px;padding:3px 10px;cursor:pointer;}
+.logo{font-size:17px;font-weight:700;color:#1a1a1a;}
+.logo span{color:#1565C0;}
+.user-chip{font-size:12px;background:#E3F2FD;color:#1565C0;border:1px solid #1565C0;border-radius:99px;padding:3px 10px;cursor:pointer;}
 .stats-row{display:flex;gap:.6rem;}
 .stat{text-align:center;}
-.stat-val{font-size:15px;font-weight:700;color:#1a1a1a;}
+.stat-val{font-size:15px;font-weight:700;}
 .stat-lbl{font-size:10px;color:#888;}
-
-/* MODES */
 .mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1.25rem 0;}
 .mode-card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:1rem;cursor:pointer;transition:.15s;text-align:right;position:relative;}
-.mode-card:hover{border-color:#2E7D4F;background:#F0F7F3;}
-.mode-card.blue{border-color:#1A5C9A;background:#EEF4FB;}
-.mode-card.blue:hover{background:#D9E9F7;}
-.mode-card.orange{border-color:#B8860B;background:#FFFBEB;}
-.mode-card.orange:hover{background:#FFF3CC;}
-.mode-badge{position:absolute;top:8px;left:8px;font-size:10px;background:#1A5C9A;color:white;padding:2px 7px;border-radius:99px;}
+.mode-card:hover{border-color:#1565C0;background:#E3F2FD;}
+.mode-card.green{border-color:#2E7D4F;background:#F0F7F3;}
+.mode-card.green:hover{background:#DFF0E8;}
+.mode-card.orange{border-color:#E65100;background:#FFF3E0;}
+.mode-card.orange:hover{background:#FFE0B2;}
+.mode-badge{position:absolute;top:8px;left:8px;font-size:10px;background:#1565C0;color:white;padding:2px 7px;border-radius:99px;}
 .mode-badge.red{background:#C94040;}
-.mode-icon{font-size:22px;margin-bottom:5px;}
-.mode-title{font-size:13px;font-weight:700;margin-bottom:2px;}
+.mode-icon{font-size:26px;margin-bottom:5px;}
+.mode-title{font-size:14px;font-weight:700;margin-bottom:2px;}
 .mode-desc{font-size:11px;color:#888;}
-
-/* CATEGORIES */
-.cat-tabs{display:flex;gap:5px;overflow-x:auto;margin-bottom:1rem;padding-bottom:4px;}
-.cat-tab{font-size:11px;padding:4px 10px;border:1px solid #e0e0e0;border-radius:99px;background:#fff;color:#666;cursor:pointer;white-space:nowrap;flex-shrink:0;}
-.cat-tab.active{background:#2E7D4F;color:white;border-color:#2E7D4F;}
-
-/* WORD LIST */
-.wbh{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;}
-.wbh h3{font-size:13px;font-weight:700;}
-.filters{display:flex;gap:5px;}
-.fb{font-size:11px;color:#666;cursor:pointer;background:#f5f5f5;border:1px solid #e0e0e0;border-radius:8px;padding:3px 8px;}
-.fb.active{color:#2E7D4F;border-color:#2E7D4F;background:#F0F7F3;}
-.word-list{display:flex;flex-direction:column;gap:4px;max-height:260px;overflow-y:auto;}
-.wi{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:7px 10px;}
-.wi.mastered{border-color:#2E7D4F;background:#F0F7F3;}
-.wi.failed{border-color:#C94040;background:#FDF2F2;}
-.wi.self-ok{border-color:#2E7D4F;background:#F0F7F3;}
-.wi.self-no{border-color:#C94040;background:#FDF2F2;}
-.wdot{width:7px;height:7px;border-radius:50%;background:#ccc;flex-shrink:0;}
-.wi.mastered .wdot,.wi.self-ok .wdot{background:#2E7D4F;}
-.wi.failed .wdot,.wi.self-no .wdot{background:#C94040;}
-.weng{font-size:13px;font-weight:600;}
-.wheb{font-size:12px;color:#666;margin-right:auto;}
-.wst{font-size:11px;}
-.self-mark-btns{display:flex;gap:4px;margin-right:4px;}
-.sm-btn{font-size:11px;padding:2px 7px;border-radius:6px;cursor:pointer;border:1px solid #e0e0e0;background:#f5f5f5;}
-.sm-ok{border-color:#2E7D4F;color:#2E7D4F;}
-.sm-no{border-color:#C94040;color:#C94040;}
-
-/* PROGRESS BAR */
-.pbw{background:#e0e0e0;border-radius:99px;height:5px;margin-bottom:1rem;overflow:hidden;}
-.pbf{height:100%;background:#2E7D4F;border-radius:99px;transition:width .4s;}
-.ctr{font-size:13px;color:#666;text-align:center;margin-bottom:.75rem;}
-
-/* FLASHCARD */
-.flashcard{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:1.75rem 1.5rem;text-align:center;margin-bottom:.75rem;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:.15s;}
-.flashcard:hover{border-color:#2E7D4F;}
-.fc-word{font-size:28px;font-weight:700;margin-bottom:.4rem;}
-.fc-cat{font-size:11px;color:#aaa;margin-bottom:.5rem;}
-.fc-hint{font-size:13px;color:#999;}
-.fc-back{display:none;width:100%;}
-.flashcard.flipped .fc-back{display:block;}
-.flashcard.flipped .fc-hint{display:none;}
-.flashcard.flipped .fc-cat{display:none;}
-.fc-meaning{font-size:18px;font-weight:700;margin-bottom:.5rem;}
-.trick-box{background:#FFFBEB;border:1px solid #D4A017;border-radius:8px;padding:8px 12px;text-align:right;}
-.trick-lbl{font-size:11px;color:#B8860B;font-weight:700;margin-bottom:3px;}
-.trick-txt{font-size:12px;color:#333;}
-.ar{display:flex;gap:8px;}
-.btn-fail{flex:1;padding:12px;border:1px solid #C94040;background:#FDF2F2;color:#C94040;border-radius:8px;font-size:14px;cursor:pointer;font-weight:700;}
-.btn-pass{flex:1;padding:12px;border:1px solid #2E7D4F;background:#F0F7F3;color:#2E7D4F;border-radius:8px;font-size:14px;cursor:pointer;font-weight:700;}
-.btn-flip{width:100%;padding:11px;border:1px solid #ccc;background:#f5f5f5;color:#333;border-radius:8px;font-size:13px;cursor:pointer;margin-bottom:8px;}
-
-/* BUTTONS */
-.btn-primary{padding:10px 20px;border:1px solid #2E7D4F;background:#F0F7F3;color:#2E7D4F;border-radius:8px;font-size:13px;cursor:pointer;font-weight:700;}
-.btn-blue{padding:10px 20px;border:1px solid #1A5C9A;background:#EEF4FB;color:#1A5C9A;border-radius:8px;font-size:13px;cursor:pointer;font-weight:700;}
-.btn-orange{padding:10px 20px;border:1px solid #B8860B;background:#FFFBEB;color:#B8860B;border-radius:8px;font-size:13px;cursor:pointer;font-weight:700;}
-.btn-sec{padding:9px 18px;border:1px solid #ccc;background:#f5f5f5;color:#333;border-radius:8px;font-size:13px;cursor:pointer;}
-.btn-back{font-size:13px;color:#666;cursor:pointer;background:none;border:none;margin-bottom:.75rem;}
-
-/* QUIZ */
-.qq{font-size:22px;font-weight:700;text-align:center;margin:1.25rem 0 1rem;}
-.qopts{display:flex;flex-direction:column;gap:7px;}
-.qopt{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:11px 14px;cursor:pointer;font-size:13px;text-align:right;transition:.15s;}
-.qopt:hover:not(.locked){border-color:#2E7D4F;background:#F0F7F3;}
-.qopt.correct{border-color:#2E7D4F;background:#F0F7F3;color:#2E7D4F;}
-.qopt.wrong{border-color:#C94040;background:#FDF2F2;color:#C94040;}
-.qfb{text-align:center;margin:.75rem 0;font-size:13px;color:#666;min-height:18px;}
-.qt-row{display:flex;gap:8px;margin-bottom:1rem;}
-.qt-btn{flex:1;padding:8px;border:1px solid #ccc;background:#f5f5f5;color:#666;border-radius:8px;font-size:12px;cursor:pointer;}
-.qt-btn.active{border-color:#2E7D4F;background:#F0F7F3;color:#2E7D4F;}
-
-/* MATCH */
-.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:.75rem 0;}
-.mc{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:9px 10px;cursor:pointer;font-size:12px;text-align:center;transition:.15s;min-height:46px;display:flex;align-items:center;justify-content:center;}
-.mc:hover:not(.matched){border-color:#2E7D4F;}
-.mc.selected{border-color:#D4A017;background:#FFFBEB;}
-.mc.matched{border-color:#2E7D4F;background:#F0F7F3;color:#2E7D4F;opacity:.65;pointer-events:none;}
-.mc.wrong-s{border-color:#C94040;background:#FDF2F2;}
-
-/* PSYCHO */
-.psych-header{background:#EEF4FB;border:1px solid #1A5C9A;border-radius:12px;padding:1rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;}
-.psych-title{font-size:14px;font-weight:700;color:#1A5C9A;}
-.psych-sub{font-size:11px;color:#2E5A8A;margin-top:2px;}
-.timer-circle{width:44px;height:44px;border-radius:50%;border:2px solid #1A5C9A;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#1A5C9A;transition:.3s;}
-.timer-circle.warn{border-color:#C94040;color:#C94040;}
-.psych-qnum{font-size:11px;color:#666;text-align:center;margin-bottom:.5rem;}
-.psych-sent{background:#f9f9f9;border-radius:8px;padding:1rem 1.25rem;font-size:15px;line-height:1.7;margin-bottom:1rem;text-align:right;border:1px solid #e0e0e0;}
-.psych-sent .blank{display:inline-block;min-width:90px;border-bottom:2px solid #1A5C9A;color:#1A5C9A;font-weight:700;text-align:center;padding:0 4px;}
-.psych-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem;}
-.psych-opt{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 14px;cursor:pointer;font-size:13px;text-align:right;transition:.15s;display:flex;align-items:center;gap:8px;}
-.psych-opt:hover:not(.locked){border-color:#1A5C9A;background:#EEF4FB;}
-.opt-letter{width:22px;height:22px;border-radius:50%;border:1px solid #ccc;display:flex;align-items:center;justify-content:center;font-size:11px;color:#666;flex-shrink:0;}
-.psych-opt.correct{border-color:#2E7D4F;background:#F0F7F3;}
-.psych-opt.correct .opt-letter{background:#2E7D4F;color:white;border-color:#2E7D4F;}
-.psych-opt.wrong{border-color:#C94040;background:#FDF2F2;}
-.psych-opt.wrong .opt-letter{background:#C94040;color:white;border-color:#C94040;}
-.psych-explain{background:#FFFBEB;border:1px solid #D4A017;border-radius:8px;padding:10px 14px;font-size:12px;color:#333;text-align:right;margin-bottom:.75rem;display:none;}
-.psych-explain.show{display:block;}
-.psych-explain strong{color:#B8860B;}
-.psych-nav{display:flex;gap:8px;align-items:center;}
-.psych-skip{font-size:12px;color:#999;cursor:pointer;background:none;border:none;text-decoration:underline;}
-.psych-dots{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:.75rem;}
-.psych-dot{width:10px;height:10px;border-radius:50%;background:#e0e0e0;border:1px solid #ccc;transition:.15s;}
-.psych-dot.answered{background:#2E7D4F;border-color:#2E7D4F;}
-.psych-dot.wrong-dot{background:#C94040;border-color:#C94040;}
-.psych-dot.current{border:2px solid #1A5C9A;}
-
-/* STATS DASHBOARD */
 .stats-dash{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:1rem;margin-bottom:1rem;}
 .stats-dash-title{font-size:13px;font-weight:700;margin-bottom:.75rem;color:#444;}
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:.75rem;}
 .sc{background:#f5f5f5;border-radius:8px;padding:10px;text-align:center;}
 .sc-num{font-size:20px;font-weight:700;}
 .sc-lbl{font-size:10px;color:#888;margin-top:2px;}
+.sc.blue .sc-num{color:#1565C0;}
 .sc.green .sc-num{color:#2E7D4F;}
 .sc.red .sc-num{color:#C94040;}
-.sc.blue .sc-num{color:#1A5C9A;}
-.progress-ring-wrap{display:flex;align-items:center;gap:1rem;padding:.5rem 0;}
-.prog-bar-label{font-size:12px;color:#666;min-width:80px;}
-.prog-bar-outer{flex:1;background:#e0e0e0;border-radius:99px;height:8px;overflow:hidden;}
-.prog-bar-inner{height:100%;border-radius:99px;transition:width .5s;}
-.prog-pct{font-size:12px;font-weight:700;min-width:32px;text-align:left;}
-.session-list{max-height:150px;overflow-y:auto;}
-.session-item{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f0f0f0;font-size:12px;}
+.prog-row{display:flex;align-items:center;gap:1rem;padding:.4rem 0;}
+.prog-lbl{font-size:12px;color:#666;min-width:70px;}
+.prog-out{flex:1;background:#e0e0e0;border-radius:99px;height:8px;overflow:hidden;}
+.prog-in{height:100%;border-radius:99px;transition:width .5s;}
+.prog-pct{font-size:12px;font-weight:700;min-width:32px;}
+.session-list{max-height:130px;overflow-y:auto;}
+.session-item{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0f0f0;font-size:12px;}
 .session-item:last-child{border-bottom:none;}
-.session-mode{color:#444;}
-.session-score{font-weight:700;}
-.session-score.good{color:#2E7D4F;}
-.session-score.bad{color:#C94040;}
+.session-score.good{color:#2E7D4F;font-weight:700;}
+.session-score.bad{color:#C94040;font-weight:700;}
 .session-date{color:#aaa;font-size:11px;}
-
-/* RESULTS */
-.rc{width:90px;height:90px;border-radius:50%;border:2px solid #2E7D4F;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:.75rem auto;}
-.rpct{font-size:24px;font-weight:700;color:#2E7D4F;}
+.cat-tabs{display:flex;gap:5px;overflow-x:auto;margin-bottom:.75rem;padding-bottom:4px;}
+.cat-tab{font-size:12px;padding:5px 12px;border:1px solid #e0e0e0;border-radius:99px;background:#fff;color:#666;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.cat-tab.active{background:#1565C0;color:white;border-color:#1565C0;}
+.wbh{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;}
+.wbh h3{font-size:13px;font-weight:700;}
+.filters{display:flex;gap:5px;}
+.fb{font-size:11px;color:#666;cursor:pointer;background:#f5f5f5;border:1px solid #e0e0e0;border-radius:8px;padding:3px 8px;}
+.fb.active{color:#1565C0;border-color:#1565C0;background:#E3F2FD;}
+.word-list{display:flex;flex-direction:column;gap:5px;max-height:280px;overflow-y:auto;}
+.wi{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:8px 10px;}
+.wi.mastered{border-color:#2E7D4F;background:#F0F7F3;}
+.wi.failed{border-color:#C94040;background:#FDF2F2;}
+.wdot{width:8px;height:8px;border-radius:50%;background:#ccc;flex-shrink:0;margin-top:4px;}
+.wi.mastered .wdot{background:#2E7D4F;}
+.wi.failed .wdot{background:#C94040;}
+.weng{font-size:14px;font-weight:700;color:#1a1a1a;}
+.wheb{font-size:13px;color:#555;}
+.wexample{font-size:11px;color:#888;font-style:italic;margin-top:2px;}
+.sm-btns{display:flex;gap:3px;margin-right:auto;flex-shrink:0;}
+.sm-btn{font-size:11px;padding:2px 7px;border-radius:6px;cursor:pointer;border:1px solid #e0e0e0;}
+.sm-ok{border-color:#2E7D4F;color:#2E7D4F;}
+.sm-no{border-color:#C94040;color:#C94040;}
+.pbw{background:#e0e0e0;border-radius:99px;height:6px;margin-bottom:1rem;overflow:hidden;}
+.pbf{height:100%;background:#1565C0;border-radius:99px;transition:width .4s;}
+.ctr{font-size:14px;color:#666;text-align:center;margin-bottom:.75rem;}
+.flashcard{background:#fff;border:1px solid #e0e0e0;border-radius:14px;padding:2rem 1.5rem;text-align:center;margin-bottom:.75rem;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:.15s;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.flashcard:hover{border-color:#1565C0;}
+.fc-cat{font-size:12px;color:#1565C0;background:#E3F2FD;padding:3px 10px;border-radius:99px;margin-bottom:.75rem;}
+.fc-word{font-size:32px;font-weight:700;color:#1a1a1a;margin-bottom:.3rem;}
+.fc-pronounce{font-size:14px;color:#888;margin-bottom:.5rem;}
+.fc-hint{font-size:14px;color:#aaa;margin-top:.5rem;}
+.fc-back{display:none;width:100%;}
+.flashcard.flipped .fc-back{display:block;}
+.flashcard.flipped .fc-hint{display:none;}
+.fc-meaning{font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:.4rem;}
+.fc-example{font-size:13px;color:#555;font-style:italic;margin-bottom:.75rem;line-height:1.5;}
+.trick-box{background:#FFF8E1;border:1px solid #F9A825;border-radius:8px;padding:8px 12px;text-align:right;}
+.trick-lbl{font-size:11px;color:#E65100;font-weight:700;margin-bottom:3px;}
+.trick-txt{font-size:13px;color:#333;}
+.ar{display:flex;gap:8px;}
+.btn-fail{flex:1;padding:13px;border:1px solid #C94040;background:#FDF2F2;color:#C94040;border-radius:8px;font-size:15px;cursor:pointer;font-weight:700;}
+.btn-pass{flex:1;padding:13px;border:1px solid #2E7D4F;background:#F0F7F3;color:#2E7D4F;border-radius:8px;font-size:15px;cursor:pointer;font-weight:700;}
+.btn-flip{width:100%;padding:13px;border:1px solid #ccc;background:#f5f5f5;color:#333;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:8px;}
+.btn-primary{padding:11px 22px;border:1px solid #1565C0;background:#E3F2FD;color:#1565C0;border-radius:8px;font-size:14px;cursor:pointer;font-weight:700;}
+.btn-green{padding:11px 22px;border:1px solid #2E7D4F;background:#F0F7F3;color:#2E7D4F;border-radius:8px;font-size:14px;cursor:pointer;font-weight:700;}
+.btn-sec{padding:10px 18px;border:1px solid #ccc;background:#f5f5f5;color:#333;border-radius:8px;font-size:13px;cursor:pointer;}
+.btn-back{font-size:14px;color:#666;cursor:pointer;background:none;border:none;margin-bottom:.75rem;}
+.qq{font-size:20px;font-weight:700;text-align:center;margin:1rem 0 .75rem;line-height:1.4;}
+.qq-sub{font-size:13px;color:#888;text-align:center;margin-bottom:1rem;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:13px 16px;cursor:pointer;font-size:14px;text-align:right;transition:.15s;line-height:1.4;}
+.qopt:hover:not(.locked){border-color:#1565C0;background:#E3F2FD;}
+.qopt.correct{border-color:#2E7D4F;background:#F0F7F3;color:#2E7D4F;}
+.qopt.wrong{border-color:#C94040;background:#FDF2F2;color:#C94040;}
+.qfb{text-align:center;margin:.75rem 0;font-size:14px;color:#666;min-height:20px;}
+.qt-row{display:flex;gap:8px;margin-bottom:1rem;}
+.qt-btn{flex:1;padding:9px;border:1px solid #ccc;background:#f5f5f5;color:#666;border-radius:8px;font-size:13px;cursor:pointer;}
+.qt-btn.active{border-color:#1565C0;background:#E3F2FD;color:#1565C0;}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:.75rem 0;}
+.mc{border-radius:10px;padding:10px;cursor:pointer;font-size:14px;font-weight:600;text-align:center;transition:all .15s;min-height:54px;display:flex;align-items:center;justify-content:center;line-height:1.4;}
+.mc.mc-eng{background:#EEF4FB;border:2px solid transparent;color:#1565C0;}
+.mc.mc-heb{background:#FFF8E1;border:2px solid transparent;color:#7B5800;}
+.mc.mc-eng:hover:not(.matched){background:#BBDEFB;}
+.mc.mc-heb:hover:not(.matched){background:#FFE082;}
+.mc.selected{transform:scale(1.04);box-shadow:0 3px 12px rgba(0,0,0,.15);}
+.mc.mc-eng.selected{background:#BBDEFB;border-color:#1565C0;}
+.mc.mc-heb.selected{background:#FFE082;border-color:#E65100;}
+.mc.matched{border:3px solid #2E7D4F!important;background:#F0F7F3!important;color:#2E7D4F!important;opacity:1!important;pointer-events:none;box-shadow:0 2px 8px rgba(46,125,79,.25);}
+.mc.wrong-s{border-color:#C94040!important;background:#FDF2F2!important;animation:shake .3s;}
+.convo-wrap{background:#f0f4ff;border-radius:12px;padding:1rem;margin-bottom:1rem;}
+.convo-title{font-size:13px;font-weight:700;color:#1565C0;margin-bottom:.75rem;}
+.convo-bubble{margin-bottom:.5rem;}
+.convo-bubble.en{text-align:left;direction:ltr;}
+.convo-bubble.he{text-align:right;}
+.bubble-text{display:inline-block;padding:8px 12px;border-radius:10px;font-size:13px;line-height:1.5;max-width:85%;}
+.convo-bubble.en .bubble-text{background:#1565C0;color:white;border-radius:10px 10px 10px 2px;}
+.convo-bubble.he .bubble-text{background:#fff;border:1px solid #ddd;border-radius:10px 10px 2px 10px;}
+.convo-word{background:rgba(255,255,255,.3);border-radius:4px;padding:0 3px;font-weight:700;cursor:pointer;border-bottom:2px solid rgba(255,255,255,.7);}
+.rc{width:90px;height:90px;border-radius:50%;border:2px solid #1565C0;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:.75rem auto;}
+.rpct{font-size:24px;font-weight:700;color:#1565C0;}
 .rlbl{font-size:11px;color:#666;}
 .rrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:.75rem 0;}
 .rtag{font-size:12px;padding:3px 11px;border-radius:99px;}
 .tp{background:#F0F7F3;color:#2E7D4F;}
 .tf{background:#FDF2F2;color:#C94040;}
-.tb{background:#EEF4FB;color:#1A5C9A;}
 .sec-title{font-size:12px;font-weight:700;color:#666;margin:.75rem 0 .4rem;}
 .review-item{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 12px;margin-bottom:6px;text-align:right;}
 .review-item.rev-correct{border-color:#2E7D4F;}
 .review-item.rev-wrong{border-color:#C94040;}
-.review-sentence{font-size:13px;margin-bottom:4px;line-height:1.5;}
-.review-ans{font-size:12px;color:#666;}
 .ca{color:#2E7D4F;font-weight:700;}
 .wa{color:#C94040;font-weight:700;}
-
-/* NOTES */
-.note-box{background:#F0F7FF;border:1px solid #B5D4F4;border-radius:8px;padding:8px 10px;margin-top:6px;}
-.note-label{font-size:11px;color:#1A5C9A;font-weight:700;margin-bottom:4px;}
-.note-textarea{width:100%;border:1px solid #B5D4F4;border-radius:6px;padding:7px 10px;font-size:13px;direction:rtl;text-align:right;resize:none;outline:none;background:#fff;font-family:inherit;line-height:1.5;}
-.note-textarea:focus{border-color:#1A5C9A;}
-.note-save{font-size:12px;padding:5px 14px;border:1px solid #1A5C9A;background:#EEF4FB;color:#1A5C9A;border-radius:6px;cursor:pointer;margin-top:5px;}
+.self-mark-header{background:#FFF8E1;border:1px solid #F9A825;border-radius:12px;padding:1rem;margin-bottom:1rem;}
+.self-mark-title{font-size:14px;font-weight:700;color:#E65100;}
+.self-word-card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:1.25rem;margin-bottom:8px;text-align:center;}
+.self-word-eng{font-size:28px;font-weight:700;margin-bottom:4px;}
+.self-word-pron{font-size:14px;color:#888;margin-bottom:6px;}
+.self-word-heb{font-size:17px;color:#444;margin-bottom:4px;}
+.self-word-ex{font-size:13px;color:#888;font-style:italic;margin-bottom:.75rem;}
+.self-word-trick{font-size:13px;color:#E65100;background:#FFF8E1;padding:6px 10px;border-radius:8px;margin-bottom:1rem;}
+.self-btns{display:flex;gap:8px;}
+.self-yes{flex:1;padding:12px;border:1px solid #2E7D4F;background:#F0F7F3;color:#2E7D4F;border-radius:8px;font-size:14px;cursor:pointer;font-weight:700;}
+.self-no{flex:1;padding:12px;border:1px solid #C94040;background:#FDF2F2;color:#C94040;border-radius:8px;font-size:14px;cursor:pointer;font-weight:700;}
+.speak-btn{background:#E3F2FD;border:1px solid #90CAF9;border-radius:99px;padding:6px 16px;font-size:13px;cursor:pointer;color:#1565C0;display:inline-flex;align-items:center;gap:5px;transition:.15s;margin:.4rem auto;}
+.speak-btn:hover{background:#BBDEFB;border-color:#1565C0;}
+.speak-btn:active{transform:scale(.96);}
+.speak-btn.speaking{background:#1565C0;color:white;border-color:#1565C0;}
+.note-box{background:#E3F2FD;border:1px solid #90CAF9;border-radius:8px;padding:8px 10px;margin-top:8px;}
+.note-label{font-size:11px;color:#1565C0;font-weight:700;margin-bottom:4px;}
+/* CAMERA */
+.mode-card-wide{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid #1565C0;border-radius:14px;padding:1rem 1.1rem;cursor:pointer;transition:.15s;margin-bottom:.6rem;}
+.mode-card-wide:hover{background:#E3F2FD;box-shadow:0 2px 10px rgba(21,101,192,.15);}
+.mode-card-errors{display:flex;align-items:center;gap:12px;background:#FDF2F2;border:1.5px solid #C94040;border-radius:14px;padding:.85rem 1.1rem;cursor:pointer;transition:.15s;margin-bottom:.6rem;}
+.mode-card-errors:hover{background:#FDEAEA;box-shadow:0 2px 10px rgba(201,64,64,.15);}
+.mode-card-camera{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#6A1B9A,#9C27B0);border:none;border-radius:14px;padding:1.1rem 1.1rem;cursor:pointer;transition:.15s;margin-bottom:1rem;box-shadow:0 3px 12px rgba(106,27,154,.3);}
+.mode-card-camera:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(106,27,154,.4);}
+.mode-card-camera .mode-title,.mode-card-camera .mode-desc{color:white!important;}
+.cat-card{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:.75rem 1rem;margin-bottom:8px;cursor:pointer;transition:.15s;}
+.cat-card:hover{border-color:#1565C0;background:#E3F2FD;}
+.cat-card-left{display:flex;align-items:center;gap:10px;}
+.cat-card-icon{font-size:22px;}
+.cat-card-name{font-size:14px;font-weight:600;color:var(--color-text-primary,#1a1a1a);}
+.cat-card-count{font-size:11px;color:#888;margin-top:1px;}
+.cat-card-right{display:flex;align-items:center;gap:8px;}
+.cat-prog{width:60px;height:6px;background:#e0e0e0;border-radius:99px;overflow:hidden;}
+.cat-prog-fill{height:100%;background:#2E7D4F;border-radius:99px;transition:width .4s;}
+.cat-prog-pct{font-size:11px;color:#2E7D4F;font-weight:600;min-width:28px;text-align:left;}
+.cat-start-btn{font-size:11px;padding:4px 10px;border:1px solid #1565C0;background:#E3F2FD;color:#1565C0;border-radius:6px;cursor:pointer;}
+/* Flash category tabs */
+.flash-cat-row{display:flex;gap:5px;overflow-x:auto;margin-bottom:.75rem;padding-bottom:3px;}
+.flash-cat-btn{font-size:11px;padding:4px 10px;border:1px solid #e0e0e0;border-radius:99px;background:#f5f5f5;color:#666;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.flash-cat-btn.active{background:#1565C0;color:white;border-color:#1565C0;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.fill-letter-btn{background:#fff;border:1.5px solid #1565C0;border-radius:8px;padding:8px 13px;font-size:16px;font-weight:700;cursor:pointer;color:#1565C0;transition:.1s;min-width:38px;text-align:center;}
+.fill-letter-btn:hover{background:#E3F2FD;}
+.fill-letter-btn:active{transform:scale(.9);}
+.fill-letter-used{border-color:#4CAF50;color:#2E7D32;background:#F0F7F3;}
+.fill-letter-used:hover{background:#E8F5E9;}
+.fill-opt-btn{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:10px 12px;cursor:pointer;text-align:center;transition:.15s;display:flex;flex-direction:column;gap:3px;align-items:center;}
+.fill-opt-btn:hover:not(:disabled){border-color:#1565C0;background:#E3F2FD;}
+.fill-opt-btn:disabled{cursor:default;}
+.fob-eng{font-size:15px;font-weight:700;color:#1a1a1a;}
+.fob-heb{font-size:12px;color:#888;}
+.fill-opt-btn.fob-correct{border:2px solid #2E7D4F!important;background:#F0F7F3!important;}
+.fill-opt-btn.fob-correct .fob-eng{color:#2E7D4F;}
+.fill-opt-btn.fob-wrong{border:2px solid #C94040!important;background:#FDF2F2!important;}
+.fill-opt-btn.fob-wrong .fob-eng{color:#C94040;}
+.cam-header{background:#F3E5F5;border:1px solid #CE93D8;border-radius:12px;padding:1rem;margin-bottom:1rem;}
+.cam-title{font-size:14px;font-weight:700;color:#6A1B9A;}
+.cam-sub{font-size:12px;color:#7B1FA2;margin-top:3px;}
+.cam-preview{position:relative;border-radius:12px;overflow:hidden;background:#000;margin-bottom:.75rem;min-height:220px;display:flex;align-items:center;justify-content:center;}
+.cam-preview video{width:100%;border-radius:12px;display:block;}
+.cam-preview canvas{display:none;}
+.cam-snap-btn{width:100%;padding:13px;background:#6A1B9A;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:.5rem;}
+.cam-snap-btn:hover{background:#4A148C;}
+.cam-snap-btn:disabled{background:#ccc;cursor:not-allowed;}
+.cam-upload-btn{width:100%;padding:10px;background:#F3E5F5;color:#6A1B9A;border:1px solid #CE93D8;border-radius:8px;font-size:13px;cursor:pointer;margin-bottom:.75rem;}
+.cam-result{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:1rem;margin-bottom:.75rem;display:none;}
+.cam-result-title{font-size:13px;font-weight:700;color:#6A1B9A;margin-bottom:.5rem;}
+.cam-extracted{font-size:13px;color:#555;background:#f9f9f9;border-radius:8px;padding:.6rem;margin-bottom:.5rem;line-height:1.6;direction:ltr;text-align:left;}
+.cam-translation{font-size:14px;color:#1a1a1a;background:#E3F2FD;border-radius:8px;padding:.75rem;line-height:1.7;direction:rtl;text-align:right;}
+.cam-word-list{display:flex;flex-direction:column;gap:5px;margin-top:.5rem;}
+.cam-word{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:7px 10px;}
+.cam-word-eng{font-size:13px;font-weight:700;color:#1a1a1a;}
+.cam-word-heb{font-size:12px;color:#555;margin-right:auto;}
+.cam-speak{font-size:14px;background:none;border:none;cursor:pointer;color:#1565C0;padding:0 3px;}
+.cam-save{font-size:11px;padding:2px 8px;border:1px solid #2E7D4F;color:#2E7D4F;background:#F0F7F3;border-radius:6px;cursor:pointer;}
+.cam-loading{text-align:center;padding:1.5rem;color:#888;}
+.cam-loading .spinner{font-size:28px;animation:spin 1s linear infinite;display:block;margin-bottom:.5rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.note-textarea{width:100%;border:1px solid #90CAF9;border-radius:6px;padding:7px 10px;font-size:13px;direction:rtl;text-align:right;resize:none;outline:none;background:#fff;font-family:inherit;line-height:1.5;}
+.note-textarea:focus{border-color:#1565C0;}
+.note-save{font-size:12px;padding:5px 14px;border:1px solid #1565C0;background:#E3F2FD;color:#1565C0;border-radius:6px;cursor:pointer;margin-top:5px;}
 .note-saved{font-size:11px;color:#2E7D4F;margin-right:8px;display:none;}
-.note-display{font-size:12px;color:#1A5C9A;background:#EEF4FB;border-radius:6px;padding:5px 8px;margin-top:5px;line-height:1.5;cursor:pointer;}
-.note-display:before{content:"📝 ";}
-
-/* SELF MARK SCREEN */
-.self-mark-header{background:#FFFBEB;border:1px solid #D4A017;border-radius:12px;padding:1rem;margin-bottom:1rem;}
-.self-mark-title{font-size:14px;font-weight:700;color:#B8860B;}
-.self-mark-sub{font-size:12px;color:#8B6914;margin-top:3px;}
-.self-word-card{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1rem;margin-bottom:8px;}
-.self-word-eng{font-size:20px;font-weight:700;margin-bottom:4px;}
-.self-word-heb{font-size:15px;color:#444;margin-bottom:6px;}
-.self-word-trick{font-size:12px;color:#B8860B;background:#FFFBEB;padding:5px 8px;border-radius:6px;margin-bottom:10px;}
-.self-word-btns{display:flex;gap:8px;}
-.self-yes{flex:1;padding:10px;border:1px solid #2E7D4F;background:#F0F7F3;color:#2E7D4F;border-radius:8px;font-size:13px;cursor:pointer;font-weight:700;}
-.self-no{flex:1;padding:10px;border:1px solid #C94040;background:#FDF2F2;color:#C94040;border-radius:8px;font-size:13px;cursor:pointer;font-weight:700;}
+.note-display{font-size:12px;color:#1565C0;background:#E3F2FD;border-radius:6px;padding:5px 8px;margin-top:5px;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -225,12 +242,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 <!-- LOGIN -->
 <div id="screen-login" class="screen active">
   <div class="login-wrap">
-    <div class="login-logo">מילים <span>לפסיכומטרי</span></div>
-    <div class="login-sub">תרגול חכם • התקדמות אישית</div>
+    <div style="font-size:48px;margin-bottom:.5rem">🌍</div>
+    <div class="login-logo">אנגלית <span>בחיי היומיום</span></div>
+    <div class="login-sub">לימוד אנגלית מעשית לחיי היומיום<br>קניות · שיחות · טיולים · ואוכל</div>
     <div class="login-box">
-      <div class="login-label">מה השם שלך?</div>
-      <input class="login-input" id="login-name" type="text" placeholder="הכניסי שם או כינוי..." maxlength="30"/>
-      <button class="login-btn" onclick="doLogin()">התחילי לתרגל ←</button>
+      <div class="login-label">מה שמך?</div>
+      <input class="login-input" id="login-name" type="text" placeholder="הכנס שם..." maxlength="30"/>
+      <button class="login-btn" onclick="doLogin()">בואו נתחיל! ←</button>
       <div class="login-hint" id="login-hint"></div>
     </div>
   </div>
@@ -239,121 +257,129 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 <!-- HOME -->
 <div id="screen-home" class="screen">
   <div class="header">
-    <div class="logo">מילים <span>לפסיכומטרי</span></div>
+    <div class="logo">אנגלית <span>יומיומית</span></div>
     <div style="display:flex;align-items:center;gap:8px">
-      <button id="sound-btn" onclick="toggleSound()" style="font-size:18px;background:none;border:none;cursor:pointer;padding:2px 4px;opacity:0.8" title="צלילים">🔊</button>
+      <button id="sound-btn" onclick="toggleSound()" style="font-size:18px;background:none;border:none;cursor:pointer;padding:2px 4px">🔊</button>
       <span class="user-chip" id="user-chip" onclick="switchUser()">👤</span>
       <div class="stats-row">
-        <div class="stat"><div class="stat-val" id="tot-m">0</div><div class="stat-lbl">שלטתי</div></div>
-        <div class="stat"><div class="stat-val" id="tot-f">0</div><div class="stat-lbl">לתרגול</div></div>
-        <div class="stat"><div class="stat-val" id="tot-w">0</div><div class="stat-lbl">סה"כ</div></div>
+        <div class="stat"><div class="stat-val" style="color:#2E7D4F" id="tot-m">0</div><div class="stat-lbl">ידעתי</div></div>
+        <div class="stat"><div class="stat-val" style="color:#C94040" id="tot-f">0</div><div class="stat-lbl">לתרגול</div></div>
+        <div class="stat"><div class="stat-val" style="color:#1565C0" id="tot-w">0</div><div class="stat-lbl">מילים</div></div>
       </div>
     </div>
   </div>
 
-  <!-- STATS DASHBOARD -->
-  <div class="stats-dash" id="stats-dash">
+  <div class="stats-dash">
     <div class="stats-dash-title">📊 ההתקדמות שלי</div>
     <div class="stats-grid">
-      <div class="sc green"><div class="sc-num" id="d-mastered">0</div><div class="sc-lbl">שלטתי</div></div>
+      <div class="sc green"><div class="sc-num" id="d-mastered">0</div><div class="sc-lbl">ידעתי</div></div>
       <div class="sc red"><div class="sc-num" id="d-failed">0</div><div class="sc-lbl">לתרגול</div></div>
       <div class="sc blue"><div class="sc-num" id="d-sessions">0</div><div class="sc-lbl">סשנים</div></div>
     </div>
-    <div class="progress-ring-wrap">
-      <div class="prog-bar-label">שלטתי</div>
-      <div class="prog-bar-outer"><div class="prog-bar-inner" id="prog-mastered" style="background:#2E7D4F;width:0%"></div></div>
+    <div class="prog-row">
+      <div class="prog-lbl">ידעתי</div>
+      <div class="prog-out"><div class="prog-in" id="prog-mastered" style="background:#2E7D4F;width:0%"></div></div>
       <div class="prog-pct" id="prog-mastered-pct" style="color:#2E7D4F">0%</div>
-    </div>
-    <div class="progress-ring-wrap">
-      <div class="prog-bar-label">לתרגול</div>
-      <div class="prog-bar-outer"><div class="prog-bar-inner" id="prog-failed" style="background:#C94040;width:0%"></div></div>
-      <div class="prog-pct" id="prog-failed-pct" style="color:#C94040">0%</div>
     </div>
     <div class="sec-title">סשנים אחרונים</div>
     <div class="session-list" id="session-list"></div>
   </div>
 
-  <div class="mode-grid">
-    <div class="mode-card" onclick="startFlash('all')"><div class="mode-icon">📖</div><div class="mode-title">כרטיסיות</div><div class="mode-desc">כל המילים עם טריק</div></div>
-    <div class="mode-card orange" onclick="startSelfMark()"><div class="mode-icon">✍️</div><div class="mode-title">סימון עצמי</div><div class="mode-desc">סמני מה שאת יודעת</div></div>
-    <div class="mode-card" onclick="startFlash('failed')">
-      <div class="mode-badge red" id="failed-badge">0</div>
-      <div class="mode-icon">🔁</div><div class="mode-title">חזרה על שגיאות</div><div class="mode-desc">מילים שלא ידעת</div>
+
+  <!-- שורה 1: אוצר מילים — רוחב מלא -->
+  <div class="mode-card-wide" onclick="startFlash('all')">
+    <div style="font-size:28px">📖</div>
+    <div>
+      <div class="mode-title" style="font-size:15px">אוצר מילים</div>
+      <div class="mode-desc">למד מילים לפי קטגוריה — עם הגייה וטיפים</div>
     </div>
-    <div class="mode-card" onclick="startQuiz()"><div class="mode-icon">❓</div><div class="mode-title">חידון</div><div class="mode-desc">4 אפשרויות</div></div>
+    <div style="margin-right:auto;font-size:20px;color:#1565C0">←</div>
   </div>
-  <div class="mode-card blue" style="margin-bottom:1rem" onclick="startPsycho()">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="font-size:28px">📝</div>
-      <div><div class="mode-title" style="color:#1A5C9A;font-size:14px">מבחן פסיכומטרי</div><div class="mode-desc">השלמת משפט — סגנון אמיתי</div></div>
-      <div class="mode-badge" style="position:static;margin-right:auto">חדש</div>
+
+  <!-- שורה 2: חידון + התאמת זוגות + השלמת מילים -->
+  <div class="mode-grid" style="margin:.6rem 0;grid-template-columns:1fr 1fr 1fr">
+    <div class="mode-card" onclick="startQuiz()">
+      <div class="mode-icon">❓</div>
+      <div class="mode-title">חידון</div>
+      <div class="mode-desc">4 אפשרויות</div>
+    </div>
+    <div class="mode-card" onclick="startMatch()">
+      <div class="mode-icon">🎯</div>
+      <div class="mode-title">התאמת זוגות</div>
+      <div class="mode-desc">חבר מילה לתרגום</div>
+    </div>
+    <div class="mode-card" onclick="startFill()">
+      <div class="mode-icon">✏️</div>
+      <div class="mode-title">השלמת מילים</div>
+      <div class="mode-desc">השלם את החסר</div>
     </div>
   </div>
-  <div class="mode-card" onclick="startMatch()" style="margin-bottom:1rem"><div class="mode-icon">🎯</div><div class="mode-title">שידוך זוגות</div><div class="mode-desc">התאם מילה לתרגום</div></div>
+
+  <!-- שורה 3: חזרה על שגיאות — רוחב מלא, בצבע שונה -->
+  <div class="mode-card-errors" onclick="startFlash('failed')">
+    <div class="mode-badge red" id="failed-badge" style="display:none;position:static;margin-left:4px">0</div>
+    <div style="font-size:24px">🔁</div>
+    <div>
+      <div class="mode-title" style="color:#C94040">חזרה על שגיאות</div>
+      <div class="mode-desc">כל מה שלא ידעת — מכל המשחקים</div>
+    </div>
+  </div>
+
+  <!-- שורה 4: תרגומון — בולט ומאובחן -->
+  <div class="mode-card-camera" onclick="openCamera()">
+    <div style="font-size:32px">📷</div>
+    <div>
+      <div class="mode-title" style="color:#fff;font-size:16px">תרגומון</div>
+      <div class="mode-desc" style="color:rgba(255,255,255,.85)">צלם שלט · תפריט · מוצר וקבל תרגום מיידי</div>
+    </div>
+    <div style="margin-right:auto;background:rgba(255,255,255,.25);border-radius:99px;font-size:11px;color:white;padding:3px 10px;flex-shrink:0">חדש ✨</div>
+  </div>
+
 
   <div class="wbh">
-    <div class="filters">
-      <button class="fb active" onclick="filterW('all',this)">הכל</button>
-      <button class="fb" onclick="filterW('failed',this)">לתרגול</button>
-      <button class="fb" onclick="filterW('mastered',this)">שלטתי</button>
-    </div>
-    <h3>בנק מילים (<span id="wcount">0</span>)</h3>
+    <h3>📂 קטגוריות — בחר נושא לתרגול</h3>
   </div>
-  <div class="cat-tabs" id="cat-tabs"></div>
-  <div class="word-list" id="word-list"></div>
+  <div id="cat-cards"></div>
 </div>
 
 <!-- FLASHCARD -->
 <div id="screen-flash" class="screen">
   <button class="btn-back" onclick="goHome()">← חזרה</button>
+  <div class="flash-cat-row" id="flash-cat-row"></div>
   <div class="pbw"><div class="pbf" id="fp"></div></div>
   <div class="ctr" id="fc-ctr"></div>
   <div class="flashcard" id="flashcard" onclick="flipCard()">
     <div class="fc-cat" id="fc-cat"></div>
     <div class="fc-word" id="fc-word"></div>
+    <div class="fc-pronounce" id="fc-pron"></div>
+    <button class="speak-btn" id="speak-front-btn" onclick="speakWord(event)" style="display:none">🔊 שמע הגייה</button>
     <div class="fc-hint">לחץ לגלות את המשמעות</div>
     <div class="fc-back">
       <div class="fc-meaning" id="fc-meaning"></div>
-      <div class="trick-box"><div class="trick-lbl">💡 טריק לזכירה</div><div class="trick-txt" id="fc-trick"></div></div>
+      <button class="speak-btn" id="speak-back-btn" onclick="speakWord(event)">🔊 שמע הגייה</button>
+      <div class="fc-example" id="fc-example" style="cursor:pointer" onclick="speakExample(event)" title="לחץ לשמוע את המשפט">
+      </div>
+      <div style="font-size:11px;color:#aaa;text-align:center;margin-bottom:.5rem">לחץ על המשפט לשמוע אותו</div>
+      <div class="trick-box"><div class="trick-lbl">💡 טיפ לזכירה</div><div class="trick-txt" id="fc-trick"></div></div>
     </div>
   </div>
-  <button class="btn-flip" id="btn-flip" onclick="flipCard()">🔄 גלה משמעות</button>
   <div class="ar" id="fc-ar" style="display:none">
     <button class="btn-fail" onclick="markCard(false)">✗ לא ידעתי</button>
     <button class="btn-pass" onclick="markCard(true)">✓ ידעתי!</button>
   </div>
+  <button class="btn-flip" id="btn-flip" onclick="flipCard()">🔄 גלה משמעות</button>
   <div id="fc-note-wrap" style="display:none;margin-top:10px">
     <div class="note-box">
       <div class="note-label">📝 הערה אישית</div>
       <div id="fc-note-display" class="note-display" style="display:none" onclick="openNoteEdit()"></div>
       <div id="fc-note-edit" style="display:none">
-        <textarea class="note-textarea" id="fc-note-input" rows="2" placeholder="כתבי הערה, דוגמה, אסוציאציה..."></textarea>
+        <textarea class="note-textarea" id="fc-note-input" rows="2" placeholder="כתוב הערה, דוגמה, אסוציאציה..."></textarea>
         <div style="display:flex;align-items:center;margin-top:4px">
           <button class="note-save" onclick="saveNote()">שמור</button>
           <span class="note-saved" id="note-saved-msg">✓ נשמר</span>
         </div>
       </div>
-      <button id="fc-note-add-btn" style="font-size:12px;color:#1A5C9A;background:none;border:none;cursor:pointer;padding:2px 0" onclick="openNoteEdit()">+ הוסיפי הערה</button>
-    </div>
-  </div>
-</div>
-
-<!-- SELF MARK -->
-<div id="screen-selfmark" class="screen">
-  <button class="btn-back" onclick="goHome()">← חזרה</button>
-  <div class="self-mark-header">
-    <div class="self-mark-title">✍️ סימון עצמי</div>
-    <div class="self-mark-sub">עיני בכל מילה וסמני אם ידעת אותה — ללא לחץ</div>
-  </div>
-  <div class="pbw"><div class="pbf" id="sm-fp"></div></div>
-  <div class="ctr" id="sm-ctr"></div>
-  <div class="self-word-card" id="sm-card">
-    <div class="self-word-eng" id="sm-word"></div>
-    <div class="self-word-heb" id="sm-heb"></div>
-    <div class="self-word-trick" id="sm-trick"></div>
-    <div class="self-word-btns">
-      <button class="self-no" onclick="selfMark(false)">✗ לא ידעתי</button>
-      <button class="self-yes" onclick="selfMark(true)">✓ ידעתי</button>
+      <button id="fc-note-add-btn" style="font-size:12px;color:#1565C0;background:none;border:none;cursor:pointer;padding:2px 0" onclick="openNoteEdit()">+ הוסף הערה</button>
     </div>
   </div>
 </div>
@@ -368,6 +394,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <div class="pbw"><div class="pbf" id="qp"></div></div>
   <div class="ctr" id="q-ctr"></div>
   <div class="qq" id="q-word"></div>
+  <div style="text-align:center"><button class="speak-btn" id="q-speak-btn" onclick="speakText(document.getElementById('q-word').textContent)" style="display:none">🔊 שמע הגייה</button></div>
+  <div class="qq-sub" id="q-sub"></div>
   <div class="qopts" id="q-opts"></div>
   <div class="qfb" id="q-fb"></div>
   <button class="btn-primary" id="q-next" style="display:none;width:100%;margin-top:8px" onclick="nextQuiz()">הבא →</button>
@@ -376,27 +404,107 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 <!-- MATCH -->
 <div id="screen-match" class="screen">
   <button class="btn-back" onclick="goHome()">← חזרה</button>
-  <div style="text-align:center;margin-bottom:.5rem;font-size:13px;color:#666">זוגות שנותרו: <span id="mpairs">0</span></div>
-  <div class="mgrid" id="mgrid"></div>
-  <div style="text-align:center;margin-top:8px"><button class="btn-sec" onclick="startMatch()">🔁 סט חדש</button></div>
+  <div style="background:#f9f9f9;border:1px solid #e0e0e0;border-radius:10px;padding:.6rem 1rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:13px;font-weight:600;color:#1565C0">🔵 English</div>
+    <div style="font-size:13px;color:#666">זוגות שנותרו: <span id="mpairs" style="font-weight:700;color:#C94040">0</span></div>
+    <div style="font-size:13px;font-weight:600;color:#7B5800">עברית 🟡</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div id="match-col-eng" style="display:flex;flex-direction:column;gap:8px"></div>
+    <div id="match-col-heb" style="display:flex;flex-direction:column;gap:8px"></div>
+  </div>
+  <div style="text-align:center;margin-top:10px"><button class="btn-sec" onclick="startMatch()">🔁 סט חדש</button></div>
 </div>
 
-<!-- PSYCHO -->
-<div id="screen-psycho" class="screen">
+<!-- CONVO MODE -->
+<div id="screen-convo" class="screen">
   <button class="btn-back" onclick="goHome()">← חזרה</button>
-  <div class="psych-header">
-    <div><div class="psych-title">מבחן השלמת משפט</div><div class="psych-sub" id="psych-sub">20 שאלות • 90 שניות</div></div>
-    <div class="timer-circle" id="timer-circle">90</div>
+  <div style="background:#E3F2FD;border:1px solid #1565C0;border-radius:12px;padding:1rem;margin-bottom:1rem;">
+    <div style="font-size:14px;font-weight:700;color:#1565C0" id="convo-title">שיחה יומיומית</div>
+    <div style="font-size:12px;color:#1565C0;margin-top:3px" id="convo-sub">לחץ על מילה מסומנת ללמוד אותה</div>
   </div>
-  <div class="psych-dots" id="psych-dots"></div>
-  <div class="psych-qnum" id="psych-qnum"></div>
-  <div class="psych-sent" id="psych-sent"></div>
-  <div class="psych-opts" id="psych-opts"></div>
-  <div class="psych-explain" id="psych-explain"></div>
-  <div class="psych-nav">
-    <button class="btn-blue" id="psych-next" style="display:none" onclick="nextPsycho()">הבא →</button>
-    <button class="psych-skip" id="psych-skip" onclick="skipPsycho()">דלג ←</button>
+  <div class="convo-wrap" id="convo-bubbles"></div>
+  <div id="convo-word-info" style="display:none;background:#FFF8E1;border:1px solid #F9A825;border-radius:10px;padding:1rem;margin-bottom:1rem;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:.3rem">
+      <div style="font-size:18px;font-weight:700" id="cw-eng"></div>
+      <button class="speak-btn" id="cw-speak-word" onclick="speakText(currentConvoWord&&currentConvoWord.e,this)" style="margin:0;padding:4px 12px;font-size:12px">🔊 הגייה</button>
+    </div>
+    <div style="font-size:15px;color:#555;margin:.2rem 0" id="cw-heb"></div>
+    <div style="font-size:12px;color:#888;font-style:italic;cursor:pointer;margin-bottom:.5rem" id="cw-ex" onclick="speakText(this.textContent.replace(/[\u201c\u201d\"]/g,''))">
+      <span style="font-size:10px;color:#B8860B">▶ לחץ לשמוע:</span>
+    </div>
+    <div style="margin-top:.5rem;display:flex;gap:8px">
+      <button class="btn-green" style="flex:1;padding:8px;font-size:13px" onclick="learnConvoWord(true)">✓ למדתי</button>
+      <button class="btn-sec" style="flex:1;padding:8px;font-size:13px" onclick="closeConvoWord()">סגור</button>
+    </div>
   </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:.5rem">
+    <button class="btn-primary" onclick="nextConvo()">שיחה הבאה →</button>
+    <button class="speak-btn" id="convo-speak-all" onclick="speakAllConvo(this)" style="margin:0">🔊 השמע את השיחה</button>
+    <button class="btn-sec" onclick="goHome()">תפריט</button>
+  </div>
+</div>
+
+<!-- CAMERA / SCAN -->
+<div id="screen-camera" class="screen">
+  <button class="btn-back" onclick="stopCamera();goHome()">← חזרה</button>
+  <div class="cam-header">
+    <div class="cam-title">📷 תרגומון</div>
+    <div class="cam-sub">צלם או הקלד — וקבל תרגום מיידי לעברית</div>
+  </div>
+
+  <!-- כפתור אחד לצילום/גלריה -->
+  <button class="cam-snap-btn" onclick="triggerCamera()">📷 צלם תמונה / בחר מהגלריה</button>
+  <input type="file" id="cam-file" accept="image/*" capture="environment" style="display:none" onchange="handleFileUpload(event)"/>
+
+  <!-- הקלדה ידנית -->
+  <div style="margin:.5rem 0;text-align:center;font-size:13px;color:#888">— או הקלד טקסט —</div>
+  <textarea id="cam-text-input" placeholder="הקלד מילים או משפט באנגלית..."
+    style="width:100%;padding:12px;border:1px solid #CE93D8;border-radius:10px;font-size:14px;direction:ltr;text-align:left;resize:none;outline:none;font-family:inherit;min-height:80px;margin-bottom:.5rem"></textarea>
+  <button class="cam-upload-btn" onclick="translateTyped()">🌍 תרגם טקסט</button>
+
+  <div class="cam-result" id="cam-result">
+    <div class="cam-result-title">📝 טקסט מקורי:</div>
+    <div class="cam-extracted" id="cam-extracted"></div>
+    <div class="cam-result-title" style="margin-top:.5rem">🇮🇱 תרגום לעברית:</div>
+    <div class="cam-translation" id="cam-translation"></div>
+    <div id="cam-word-section" style="display:none">
+      <div class="cam-result-title" style="margin-top:.5rem">💾 מילים — שמור ללימוד:</div>
+      <div class="cam-word-list" id="cam-word-list"></div>
+    </div>
+  </div>
+
+  <div class="cam-loading" id="cam-loading" style="display:none">
+    <span class="spinner">⏳</span>
+    מתרגם...
+  </div>
+</div>
+
+<!-- FILL IN THE BLANK -->
+<div id="screen-fill" class="screen">
+  <button class="btn-back" onclick="goHome()">← חזרה</button>
+  <div style="background:#E8F5E9;border:1px solid #4CAF50;border-radius:12px;padding:.75rem 1rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:14px;font-weight:700;color:#2E7D32">✏️ השלמת משפט</div>
+    <div style="font-size:13px;font-weight:700;color:#2E7D32" id="fill-score-wrap">0 ✓  0 ✗</div>
+  </div>
+  <div class="pbw"><div class="pbf" id="fill-p" style="background:#4CAF50"></div></div>
+  <div class="ctr" id="fill-ctr"></div>
+
+  <!-- המשפט עם החסר -->
+  <div id="fill-sentence-box" style="background:#f9f9f9;border:1px solid #e0e0e0;border-radius:12px;padding:1.1rem 1.25rem;font-size:17px;line-height:2;text-align:center;margin-bottom:.6rem;direction:ltr;min-height:70px"></div>
+
+  <!-- הגייה בלבד -->
+  <div style="text-align:center;margin-bottom:.75rem">
+    <button id="fill-speak-btn" onclick="speakText(fillCorrect,this)" class="speak-btn" style="margin:0 auto">🔊 שמע הגייה</button>
+  </div>
+
+  <!-- 4 אפשרויות מילים -->
+  <div id="fill-opts" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem"></div>
+
+  <!-- משוב -->
+  <div id="fill-feedback" style="display:none;border-radius:10px;padding:.75rem 1rem;margin-bottom:.75rem;text-align:center"></div>
+  <button id="fill-next-btn" onclick="nextFill()" class="btn-primary" style="display:none;width:100%;padding:12px;font-size:14px">הבא →</button>
+  <button id="fill-skip-btn" onclick="skipFill()" class="psych-skip" style="display:block;margin:.5rem auto">דלג</button>
 </div>
 
 <!-- RESULTS -->
@@ -407,77 +515,765 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
     <div class="rrow">
       <span class="rtag tp" id="res-pass">0 נכון</span>
       <span class="rtag tf" id="res-fail">0 שגוי</span>
-      <span class="rtag tb" id="res-skip" style="display:none">0 דילוגים</span>
     </div>
     <div class="sec-title" id="res-ftitle"></div>
-    <div id="res-review" style="max-height:220px;overflow-y:auto"></div>
+    <div id="res-review" style="max-height:240px;overflow-y:auto"></div>
     <div style="display:flex;gap:8px;justify-content:center;margin-top:1rem;flex-wrap:wrap">
-      <button class="btn-primary" id="btn-retry" onclick="startFlash('failed')" style="display:none">חזור על שגיאות</button>
-      <button class="btn-blue" id="btn-retry-psycho" onclick="startPsycho()" style="display:none">מבחן חדש</button>
-      <button class="btn-sec" onclick="goHome()">תפריט</button>
+      <button class="btn-green" id="btn-retry" onclick="startFlash('failed')" style="display:none">חזור על שגיאות</button>
+      <button class="btn-sec" onclick="goHome()">תפריט ראשי</button>
     </div>
   </div>
 </div>
 
 </div>
 <script>
-// ========== WORD DATA WITH CATEGORIES ==========
-const CATS = {
-  "פעלים בסיסיים": ["Expand","Contract","Conceal","Reveal","Justify","Enhance","Decline","Resist","Persist","Cease","Commence","Eliminate","Retain","Acquire","Verify","Infer","Imply","Generate","Consume","Allocate","Exceed","Fluctuate","Maintain","Preserve","Destroy","Establish","Achieve","Attempt","Avoid","Prevent","Enable","Reduce"],
-  "פעלים מתקדמים": ["Abolish","Advocate","Alleviate","Assert","Assess","Attain","Boost","Collapse","Comply","Conclude","Contradict","Convey","Deduce","Defy","Deprive","Derive","Detect","Diminish","Disrupt","Dominate","Emerge","Emphasize","Encounter","Endure","Enforce","Ensure","Entail","Evaluate","Evolve","Execute","Exploit","Extract","Facilitate","Foster","Highlight","Identify","Implement","Impose","Indicate","Integrate","Interpret","Isolate","Accommodate","Accumulate","Acknowledge","Aggravate","Alter","Anticipate","Attribute","Characterize","Cite","Clarify","Compensate","Complicate","Compromise","Contribute","Convert","Correlate","Counteract","Demonstrate"],
-  "תארים": ["Abundant","Reluctant","Meticulous","Scarce","Vague","Rigid","Flexible","Comprehensive","Ambiguous","Inevitable","Significant","Stable","Evident","Precise","Approximate","Complex","Logical","Relevant","Valid","Efficient","Capable","Visible","Common","Rare","Permanent","Temporary","Certain","Accurate","Artificial","Ancient","Modern","Adequate","Arbitrary","Aware","Deficient","Dense","Diverse","Entire","Finite","Fundamental","Genuine","Identical","Inferior","Intense","Intrinsic","Ambivalent","Analogous","Chronic","Coherent","Compatible","Controversial","Credible","Cumulative","Deliberate","Detrimental","Dubious","Erroneous","Excessive","Explicit","Implicit","Inherent","Neutral","Objective","Subjective","Obsolete","Plausible","Profound","Redundant","Subtle","Superior","Sustainable","Tangible","Trivial"],
-  "מילות קישור": ["Hence","Thus","Albeit","Whereas","Consequently","Conversely","Furthermore","Nevertheless","Nonetheless","Presumably","Simultaneously"],
-  "שמות עצם ומושגים": ["Bias","Barrier","Core","Crisis","Draft","Duration","Factor","Feature","Foundation","Framework","Hypothesis","Incentive","Insight","Instance","Interval","Analogy","Anomaly","Criterion","Paradox","Phenomenon","Stereotype"],
-  "אוצר מילים נוסף": ["Deteriorate","Assume","Confirm","Deny","Permit","Prohibit","Compel","Persuade","Require","Lack","Benefit","Harm","Advantage","Abrupt","Absurd","Adjacent","Aspire","Baffle","Brief","Bulk","Capture","Compile","Conceive","Conduct","Confine","Confront","Congest","Contend","Defy","Depict","Deviate","Discard","Disclose","Distort","Equate","Equip","Erode","Evade","Exaggerate","Exclude","Exhibit","Expose","Formulate","Grant","Guarantee","Incorporate","Invoke","Skeptical","Strengthen","Weaken","Accept","Refuse","Include","Attach","Detach","Absorb","Vary","Omit","Debate","Challenge"]
-};
+// ========== WORD DATA ==========
+const WORDS = [
+  // קניות וסופרמרקט
+  {e:"apple",h:"תפוח",p:"AP-ul",ex:"I want to buy an apple.",t:"apple = תפוח — כמו האפל של ניוטון",cat:"🛒 קניות"},
+  {e:"bread",h:"לחם",p:"BRED",ex:"Please give me bread.",t:"bread = לחם — נשמע כמו 'ברד'",cat:"🛒 קניות"},
+  {e:"milk",h:"חלב",p:"MILK",ex:"I drink milk every morning.",t:"milk = חלב — קצר וקל",cat:"🛒 קניות"},
+  {e:"water",h:"מים",p:"WO-ter",ex:"Can I have some water?",t:"water = מים — וו-טר",cat:"🛒 קניות"},
+  {e:"chicken",h:"עוף",p:"CHIK-en",ex:"I need chicken for dinner.",t:"chicken = עוף — צ'יקן",cat:"🛒 קניות"},
+  {e:"fish",h:"דג",p:"FISH",ex:"I like to eat fish.",t:"fish = דג — כמו fish and chips",cat:"🛒 קניות"},
+  {e:"vegetables",h:"ירקות",p:"VEJ-ta-buls",ex:"Buy fresh vegetables please.",t:"vege = ירק — veggie burger",cat:"🛒 קניות"},
+  {e:"fruit",h:"פרות",p:"FROOT",ex:"I eat fruit every day.",t:"fruit = פרות — פרוט",cat:"🛒 קניות"},
+  {e:"eggs",h:"ביצים",p:"EGZ",ex:"I need a dozen eggs.",t:"eggs = ביצים — אגז",cat:"🛒 קניות"},
+  {e:"cheese",h:"גבינה",p:"CHEEZ",ex:"I love cheese.",t:"cheese = גבינה — צ'יז",cat:"🛒 קניות"},
+  {e:"price",h:"מחיר",p:"PRYS",ex:"What is the price?",t:"price = מחיר — פריס",cat:"🛒 קניות"},
+  {e:"cheaper",h:"יותר זול",p:"CHEE-per",ex:"Do you have something cheaper?",t:"cheap = זול + er = יותר",cat:"🛒 קניות"},
+  {e:"expensive",h:"יקר",p:"ek-SPEN-siv",ex:"This is too expensive.",t:"expensive = יקר — כסף יוצא (ex-spend)",cat:"🛒 קניות"},
+  {e:"receipt",h:"קבלה",p:"re-SEET",ex:"Can I have a receipt?",t:"receipt = קבלה — ריסיט",cat:"🛒 קניות"},
+  {e:"bag",h:"שקית",p:"BAG",ex:"Do you have a bag?",t:"bag = שקית — בג",cat:"🛒 קניות"},
 
-const WORDS=[
-  {e:"Abundant",h:"שופע",t:"abundance = שפע"},{e:"Reluctant",h:"מסויג",t:"reluct = נרתע, לא רוצה"},{e:"Meticulous",h:"קפדן",t:"מדד כל מילימטר – שם לב להכל"},{e:"Scarce",h:"נדיר",t:"scar = צלקת נדירה"},{e:"Vague",h:"מעורפל",t:"vague נשמע ריק ומטושטש"},{e:"Expand",h:"להרחיב",t:"ex+pan = מחבת גדולה"},{e:"Contract",h:"לצמצם",t:"חוזה שמגביל"},{e:"Rigid",h:"נוקשה",t:"rigid = קשיח כמו מוט"},{e:"Flexible",h:"גמיש",t:"flex = שריר גמיש"},{e:"Comprehensive",h:"מקיף",t:"comprehensive exam = מבחן כולל"},{e:"Conceal",h:"להסתיר",t:"קונסילר = מסתיר פגמים"},{e:"Reveal",h:"לחשוף",t:"ההפך מ-conceal"},{e:"Justify",h:"להצדיק",t:"justice = צדק"},{e:"Deteriorate",h:"להידרדר",t:"יורד ומחמיר"},{e:"Hence",h:"לכן",t:"hence = מכאן נובע"},{e:"Thus",h:"לכן",t:"thus = this way"},{e:"Albeit",h:"למרות ש",t:"al-be-it = על אף שהוא"},{e:"Whereas",h:"בעוד ש",t:"where+as = השוואה"},{e:"Ambiguous",h:"דו-משמעי",t:"ambi = שניים (ambidextrous)"},{e:"Inevitable",h:"בלתי נמנע",t:"in+evitable = לא ניתן להימנע"},{e:"Enhance",h:"לשפר",t:"להעלות רמה"},{e:"Decline",h:"ירידה / לסרב",t:"↓ decline = לרדת"},{e:"Resist",h:"להתנגד",t:"resistance = התנגדות"},{e:"Persist",h:"להתמיד",t:"per+sist = ממשיך לעמוד"},{e:"Cease",h:"להפסיק",t:"cease fire = הפסקת אש"},{e:"Commence",h:"להתחיל",t:"commencement = טקס תחילה"},{e:"Eliminate",h:"לחסל",t:"להוציא מהמשחק"},{e:"Retain",h:"לשמור",t:"retain = לשמור בזיכרון"},{e:"Acquire",h:"לרכוש",t:"acquisition = רכישה"},{e:"Assume",h:"להניח",t:"assumption = הנחה"},{e:"Verify",h:"לאמת",t:"verify = לוודא אמת"},{e:"Infer",h:"להסיק",t:"inference = הסקת מסקנה"},{e:"Imply",h:"לרמוז",t:"implication = רמז"},{e:"Generate",h:"ליצור",t:"generator = מחולל"},{e:"Consume",h:"לצרוך",t:"consumer = צרכן"},{e:"Allocate",h:"להקצות",t:"לחלק תקציב"},{e:"Exceed",h:"לחרוג",t:"מעבר לגבול"},{e:"Prior",h:"קודם",t:"priority = עדיפות ראשונה"},{e:"Subsequent",h:"לאחר מכן",t:"sequence = רצף"},{e:"Approximate",h:"בערך",t:"approx. = קיצור"},{e:"Precise",h:"מדויק",t:"precision = דיוק"},{e:"Stable",h:"יציב",t:"stable = אורווה יציבה"},{e:"Fluctuate",h:"להשתנות",t:"עולה יורד כמו גל"},{e:"Significant",h:"משמעותי",t:"חשוב"},{e:"Contrast",h:"ניגוד",t:"contra = נגד"},{e:"Evident",h:"ברור",t:"evidence = ראיה"},{e:"Confirm",h:"לאשר",t:"confirmation = אישור"},{e:"Deny",h:"להכחיש",t:"denial = הכחשה"},{e:"Permit",h:"להרשות",t:"permit = היתר"},{e:"Prohibit",h:"לאסור",t:"prohibition = איסור"},{e:"Compel",h:"להכריח",t:"כוח מכריח"},{e:"Persuade",h:"לשכנע",t:"persuasion = שכנוע"},{e:"Require",h:"לדרוש",t:"requirement = דרישה"},{e:"Lack",h:"חוסר",t:"lacking = חסר"},{e:"Maintain",h:"לשמור על",t:"maintenance = תחזוקה"},{e:"Preserve",h:"לשמר",t:"preservation = שימור"},{e:"Destroy",h:"להרוס",t:"destruction = הרס"},{e:"Establish",h:"להקים",t:"establishment = מוסד"},{e:"Achieve",h:"להשיג",t:"achievement = הישג"},{e:"Attempt",h:"לנסות",t:"attempt = ניסיון"},{e:"Avoid",h:"להימנע",t:"לסטות מהדרך"},{e:"Prevent",h:"למנוע",t:"prevention = מניעה"},{e:"Enable",h:"לאפשר",t:"להדליק אפשרות"},{e:"Reduce",h:"לצמצם",t:"reduction = צמצום"},{e:"Benefit",h:"תועלת",t:"benefit = יתרון"},{e:"Harm",h:"נזק",t:"harmful = מזיק"},{e:"Advantage",h:"יתרון",t:"יד עליונה"},{e:"Accurate",h:"מדויק",t:"accuracy = דיוק"},{e:"Artificial",h:"מלאכותי",t:"art = יצירה מלאכותית"},{e:"Ancient",h:"עתיק",t:"ישן מאוד"},{e:"Modern",h:"מודרני",t:"עכשווי"},{e:"Common",h:"נפוץ",t:"שכיח"},{e:"Rare",h:"נדיר",t:"עצם נדירה"},{e:"Permanent",h:"קבוע",t:"permanent marker = לא נמחק"},{e:"Temporary",h:"זמני",t:"temp job = עבודה זמנית"},{e:"Complex",h:"מורכב",t:"complexity = מורכבות"},{e:"Certain",h:"בטוח",t:"certainly = בהחלט"},{e:"Logical",h:"הגיוני",t:"logic = לוגיקה"},{e:"Relevant",h:"רלוונטי",t:"relate = קשור לנושא"},{e:"Valid",h:"תקף",t:"validation = אימות"},{e:"Efficient",h:"יעיל",t:"efficiency = יעילות"},{e:"Capable",h:"מסוגל",t:"capability = יכולת"},{e:"Visible",h:"נראה",t:"vision = ראייה"},{e:"Accept",h:"לקבל",t:"acceptance = קבלה"},{e:"Refuse",h:"לסרב",t:"refusal = סירוב"},{e:"Include",h:"לכלול",t:"inclusive = כולל"},{e:"Exclude",h:"להוציא",t:"exclusive = בלעדי"},{e:"Strengthen",h:"לחזק",t:"strong = חזק"},{e:"Weaken",h:"להחליש",t:"weak = חלש"},{e:"Abolish",h:"לבטל חוק",t:"abolish law = ביטול חוק"},{e:"Abrupt",h:"פתאומי",t:"ברגע – ניתוק חד"},{e:"Absurd",h:"מגוחך",t:"אבסורד = חסר הגיון"},{e:"Adequate",h:"מספק",t:"adequate = מספיק"},{e:"Adjacent",h:"סמוך",t:"adjacent rooms = חדרים צמודים"},{e:"Advocate",h:"לתמוך / עורך דין",t:'עו"ד תומך'},{e:"Alleviate",h:"להקל",t:"להעלים כאב"},{e:"Arbitrary",h:"שרירותי",t:"בלי חוק – לא מוצדק"},{e:"Aspire",h:"לשאוף",t:"aspire = לשאוף גבוה"},{e:"Assert",h:"לטעון בנחרצות",t:"assert = להצהיר בבטחה"},{e:"Assess",h:"להעריך",t:"assessment = הערכה"},{e:"Attain",h:"להשיג",t:"attain goal = להגיע ליעד"},{e:"Aware",h:"מודע",t:"awareness = מודעות"},{e:"Barrier",h:"מחסום",t:"barrier = חסם בדרך"},{e:"Bias",h:"הטיה",t:"נטייה לצד אחד"},{e:"Boost",h:"להעלות / לחזק",t:"boost = דחיפה למעלה"},{e:"Collapse",h:"לקרוס",t:"נפילה מוחלטת"},{e:"Comply",h:"לציית",t:"comply with rules"},{e:"Conclude",h:"להסיק / לסיים",t:"conclusion = מסקנה"},{e:"Contradict",h:"לסתור",t:"contra = נגד"},{e:"Convey",h:"להעביר מסר",t:"convey message"},{e:"Core",h:"ליבה",t:"core = המרכז"},{e:"Crisis",h:"משבר",t:"נקודת שבר"},{e:"Crucial",h:"קריטי",t:"חיוני לגמרי"},{e:"Deduce",h:"להסיק",t:"Sherlock Holmes"},{e:"Deficient",h:"חסר",t:"deficit = גירעון"},{e:"Defy",h:"להתריס",t:"לא ציות"},{e:"Dense",h:"צפוף",t:"dense forest = יער צפוף"},{e:"Deprive",h:"לשלול",t:"לקחת ממישהו"},{e:"Derive",h:"להפיק",t:"לגזור ממקור"},{e:"Detect",h:"לזהות",t:"detector = גלאי"},{e:"Diminish",h:"להקטין",t:"לרדת בערך"},{e:"Disrupt",h:"להפריע / לשבש",t:"disruptive = מפריע"},{e:"Diverse",h:"מגוון",t:"diversity = גיוון"},{e:"Dominate",h:"לשלוט",t:"להשתלט"},{e:"Emerge",h:"להופיע / לצוץ",t:"לצוץ מהמים"},{e:"Emphasize",h:"להדגיש",t:"emphasis = הדגשה"},{e:"Encounter",h:"להיתקל",t:"פגישה בלתי צפויה"},{e:"Endure",h:"להחזיק מעמד",t:"endurance = סיבולת"},{e:"Enforce",h:"לאכוף",t:"enforcement = אכיפה"},{e:"Ensure",h:"להבטיח",t:"לוודא"},{e:"Entail",h:"לגרור / לכלול",t:"לדרוש בהכרח"},{e:"Evaluate",h:"להעריך",t:"evaluation = הערכה"},{e:"Evolve",h:"להתפתח",t:"evolution = אבולוציה"},{e:"Execute",h:"לבצע",t:"execution = ביצוע"},{e:"Exploit",h:"לנצל",t:"exploitation = ניצול"},{e:"Extract",h:"לחלץ",t:"להוציא מתוך"},{e:"Facilitate",h:"להקל / לאפשר",t:"לסלול דרך"},{e:"Factor",h:"גורם",t:"מרכיב"},{e:"Foster",h:"לטפח",t:"לגדל ולטפח"},{e:"Foundation",h:"יסוד",t:"בסיס"},{e:"Framework",h:"מסגרת",t:"frame = מסגרת"},{e:"Fundamental",h:"בסיסי",t:"foundation = יסוד"},{e:"Genuine",h:"אמיתי",t:"לא מזויף"},{e:"Grant",h:"להעניק",t:"מתן"},{e:"Highlight",h:"להדגיש",t:"highlighter = מדגיש"},{e:"Hypothesis",h:"השערה",t:"hypo = הנחה בסיסית"},{e:"Identify",h:"לזהות",t:"ID = תעודת זהות"},{e:"Impact",h:"השפעה",t:"פגיעה / השפעה"},{e:"Implement",h:"ליישם",t:"implementation = יישום"},{e:"Impose",h:"לכפות",t:"לכפות על"},{e:"Incentive",h:"תמריץ",t:"סיבה לפעול"},{e:"Indicate",h:"להצביע על",t:"indicator = מדד"},{e:"Inferior",h:"נחות",t:"מתחת ל"},{e:"Insight",h:"תובנה",t:"ראייה פנימית"},{e:"Integrate",h:"לשלב",t:"integration = שילוב"},{e:"Integrity",h:"יושרה",t:"integer = שלם"},{e:"Intense",h:"עז",t:"intensity = עוצמה"},{e:"Interpret",h:"לפרש",t:"interpreter = מתורגמן"},{e:"Isolate",h:"לבודד",t:"isolation = בידוד"},
-  {e:"Accommodate",h:"להתאים / לאכלס",t:"accommodate = להכיל"},{e:"Accumulate",h:"לצבור",t:"accumulate = לצבור לאט"},{e:"Acknowledge",h:"להכיר / להודות",t:"acknowledge = לתת קרדיט"},{e:"Aggravate",h:"להחמיר",t:"aggravate = לגרום לגרוע יותר"},{e:"Alter",h:"לשנות",t:"alter ego = שינוי"},{e:"Anticipate",h:"לצפות מראש",t:"anticipate = לחכות ל"},{e:"Attribute",h:"לייחס",t:"attribute to = לתלות ב"},{e:"Characterize",h:"לאפיין",t:"character = תכונה"},{e:"Cite",h:"לצטט",t:"citation = ציטוט"},{e:"Clarify",h:"להבהיר",t:"clarity = בהירות"},{e:"Compensate",h:"לפצות",t:"compensation = פיצוי"},{e:"Complicate",h:"לסבך",t:"complex = מורכב"},{e:"Compromise",h:"להתפשר",t:"שביל הזהב"},{e:"Contribute",h:"לתרום",t:"contribution = תרומה"},{e:"Convert",h:"להמיר",t:"convert = לשנות צורה"},{e:"Correlate",h:"לתאם",t:"correlation = מתאם"},{e:"Counteract",h:"לנטרל",t:"counter=נגד + act=לפעול"},{e:"Demonstrate",h:"להדגים",t:"demo = הדגמה"},{e:"Ambivalent",h:"מהוסס / דו-ערכי",t:"ambi=שניים + valent=ערך"},{e:"Analogous",h:"אנלוגי / דומה",t:"analogy = השוואה"},{e:"Chronic",h:"כרוני / מתמשך",t:"chronic = לאורך זמן"},{e:"Coherent",h:"עקבי / הגיוני",t:"co+here = הכל ביחד"},{e:"Compatible",h:"תואם",t:"compatible = מסתדר עם"},{e:"Controversial",h:"שנוי במחלוקת",t:"controversy = ויכוח"},{e:"Credible",h:"אמין",t:"credit = אמינות"},{e:"Cumulative",h:"מצטבר",t:"accumulate = לצבור"},{e:"Deliberate",h:"מכוון / מודע",t:"deliberate = לא מקרי"},{e:"Detrimental",h:"מזיק",t:"detriment = נזק"},{e:"Dubious",h:"מפוקפק",t:"doubt = ספק"},{e:"Erroneous",h:"שגוי",t:"error = שגיאה"},{e:"Excessive",h:"מוגזם",t:"exceed = לחרוג"},{e:"Explicit",h:"מפורש",t:"explicit = ברור לחלוטין"},{e:"Implicit",h:"משתמע",t:"implicit = לא אמור במפורש"},{e:"Inherent",h:"מובנה / טבעי",t:"inherit = לרשת"},{e:"Neutral",h:"נייטרלי",t:"לא לוקח צד"},{e:"Objective",h:"אובייקטיבי",t:"object = עצם, לא רגש"},{e:"Subjective",h:"סובייקטיבי",t:"subject = אני, רגשי"},{e:"Obsolete",h:"מיושן",t:"כבר לא בשימוש"},{e:"Plausible",h:"סביר / משכנע",t:"נשמע הגיוני"},{e:"Profound",h:"עמוק / מעמיק",t:"pro+found = למצוא לעומק"},{e:"Redundant",h:"מיותר / כפול",t:"חוזר על עצמו"},{e:"Subtle",h:"עדין / דק",t:"subtle = לא ברור מיד"},{e:"Superior",h:"עליון / מעולה",t:"super = מעל"},{e:"Sustainable",h:"בר-קיימא",t:"sustain = להחזיק לאורך זמן"},{e:"Tangible",h:"מוחשי",t:"tangible = אפשר לגעת"},{e:"Trivial",h:"טריוויאלי / שולי",t:"trivial = לא חשוב"},{e:"Consequently",h:"כתוצאה מכך",t:"consequence = תוצאה"},{e:"Conversely",h:"לעומת זאת",t:"converse = הפוך"},{e:"Furthermore",h:"יתרה מזאת",t:"further+more = עוד ועוד"},{e:"Nevertheless",h:"אף על פי כן",t:"never+the+less = בכל זאת"},{e:"Nonetheless",h:"למרות זאת",t:"none+the+less = בכל זאת"},{e:"Presumably",h:"כנראה",t:"presume = להניח"},{e:"Simultaneously",h:"בו זמנית",t:"simul = ביחד"},{e:"Analogy",h:"אנלוגיה",t:"דמיון בין דברים"},{e:"Anomaly",h:"חריגה",t:"a+normal = לא נורמלי"},{e:"Criterion",h:"קריטריון",t:"criteria = רשימת דרישות"},{e:"Paradox",h:"פרדוקס",t:"para+dox = דעה מנוגדת"},{e:"Phenomenon",h:"תופעה",t:"pheno = להופיע"},{e:"Skeptical",h:"ספקני",t:"skeptic = מטיל ספק"},{e:"Stereotype",h:"סטריאוטיפ",t:"stereo+type = קבוע וסוג"}
+  // מסעדה וקפה
+  {e:"menu",h:"תפריט",p:"MEN-yoo",ex:"Can I see the menu?",t:"menu = תפריט — כמו בעברית",cat:"🍽️ מסעדה"},
+  {e:"table",h:"שולחן",p:"TAY-bul",ex:"A table for two, please.",t:"table = שולחן — טייבל",cat:"🍽️ מסעדה"},
+  {e:"waiter",h:"מלצר",p:"WAY-ter",ex:"Excuse me, waiter!",t:"waiter = מלצר — ווייטר = מחכה לך",cat:"🍽️ מסעדה"},
+  {e:"bill",h:"חשבון",p:"BIL",ex:"The bill please.",t:"bill = חשבון — בנוסף לשטר כסף",cat:"🍽️ מסעדה"},
+  {e:"tip",h:"טיפ / תשר",p:"TIP",ex:"I want to leave a tip.",t:"tip = טיפ — כמו בעברית",cat:"🍽️ מסעדה"},
+  {e:"delicious",h:"טעים מאוד",p:"de-LISH-us",ex:"This food is delicious!",t:"delicious = טעים — דה-ליש-אס",cat:"🍽️ מסעדה"},
+  {e:"coffee",h:"קפה",p:"KO-fee",ex:"One coffee, please.",t:"coffee = קפה — כמו בעברית",cat:"🍽️ מסעדה"},
+  {e:"tea",h:"תה",p:"TEE",ex:"I prefer tea.",t:"tea = תה — טי",cat:"🍽️ מסעדה"},
+  {e:"vegetarian",h:"צמחוני",p:"vej-uh-TAIR-ee-an",ex:"I am vegetarian.",t:"vegetarian = צמחוני — vege = ירק",cat:"🍽️ מסעדה"},
+  {e:"dessert",h:"קינוח",p:"de-ZERT",ex:"What is the dessert?",t:"dessert = קינוח — שני S כי תמיד רוצים עוד",cat:"🍽️ מסעדה"},
+
+  // לבוש וקניות בגדים
+  {e:"shirt",h:"חולצה",p:"SHERT",ex:"I need a new shirt.",t:"shirt = חולצה — שרט",cat:"👗 לבוש"},
+  {e:"pants",h:"מכנסיים",p:"PANTS",ex:"These pants are too long.",t:"pants = מכנסיים — פנטס",cat:"👗 לבוש"},
+  {e:"dress",h:"שמלה",p:"DRES",ex:"I like your dress.",t:"dress = שמלה — דרס",cat:"👗 לבוש"},
+  {e:"shoes",h:"נעליים",p:"SHOOZ",ex:"What size shoes do you wear?",t:"shoes = נעליים — שוז",cat:"👗 לבוש"},
+  {e:"coat",h:"מעיל",p:"KOHT",ex:"It is cold, wear a coat.",t:"coat = מעיל — קוט",cat:"👗 לבוש"},
+  {e:"size",h:"מידה",p:"SYZ",ex:"What is your size?",t:"size = מידה — סייז",cat:"👗 לבוש"},
+  {e:"color",h:"צבע",p:"KUL-er",ex:"What color do you want?",t:"color = צבע — קאלר",cat:"👗 לבוש"},
+  {e:"fitting room",h:"חדר מדידה",p:"FIT-ing ROOM",ex:"Where is the fitting room?",t:"fit = מתאים + room = חדר",cat:"👗 לבוש"},
+
+  // טיולים ותחבורה
+  {e:"airport",h:"שדה תעופה",p:"AIR-port",ex:"Take me to the airport.",t:"air = אוויר + port = נמל",cat:"✈️ טיולים"},
+  {e:"hotel",h:"מלון",p:"ho-TEL",ex:"I have a hotel reservation.",t:"hotel = מלון — כמו בעברית",cat:"✈️ טיולים"},
+  {e:"passport",h:"דרכון",p:"PAS-port",ex:"Show me your passport.",t:"pass = עבור + port = נמל",cat:"✈️ טיולים"},
+  {e:"ticket",h:"כרטיס",p:"TIK-et",ex:"One ticket, please.",t:"ticket = כרטיס — טיקט",cat:"✈️ טיולים"},
+  {e:"taxi",h:"מונית",p:"TAK-see",ex:"I need a taxi.",t:"taxi = מונית — כמו בעברית",cat:"✈️ טיולים"},
+  {e:"bus",h:"אוטובוס",p:"BUS",ex:"Which bus goes downtown?",t:"bus = אוטובוס — כמו בעברית",cat:"✈️ טיולים"},
+  {e:"map",h:"מפה",p:"MAP",ex:"Do you have a map?",t:"map = מפה — כמו בעברית (מפה!)",cat:"✈️ טיולים"},
+  {e:"reservation",h:"הזמנה",p:"rez-er-VAY-shun",ex:"I have a reservation.",t:"reserve = לשמור מקום",cat:"✈️ טיולים"},
+  {e:"lost",h:"אבוד",p:"LOST",ex:"I am lost, can you help?",t:"lost = אבוד — לוסט",cat:"✈️ טיולים"},
+  {e:"left",h:"שמאל",p:"LEFT",ex:"Turn left here.",t:"left = שמאל — כמו 'לפט לפנות'",cat:"✈️ טיולים"},
+  {e:"right",h:"ימין",p:"RYTE",ex:"Turn right at the light.",t:"right = ימין — גם = נכון",cat:"✈️ טיולים"},
+  {e:"straight",h:"ישר",p:"STRAYT",ex:"Go straight ahead.",t:"straight = ישר — סטרייט",cat:"✈️ טיולים"},
+
+  // שיחות חולין
+  {e:"hello",h:"שלום",p:"he-LOH",ex:"Hello, how are you?",t:"hello = שלום — הכי בסיסי!",cat:"💬 שיחה"},
+  {e:"goodbye",h:"להתראות",p:"good-BY",ex:"Goodbye, see you tomorrow.",t:"goodbye = להתראות — גוד + באי",cat:"💬 שיחה"},
+  {e:"please",h:"בבקשה",p:"PLEEZ",ex:"Can you help me, please?",t:"please = בבקשה — פליז",cat:"💬 שיחה"},
+  {e:"thank you",h:"תודה",p:"THANK yoo",ex:"Thank you very much!",t:"thank = תודה — ת'אנק יו",cat:"💬 שיחה"},
+  {e:"sorry",h:"סליחה",p:"SO-ree",ex:"I am sorry for being late.",t:"sorry = סליחה — סורי",cat:"💬 שיחה"},
+  {e:"help",h:"עזרה",p:"HELP",ex:"I need help.",t:"help = עזרה — הלפ",cat:"💬 שיחה"},
+  {e:"understand",h:"להבין",p:"un-der-STAND",ex:"I don't understand.",t:"under = מתחת + stand = עומד = מבין",cat:"💬 שיחה"},
+  {e:"slowly",h:"לאט",p:"SLOH-lee",ex:"Please speak more slowly.",t:"slow = איטי + ly = לאט",cat:"💬 שיחה"},
+  {e:"repeat",h:"לחזור",p:"re-PEET",ex:"Can you repeat that?",t:"repeat = חזור — ריפיט",cat:"💬 שיחה"},
+  {e:"name",h:"שם",p:"NAYM",ex:"What is your name?",t:"name = שם — ניים",cat:"💬 שיחה"},
+  {e:"how much",h:"כמה עולה",p:"how MUCH",ex:"How much does this cost?",t:"how much = כמה — שאלה בסיסית בקניות",cat:"💬 שיחה"},
+  {e:"where",h:"איפה",p:"WAIR",ex:"Where is the bathroom?",t:"where = איפה — ווֵר",cat:"💬 שיחה"},
+
+  // בית ומשפחה
+  {e:"family",h:"משפחה",p:"FAM-i-lee",ex:"I love my family.",t:"family = משפחה — פמילי",cat:"🏠 בית"},
+  {e:"house",h:"בית",p:"HOWSS",ex:"This is my house.",t:"house = בית — האוס",cat:"🏠 בית"},
+  {e:"kitchen",h:"מטבח",p:"KICH-en",ex:"The kitchen is clean.",t:"kitchen = מטבח — קיצ'ן",cat:"🏠 בית"},
+  {e:"bedroom",h:"חדר שינה",p:"BED-room",ex:"My bedroom is quiet.",t:"bed = מיטה + room = חדר",cat:"🏠 בית"},
+  {e:"bathroom",h:"חדר אמבטיה",p:"BATH-room",ex:"Where is the bathroom?",t:"bath = אמבטיה + room = חדר",cat:"🏠 בית"},
+  {e:"neighbor",h:"שכן",p:"NAY-ber",ex:"My neighbor is very nice.",t:"neighbor = שכן — ניי-בר",cat:"🏠 בית"},
+
+  // בריאות ורפואה
+  {e:"doctor",h:"רופא",p:"DOK-ter",ex:"I need to see a doctor.",t:"doctor = רופא — דוקטור",cat:"🏥 בריאות"},
+  {e:"hospital",h:"בית חולים",p:"HOS-pi-tal",ex:"Take me to the hospital.",t:"hospital = בית חולים — הוספיטל",cat:"🏥 בריאות"},
+  {e:"medicine",h:"תרופה",p:"MED-i-sin",ex:"I need my medicine.",t:"medicine = תרופה — מדיצין",cat:"🏥 בריאות"},
+  {e:"pain",h:"כאב",p:"PAYN",ex:"I have pain in my back.",t:"pain = כאב — פיין",cat:"🏥 בריאות"},
+  {e:"allergic",h:"אלרגי",p:"a-LER-jik",ex:"I am allergic to nuts.",t:"allergic = אלרגי — כמו בעברית",cat:"🏥 בריאות"},
+  {e:"emergency",h:"חירום",p:"e-MER-jen-see",ex:"This is an emergency!",t:"emergency = חירום — אמרג'נסי",cat:"🏥 בריאות"},
+
+  // 🛒 קניות נוספות
+  {e:"butter",h:"חמאה",p:"BUT-er",ex:"I need butter for the cake.",t:"butter = חמאה — בּאטר",cat:"🛒 קניות"},
+  {e:"sugar",h:"סוכר",p:"SHOO-ger",ex:"How much sugar do you need?",t:"sugar = סוכר — שוגר",cat:"🛒 קניות"},
+  {e:"salt",h:"מלח",p:"SAWLT",ex:"Pass me the salt please.",t:"salt = מלח — סולט",cat:"🛒 קניות"},
+  {e:"oil",h:"שמן",p:"OYL",ex:"I need cooking oil.",t:"oil = שמן — אויל",cat:"🛒 קניות"},
+  {e:"rice",h:"אורז",p:"RYSS",ex:"I want to buy rice.",t:"rice = אורז — ריס",cat:"🛒 קניות"},
+  {e:"pasta",h:"פסטה",p:"PAH-sta",ex:"I love pasta.",t:"pasta = פסטה — כמו בעברית",cat:"🛒 קניות"},
+  {e:"tomato",h:"עגבנייה",p:"tuh-MAY-toh",ex:"I need two tomatoes.",t:"tomato = עגבנייה — טומיייטו",cat:"🛒 קניות"},
+  {e:"potato",h:"תפוח אדמה",p:"puh-TAY-toh",ex:"I want potatoes.",t:"potato = תפוח אדמה — פוטיייטו",cat:"🛒 קניות"},
+  {e:"onion",h:"בצל",p:"UN-yun",ex:"Buy me some onions.",t:"onion = בצל — אניון",cat:"🛒 קניות"},
+  {e:"garlic",h:"שום",p:"GAR-lik",ex:"Add garlic to the sauce.",t:"garlic = שום — גארליק",cat:"🛒 קניות"},
+  {e:"lemon",h:"לימון",p:"LEM-un",ex:"I need a lemon.",t:"lemon = לימון — כמו בעברית",cat:"🛒 קניות"},
+  {e:"orange",h:"תפוז",p:"OR-inj",ex:"I drink orange juice.",t:"orange = תפוז — אוֹרנג'",cat:"🛒 קניות"},
+  {e:"banana",h:"בננה",p:"buh-NAN-uh",ex:"I eat a banana every day.",t:"banana = בננה — כמו בעברית",cat:"🛒 קניות"},
+  {e:"strawberry",h:"תות שדה",p:"STRAW-ber-ee",ex:"I love strawberries.",t:"straw = קש + berry = פרי יער",cat:"🛒 קניות"},
+  {e:"grapes",h:"ענבים",p:"GRAYPS",ex:"These grapes are sweet.",t:"grapes = ענבים — גריייפס",cat:"🛒 קניות"},
+  {e:"yogurt",h:"יוגורט",p:"YOH-gert",ex:"I eat yogurt for breakfast.",t:"yogurt = יוגורט — כמו בעברית",cat:"🛒 קניות"},
+  {e:"cream",h:"שמנת",p:"KREEM",ex:"Add cream to the soup.",t:"cream = שמנת — קריים",cat:"🛒 קניות"},
+  {e:"juice",h:"מיץ",p:"JOOSS",ex:"I want orange juice.",t:"juice = מיץ — ג'וס",cat:"🛒 קניות"},
+  {e:"wine",h:"יין",p:"WYN",ex:"A bottle of red wine please.",t:"wine = יין — ווין",cat:"🛒 קניות"},
+  {e:"beer",h:"בירה",p:"BEER",ex:"One cold beer please.",t:"beer = בירה — ביר",cat:"🛒 קניות"},
+  {e:"soap",h:"סבון",p:"SOHP",ex:"I need to buy soap.",t:"soap = סבון — סוֹפ",cat:"🛒 קניות"},
+  {e:"shampoo",h:"שמפו",p:"sham-POO",ex:"Which shampoo do you use?",t:"shampoo = שמפו — כמו בעברית",cat:"🛒 קניות"},
+  {e:"toothpaste",h:"משחת שיניים",p:"TOOTH-payst",ex:"I need toothpaste.",t:"tooth = שן + paste = משחה",cat:"🛒 קניות"},
+  {e:"tissue",h:"טישו / נייר טואלט",p:"TISH-oo",ex:"Pass me a tissue please.",t:"tissue = טישו — כמו בעברית",cat:"🛒 קניות"},
+  {e:"checkout",h:"קופה",p:"CHEK-owt",ex:"Where is the checkout?",t:"check = בדוק + out = צא",cat:"🛒 קניות"},
+  {e:"discount",h:"הנחה",p:"DIS-kownt",ex:"Is there a discount?",t:"discount = הנחה — דיסקאונט",cat:"🛒 קניות"},
+  {e:"sale",h:"מבצע",p:"SAYL",ex:"Everything is on sale today.",t:"sale = מכירה — ייל",cat:"🛒 קניות"},
+  {e:"cash",h:"מזומן",p:"KASH",ex:"Do you accept cash?",t:"cash = מזומן — קאש",cat:"🛒 קניות"},
+  {e:"credit card",h:"כרטיס אשראי",p:"KRED-it KARD",ex:"Can I pay by credit card?",t:"credit = אשראי + card = כרטיס",cat:"🛒 קניות"},
+  {e:"change",h:"עודף",p:"CHAYNJ",ex:"Here is your change.",t:"change = עודף / שינוי — צ'יינג'",cat:"🛒 קניות"},
+
+  // 🍽️ מסעדה נוספות
+  {e:"breakfast",h:"ארוחת בוקר",p:"BREK-fust",ex:"What do you eat for breakfast?",t:"break = שבור + fast = צום",cat:"🍽️ מסעדה"},
+  {e:"lunch",h:"ארוחת צהריים",p:"LUNCH",ex:"Let's have lunch together.",t:"lunch = ארוחת צהריים — לאנץ'",cat:"🍽️ מסעדה"},
+  {e:"dinner",h:"ארוחת ערב",p:"DIN-er",ex:"Dinner is ready!",t:"dinner = ארוחת ערב — דינר",cat:"🍽️ מסעדה"},
+  {e:"soup",h:"מרק",p:"SOOP",ex:"I want chicken soup.",t:"soup = מרק — סוּפ",cat:"🍽️ מסעדה"},
+  {e:"salad",h:"סלט",p:"SAL-ud",ex:"I want a green salad.",t:"salad = סלט — כמו בעברית",cat:"🍽️ מסעדה"},
+  {e:"sandwich",h:"כריך",p:"SAND-wich",ex:"Make me a sandwich.",t:"sandwich = כריך — כמו בעברית",cat:"🍽️ מסעדה"},
+  {e:"pizza",h:"פיצה",p:"PEE-tsa",ex:"I want pizza with cheese.",t:"pizza = פיצה — כמו בעברית",cat:"🍽️ מסעדה"},
+  {e:"steak",h:"סטייק",p:"STAYK",ex:"I want my steak medium.",t:"steak = סטייק — כמו בעברית",cat:"🍽️ מסעדה"},
+  {e:"spicy",h:"חריף",p:"SPY-see",ex:"Is this dish spicy?",t:"spicy = חריף — ספייסי",cat:"🍽️ מסעדה"},
+  {e:"sweet",h:"מתוק",p:"SWEET",ex:"This dessert is very sweet.",t:"sweet = מתוק — סוויט",cat:"🍽️ מסעדה"},
+  {e:"salty",h:"מלוח",p:"SAWL-tee",ex:"This soup is too salty.",t:"salt = מלח + y = מלוח",cat:"🍽️ מסעדה"},
+  {e:"portion",h:"מנה",p:"POR-shun",ex:"The portion is very large.",t:"portion = מנה — פּורשן",cat:"🍽️ מסעדה"},
+  {e:"appetizer",h:"מנה ראשונה",p:"AP-uh-ty-zer",ex:"What are the appetizers?",t:"appetizer = מנה ראשונה — פותחת תיאבון",cat:"🍽️ מסעדה"},
+  {e:"main course",h:"מנה עיקרית",p:"MAYN KORSS",ex:"For the main course I want fish.",t:"main = עיקרי + course = מנה",cat:"🍽️ מסעדה"},
+  {e:"glass",h:"כוס",p:"GLASS",ex:"A glass of water please.",t:"glass = כוס — גלאס",cat:"🍽️ מסעדה"},
+  {e:"fork",h:"מזלג",p:"FORK",ex:"I need a fork.",t:"fork = מזלג — פורק",cat:"🍽️ מסעדה"},
+  {e:"knife",h:"סכין",p:"NYF",ex:"Can I have a knife?",t:"knife = סכין — נייף",cat:"🍽️ מסעדה"},
+  {e:"spoon",h:"כף",p:"SPOON",ex:"I need a spoon for the soup.",t:"spoon = כף — ספוּן",cat:"🍽️ מסעדה"},
+  {e:"napkin",h:"מפית",p:"NAP-kin",ex:"Can I have a napkin?",t:"napkin = מפית — נאפקין",cat:"🍽️ מסעדה"},
+  {e:"takeaway",h:"לקחת הביתה",p:"TAYK-uh-way",ex:"Can I have this as takeaway?",t:"take = קח + away = הרחק = לקחת הביתה",cat:"🍽️ מסעדה"},
+  {e:"reservation",h:"הזמנת מקום",p:"rez-er-VAY-shun",ex:"I have a reservation for 7pm.",t:"reserve = לשמור מקום",cat:"🍽️ מסעדה"},
+
+  // 👗 לבוש נוספות
+  {e:"jacket",h:"ז'קט",p:"JAK-et",ex:"This jacket is warm.",t:"jacket = ז'קט — כמו בעברית",cat:"👗 לבוש"},
+  {e:"sweater",h:"סוודר",p:"SWET-er",ex:"I need a warm sweater.",t:"sweater = סוודר — כמו בעברית",cat:"👗 לבוש"},
+  {e:"socks",h:"גרביים",p:"SOKS",ex:"I need new socks.",t:"socks = גרביים — סוקס",cat:"👗 לבוש"},
+  {e:"underwear",h:"תחתונים",p:"UN-der-wair",ex:"I need to buy underwear.",t:"under = תחת + wear = ללבוש",cat:"👗 לבוש"},
+  {e:"hat",h:"כובע",p:"HAT",ex:"Put on your hat, it is cold.",t:"hat = כובע — האט",cat:"👗 לבוש"},
+  {e:"scarf",h:"צעיף",p:"SKARF",ex:"I love this colorful scarf.",t:"scarf = צעיף — סקארף",cat:"👗 לבוש"},
+  {e:"gloves",h:"כפפות",p:"GLUVZ",ex:"Wear your gloves outside.",t:"gloves = כפפות — גלאבז",cat:"👗 לבוש"},
+  {e:"belt",h:"חגורה",p:"BELT",ex:"This belt is too tight.",t:"belt = חגורה — בלט",cat:"👗 לבוש"},
+  {e:"boots",h:"מגפיים",p:"BOOTS",ex:"I need waterproof boots.",t:"boots = מגפיים — בּוּטס",cat:"👗 לבוש"},
+  {e:"sandals",h:"סנדלים",p:"SAN-dulz",ex:"I wear sandals in summer.",t:"sandals = סנדלים — כמו בעברית",cat:"👗 לבוש"},
+  {e:"pajamas",h:"פיג'מה",p:"puh-JAH-muz",ex:"I wear comfortable pajamas.",t:"pajamas = פיג'מה — כמו בעברית",cat:"👗 לבוש"},
+  {e:"swimsuit",h:"בגד ים",p:"SWIM-soot",ex:"I need a new swimsuit.",t:"swim = שחייה + suit = חליפה",cat:"👗 לבוש"},
+  {e:"tight",h:"צר / הדוק",p:"TYT",ex:"These pants are too tight.",t:"tight = הדוק — טייט",cat:"👗 לבוש"},
+  {e:"loose",h:"רפוי / רחב",p:"LOOS",ex:"I prefer loose clothing.",t:"loose = רפוי — לוּס",cat:"👗 לבוש"},
+  {e:"cotton",h:"כותנה",p:"KOT-un",ex:"I like cotton shirts.",t:"cotton = כותנה — קוטון",cat:"👗 לבוש"},
+  {e:"wool",h:"צמר",p:"WOOL",ex:"This sweater is pure wool.",t:"wool = צמר — וול",cat:"👗 לבוש"},
+  {e:"laundry",h:"כביסה",p:"LAWN-dree",ex:"I need to do laundry.",t:"laundry = כביסה — לאונדרי",cat:"👗 לבוש"},
+  {e:"iron",h:"לגהץ / מגהץ",p:"EYE-ern",ex:"I need to iron this shirt.",t:"iron = לגהץ — אייאֶרן",cat:"👗 לבוש"},
+
+  // ✈️ טיולים נוספות
+  {e:"flight",h:"טיסה",p:"FLYT",ex:"My flight is at 6am.",t:"flight = טיסה — פלייט",cat:"✈️ טיולים"},
+  {e:"luggage",h:"מזוודות",p:"LUG-ij",ex:"My luggage is heavy.",t:"luggage = מזוודות — לאגג'",cat:"✈️ טיולים"},
+  {e:"suitcase",h:"מזוודה",p:"SOOT-kays",ex:"I have one suitcase.",t:"suit = חליפה + case = מיכל",cat:"✈️ טיולים"},
+  {e:"boarding pass",h:"כרטיס עלייה",p:"BOR-ding PAS",ex:"Show your boarding pass.",t:"board = לעלות + pass = כרטיס",cat:"✈️ טיולים"},
+  {e:"check in",h:"צ'ק אין",p:"CHEK IN",ex:"I need to check in.",t:"check in = להירשם לטיסה",cat:"✈️ טיולים"},
+  {e:"gate",h:"שער",p:"GAYT",ex:"Which gate is my flight?",t:"gate = שער — גייט",cat:"✈️ טיולים"},
+  {e:"delay",h:"עיכוב",p:"de-LAY",ex:"There is a delay of two hours.",t:"delay = עיכוב — דיליי",cat:"✈️ טיולים"},
+  {e:"customs",h:"מכס",p:"KUS-tumz",ex:"Go through customs first.",t:"customs = מכס — קאסטומז",cat:"✈️ טיולים"},
+  {e:"exchange",h:"חלפנות / המרה",p:"eks-CHAYNJ",ex:"Where can I exchange money?",t:"exchange = להמיר — אקסצ'יינג'",cat:"✈️ טיולים"},
+  {e:"room",h:"חדר",p:"ROOM",ex:"My room is on the third floor.",t:"room = חדר — רום",cat:"✈️ טיולים"},
+  {e:"key",h:"מפתח",p:"KEE",ex:"Here is your room key.",t:"key = מפתח — קי",cat:"✈️ טיולים"},
+  {e:"floor",h:"קומה",p:"FLOR",ex:"I am on the second floor.",t:"floor = קומה — פלור",cat:"✈️ טיולים"},
+  {e:"elevator",h:"מעלית",p:"EL-uh-vay-ter",ex:"Take the elevator to floor 5.",t:"elevator = מעלית — אלביייטור",cat:"✈️ טיולים"},
+  {e:"swimming pool",h:"בריכת שחייה",p:"SWIM-ing POOL",ex:"Is there a swimming pool?",t:"swim = שחייה + pool = בריכה",cat:"✈️ טיולים"},
+  {e:"beach",h:"חוף ים",p:"BEECH",ex:"I love to relax on the beach.",t:"beach = חוף ים — ביץ'",cat:"✈️ טיולים"},
+  {e:"museum",h:"מוזיאון",p:"myoo-ZEE-um",ex:"Let's visit the museum.",t:"museum = מוזיאון — כמו בעברית",cat:"✈️ טיולים"},
+  {e:"tour",h:"סיור",p:"TOOR",ex:"I want to book a city tour.",t:"tour = סיור — טוּר",cat:"✈️ טיולים"},
+  {e:"guide",h:"מדריך",p:"GYD",ex:"Our guide speaks Hebrew.",t:"guide = מדריך — גייד",cat:"✈️ טיולים"},
+  {e:"souvenir",h:"מזכרת",p:"soo-vuh-NEER",ex:"I want to buy a souvenir.",t:"souvenir = מזכרת — סובניר",cat:"✈️ טיולים"},
+  {e:"tip",h:"טיפ",p:"TIP",ex:"Leave a tip for the driver.",t:"tip = טיפ — כמו בעברית",cat:"✈️ טיולים"},
+  {e:"north",h:"צפון",p:"NORTH",ex:"The hotel is to the north.",t:"north = צפון — נורת'",cat:"✈️ טיולים"},
+  {e:"south",h:"דרום",p:"SOWTH",ex:"Go south for two blocks.",t:"south = דרום — סאות'",cat:"✈️ טיולים"},
+  {e:"east",h:"מזרח",p:"EEST",ex:"The sun rises in the east.",t:"east = מזרח — איסט",cat:"✈️ טיולים"},
+  {e:"west",h:"מערב",p:"WEST",ex:"The beach is to the west.",t:"west = מערב — ווסט",cat:"✈️ טיולים"},
+  {e:"near",h:"קרוב",p:"NEER",ex:"Is there a bank near here?",t:"near = קרוב — ניר",cat:"✈️ טיולים"},
+  {e:"far",h:"רחוק",p:"FAR",ex:"Is the hotel far from here?",t:"far = רחוק — פאר",cat:"✈️ טיולים"},
+
+  // 💬 שיחה נוספות
+  {e:"good morning",h:"בוקר טוב",p:"good MOR-ning",ex:"Good morning, how are you?",t:"good = טוב + morning = בוקר",cat:"💬 שיחה"},
+  {e:"good evening",h:"ערב טוב",p:"good EEV-ning",ex:"Good evening everyone.",t:"good = טוב + evening = ערב",cat:"💬 שיחה"},
+  {e:"good night",h:"לילה טוב",p:"good NYT",ex:"Good night, sleep well.",t:"good = טוב + night = לילה",cat:"💬 שיחה"},
+  {e:"how are you",h:"מה שלומך",p:"how AR yoo",ex:"Hi! How are you today?",t:"how = איך + are you = אתה",cat:"💬 שיחה"},
+  {e:"fine",h:"בסדר / נהדר",p:"FYN",ex:"I am fine, thank you.",t:"fine = בסדר — פיין",cat:"💬 שיחה"},
+  {e:"nice to meet you",h:"נעים להכיר",p:"NYS to MEET yoo",ex:"Nice to meet you!",t:"nice = נחמד + meet = להיפגש",cat:"💬 שיחה"},
+  {e:"excuse me",h:"סליחה / רשות",p:"eks-KYOOZ mee",ex:"Excuse me, where is the bank?",t:"excuse = לסלוח + me = אותי",cat:"💬 שיחה"},
+  {e:"of course",h:"כמובן",p:"uv KORSS",ex:"Of course I can help you.",t:"of course = כמובן — אוף קורס",cat:"💬 שיחה"},
+  {e:"no problem",h:"אין בעיה",p:"NOH PROB-lem",ex:"No problem, I can wait.",t:"no = לא + problem = בעיה",cat:"💬 שיחה"},
+  {e:"wait",h:"לחכות",p:"WAYT",ex:"Please wait a moment.",t:"wait = לחכות — ווייט",cat:"💬 שיחה"},
+  {e:"speak",h:"לדבר",p:"SPEEK",ex:"Do you speak English?",t:"speak = לדבר — ספיק",cat:"💬 שיחה"},
+  {e:"English",h:"אנגלית",p:"ING-glish",ex:"I am learning English.",t:"English = אנגלית — כמו בעברית",cat:"💬 שיחה"},
+  {e:"Hebrew",h:"עברית",p:"HEE-broo",ex:"I speak Hebrew and English.",t:"Hebrew = עברית — היברו",cat:"💬 שיחה"},
+  {e:"yes",h:"כן",p:"YES",ex:"Yes, I understand.",t:"yes = כן — ייס",cat:"💬 שיחה"},
+  {e:"no",h:"לא",p:"NOH",ex:"No, I do not want this.",t:"no = לא — נוֹ",cat:"💬 שיחה"},
+  {e:"maybe",h:"אולי",p:"MAY-bee",ex:"Maybe I will come tomorrow.",t:"maybe = אולי — מייבי",cat:"💬 שיחה"},
+  {e:"I don't know",h:"אני לא יודע",p:"eye DOHNT NOH",ex:"I don't know this word.",t:"don't know = לא יודע",cat:"💬 שיחה"},
+  {e:"write it down",h:"כתוב לי את זה",p:"RYT it DOWN",ex:"Can you write it down for me?",t:"write = לכתוב + down = למטה",cat:"💬 שיחה"},
+  {e:"spell it",h:"לאיית",p:"SPEL it",ex:"Can you spell it for me?",t:"spell = לאיית — ספל",cat:"💬 שיחה"},
+  {e:"again",h:"שוב / שוב פעם",p:"uh-GEN",ex:"Can you say that again?",t:"again = שוב — אגיין",cat:"💬 שיחה"},
+  {e:"loud",h:"בקול רם",p:"LOWD",ex:"Please speak louder.",t:"loud = חזק — לאוד",cat:"💬 שיחה"},
+  {e:"telephone",h:"טלפון",p:"TEL-uh-fohn",ex:"What is your telephone number?",t:"telephone = טלפון — כמו בעברית",cat:"💬 שיחה"},
+  {e:"address",h:"כתובת",p:"AD-res",ex:"What is your address?",t:"address = כתובת — אדרס",cat:"💬 שיחה"},
+  {e:"email",h:"דואר אלקטרוני",p:"EE-mayl",ex:"What is your email?",t:"email = אימייל — כמו בעברית",cat:"💬 שיחה"},
+  {e:"computer",h:"מחשב",p:"kum-PYOO-ter",ex:"I use the computer every day.",t:"computer = מחשב — כמו בעברית",cat:"💬 שיחה"},
+  {e:"phone",h:"טלפון",p:"FOHN",ex:"Where is my phone?",t:"phone = טלפון — פוֹן",cat:"💬 שיחה"},
+  {e:"internet",h:"אינטרנט",p:"IN-ter-net",ex:"Is there internet here?",t:"internet = אינטרנט — כמו בעברית",cat:"💬 שיחה"},
+  {e:"password",h:"סיסמה",p:"PAS-werd",ex:"What is the wifi password?",t:"pass = עבור + word = מילה",cat:"💬 שיחה"},
+
+  // 🏠 בית ומשפחה נוספות
+  {e:"living room",h:"סלון",p:"LIV-ing ROOM",ex:"We watch TV in the living room.",t:"living = חיים + room = חדר",cat:"🏠 בית"},
+  {e:"garden",h:"גינה",p:"GAR-den",ex:"I love my garden.",t:"garden = גינה — גארדן",cat:"🏠 בית"},
+  {e:"balcony",h:"מרפסת",p:"BAL-ko-nee",ex:"I drink coffee on the balcony.",t:"balcony = מרפסת — כמו בעברית",cat:"🏠 בית"},
+  {e:"floor",h:"רצפה",p:"FLOR",ex:"The floor is clean.",t:"floor = רצפה — פלור",cat:"🏠 בית"},
+  {e:"ceiling",h:"תקרה",p:"SEE-ling",ex:"The ceiling is high.",t:"ceiling = תקרה — סיילינג",cat:"🏠 בית"},
+  {e:"window",h:"חלון",p:"WIN-doh",ex:"Open the window please.",t:"window = חלון — ווינדו",cat:"🏠 בית"},
+  {e:"door",h:"דלת",p:"DOR",ex:"Close the door please.",t:"door = דלת — דוֹר",cat:"🏠 בית"},
+  {e:"stairs",h:"מדרגות",p:"STAIRZ",ex:"Take the stairs, not the elevator.",t:"stairs = מדרגות — סטיירז",cat:"🏠 בית"},
+  {e:"rent",h:"שכירות",p:"RENT",ex:"I pay rent every month.",t:"rent = שכירות — רנט",cat:"🏠 בית"},
+  {e:"furniture",h:"ריהוט",p:"FER-ni-cher",ex:"I need new furniture.",t:"furniture = ריהוט — פרניצ'ר",cat:"🏠 בית"},
+  {e:"sofa",h:"ספה",p:"SOH-fuh",ex:"Sit on the sofa.",t:"sofa = ספה — כמו בעברית",cat:"🏠 בית"},
+  {e:"bed",h:"מיטה",p:"BED",ex:"I go to bed at 10.",t:"bed = מיטה — בד",cat:"🏠 בית"},
+  {e:"fridge",h:"מקרר",p:"FRIJ",ex:"Put the milk in the fridge.",t:"fridge = מקרר — פריג'",cat:"🏠 בית"},
+  {e:"washing machine",h:"מכונת כביסה",p:"WASH-ing muh-SHEEN",ex:"My washing machine is new.",t:"wash = לכבס + machine = מכונה",cat:"🏠 בית"},
+  {e:"air conditioning",h:"מזגן",p:"AIR kun-DISH-uh-ning",ex:"Turn on the air conditioning.",t:"air = אוויר + conditioning = מיזוג",cat:"🏠 בית"},
+  {e:"heating",h:"חימום",p:"HEEL-ting",ex:"The heating is not working.",t:"heat = חום + ing = חימום",cat:"🏠 בית"},
+  {e:"electricity",h:"חשמל",p:"e-lek-TRIS-i-tee",ex:"The electricity bill is high.",t:"electricity = חשמל — אלקטריסיטי",cat:"🏠 בית"},
+  {e:"husband",h:"בעל",p:"HUZ-bund",ex:"My husband is a doctor.",t:"husband = בעל — האזבנד",cat:"🏠 בית"},
+  {e:"wife",h:"אישה",p:"WYF",ex:"My wife loves cooking.",t:"wife = אישה — ווייף",cat:"🏠 בית"},
+  {e:"son",h:"בן",p:"SUN",ex:"My son is ten years old.",t:"son = בן — סאן",cat:"🏠 בית"},
+  {e:"daughter",h:"בת",p:"DAW-ter",ex:"My daughter is very smart.",t:"daughter = בת — דוטר",cat:"🏠 בית"},
+  {e:"parents",h:"הורים",p:"PAIR-ents",ex:"My parents live in Tel Aviv.",t:"parents = הורים — פיירנטס",cat:"🏠 בית"},
+  {e:"grandmother",h:"סבתא",p:"GRAND-muth-er",ex:"My grandmother is 80 years old.",t:"grand = גדול + mother = אמא",cat:"🏠 בית"},
+  {e:"grandfather",h:"סבא",p:"GRAND-fah-ther",ex:"My grandfather loves chess.",t:"grand = גדול + father = אבא",cat:"🏠 בית"},
+  {e:"friend",h:"חבר",p:"FREND",ex:"She is my best friend.",t:"friend = חבר — פרנד",cat:"🏠 בית"},
+
+  // 🏥 בריאות נוספות
+  {e:"nurse",h:"אחות",p:"NERSS",ex:"The nurse is very kind.",t:"nurse = אחות — נרס",cat:"🏥 בריאות"},
+  {e:"dentist",h:"רופא שיניים",p:"DEN-tist",ex:"I have an appointment with the dentist.",t:"dent = שן + ist = איש מקצוע",cat:"🏥 בריאות"},
+  {e:"pharmacy",h:"בית מרקחת",p:"FAR-muh-see",ex:"Where is the nearest pharmacy?",t:"pharmacy = בית מרקחת — פארמסי",cat:"🏥 בריאות"},
+  {e:"prescription",h:"מרשם",p:"pre-SKRIP-shun",ex:"I need a prescription.",t:"prescription = מרשם — פרסקריפשן",cat:"🏥 בריאות"},
+  {e:"headache",h:"כאב ראש",p:"HED-ayk",ex:"I have a terrible headache.",t:"head = ראש + ache = כאב",cat:"🏥 בריאות"},
+  {e:"fever",h:"חום",p:"FEE-ver",ex:"The child has a fever.",t:"fever = חום — פיבר",cat:"🏥 בריאות"},
+  {e:"cold",h:"הצטננות",p:"KOHLD",ex:"I have a cold.",t:"cold = קר / הצטננות — קוֹלד",cat:"🏥 בריאות"},
+  {e:"cough",h:"שיעול",p:"KAWF",ex:"I have a bad cough.",t:"cough = שיעול — קוֹף",cat:"🏥 בריאות"},
+  {e:"tired",h:"עייף",p:"TYE-erd",ex:"I am very tired today.",t:"tired = עייף — טיירד",cat:"🏥 בריאות"},
+  {e:"dizzy",h:"סחרחורת",p:"DIZ-ee",ex:"I feel dizzy.",t:"dizzy = סחרחורת — דיזי",cat:"🏥 בריאות"},
+  {e:"blood pressure",h:"לחץ דם",p:"BLUD PRESH-er",ex:"My blood pressure is high.",t:"blood = דם + pressure = לחץ",cat:"🏥 בריאות"},
+  {e:"diabetes",h:"סוכרת",p:"dy-uh-BEE-teez",ex:"I have diabetes.",t:"diabetes = סוכרת — דייאביטיס",cat:"🏥 בריאות"},
+  {e:"injection",h:"זריקה",p:"in-JEK-shun",ex:"I need an injection.",t:"injection = זריקה — אינג'קשן",cat:"🏥 בריאות"},
+  {e:"bandage",h:"תחבושת",p:"BAN-dij",ex:"I need a bandage.",t:"bandage = תחבושת — בנדג'",cat:"🏥 בריאות"},
+  {e:"glasses",h:"משקפיים",p:"GLAS-iz",ex:"I wear glasses.",t:"glasses = משקפיים — גלאסיז",cat:"🏥 בריאות"},
+  {e:"hearing aid",h:"מכשיר שמיעה",p:"HEER-ing AYD",ex:"My father wears a hearing aid.",t:"hear = לשמוע + aid = עזרה",cat:"🏥 בריאות"},
+  {e:"appointment",h:"תור",p:"uh-POYNT-ment",ex:"I have a doctor appointment.",t:"appointment = תור / פגישה",cat:"🏥 בריאות"},
+  {e:"insurance",h:"ביטוח",p:"in-SHOOR-ens",ex:"Do you have health insurance?",t:"insurance = ביטוח — אינשורנס",cat:"🏥 בריאות"},
+  {e:"operation",h:"ניתוח",p:"op-er-AY-shun",ex:"The operation was a success.",t:"operation = ניתוח — אופריישן",cat:"🏥 בריאות"},
+  {e:"rest",h:"מנוחה",p:"REST",ex:"You need to rest.",t:"rest = מנוחה — רסט",cat:"🏥 בריאות"},
+
+  // 🌤️ מזג אוויר ועונות (קטגוריה חדשה)
+  {e:"weather",h:"מזג אוויר",p:"WETH-er",ex:"What is the weather today?",t:"weather = מזג אוויר — ווד'ר",cat:"🌤️ מזג אוויר"},
+  {e:"sunny",h:"שמשי",p:"SUN-ee",ex:"It is a sunny day.",t:"sun = שמש + ny = שמשי",cat:"🌤️ מזג אוויר"},
+  {e:"cloudy",h:"מעונן",p:"KLOW-dee",ex:"It is cloudy today.",t:"cloud = ענן + y = מעונן",cat:"🌤️ מזג אוויר"},
+  {e:"rainy",h:"גשום",p:"RAY-nee",ex:"Take an umbrella, it is rainy.",t:"rain = גשם + y = גשום",cat:"🌤️ מזג אוויר"},
+  {e:"windy",h:"סוער / רוחות",p:"WIN-dee",ex:"It is very windy outside.",t:"wind = רוח + y = רוחות",cat:"🌤️ מזג אוויר"},
+  {e:"hot",h:"חם",p:"HOT",ex:"It is very hot in summer.",t:"hot = חם — הוֹט",cat:"🌤️ מזג אוויר"},
+  {e:"cold",h:"קר",p:"KOHLD",ex:"It is cold in winter.",t:"cold = קר — קוֹלד",cat:"🌤️ מזג אוויר"},
+  {e:"warm",h:"חמים",p:"WORM",ex:"The weather is warm today.",t:"warm = חמים — וורם",cat:"🌤️ מזג אוויר"},
+  {e:"snow",h:"שלג",p:"SNOH",ex:"There is snow on the mountains.",t:"snow = שלג — סנוֹ",cat:"🌤️ מזג אוויר"},
+  {e:"rain",h:"גשם",p:"RAYN",ex:"I love the rain.",t:"rain = גשם — ריין",cat:"🌤️ מזג אוויר"},
+  {e:"umbrella",h:"מטרייה",p:"um-BREL-uh",ex:"Do not forget your umbrella.",t:"umbrella = מטרייה — אמברלה",cat:"🌤️ מזג אוויר"},
+  {e:"spring",h:"אביב",p:"SPRING",ex:"Spring is my favorite season.",t:"spring = אביב — ספרינג",cat:"🌤️ מזג אוויר"},
+  {e:"summer",h:"קיץ",p:"SUM-er",ex:"I love summer holidays.",t:"summer = קיץ — סאמר",cat:"🌤️ מזג אוויר"},
+  {e:"autumn",h:"סתיו",p:"AW-tum",ex:"Autumn leaves are beautiful.",t:"autumn = סתיו — אוטום",cat:"🌤️ מזג אוויר"},
+  {e:"winter",h:"חורף",p:"WIN-ter",ex:"Winter in the mountains is cold.",t:"winter = חורף — וינטר",cat:"🌤️ מזג אוויר"},
+  {e:"temperature",h:"טמפרטורה",p:"TEM-pra-cher",ex:"What is the temperature today?",t:"temperature = טמפרטורה — כמו בעברית",cat:"🌤️ מזג אוויר"},
+  {e:"degrees",h:"מעלות",p:"de-GREEZ",ex:"It is 30 degrees outside.",t:"degrees = מעלות — דיגריז",cat:"🌤️ מזג אוויר"},
+  {e:"forecast",h:"תחזית",p:"FOR-kast",ex:"The forecast is rain tomorrow.",t:"fore = קדימה + cast = לזרוק = לחזות",cat:"🌤️ מזג אוויר"},
+
+  // 🕐 זמן ומספרים (קטגוריה חדשה)
+  {e:"today",h:"היום",p:"too-DAY",ex:"What are you doing today?",t:"today = היום — טודיי",cat:"🕐 זמן"},
+  {e:"tomorrow",h:"מחר",p:"tuh-MOR-oh",ex:"I will call you tomorrow.",t:"tomorrow = מחר — טומורו",cat:"🕐 זמן"},
+  {e:"yesterday",h:"אתמול",p:"YES-ter-day",ex:"I was sick yesterday.",t:"yesterday = אתמול — ייסטרדיי",cat:"🕐 זמן"},
+  {e:"now",h:"עכשיו",p:"NOW",ex:"I need help now.",t:"now = עכשיו — נאו",cat:"🕐 זמן"},
+  {e:"later",h:"מאוחר יותר",p:"LAY-ter",ex:"I will do it later.",t:"late = מאוחר + r = יותר מאוחר",cat:"🕐 זמן"},
+  {e:"soon",h:"בקרוב",p:"SOON",ex:"The doctor will come soon.",t:"soon = בקרוב — סוּן",cat:"🕐 זמן"},
+  {e:"morning",h:"בוקר",p:"MOR-ning",ex:"I wake up early in the morning.",t:"morning = בוקר — מורנינג",cat:"🕐 זמן"},
+  {e:"afternoon",h:"אחרי הצהריים",p:"af-ter-NOON",ex:"I rest in the afternoon.",t:"after = אחרי + noon = צהריים",cat:"🕐 זמן"},
+  {e:"evening",h:"ערב",p:"EEV-ning",ex:"Good evening everyone.",t:"evening = ערב — איבנינג",cat:"🕐 זמן"},
+  {e:"night",h:"לילה",p:"NYT",ex:"I sleep at night.",t:"night = לילה — נייט",cat:"🕐 זמן"},
+  {e:"week",h:"שבוע",p:"WEEK",ex:"I will see you next week.",t:"week = שבוע — ויק",cat:"🕐 זמן"},
+  {e:"month",h:"חודש",p:"MUNTH",ex:"I pay rent every month.",t:"month = חודש — מאנת'",cat:"🕐 זמן"},
+  {e:"year",h:"שנה",p:"YEER",ex:"Happy New Year!",t:"year = שנה — ייר",cat:"🕐 זמן"},
+  {e:"hour",h:"שעה",p:"OW-er",ex:"I will be there in one hour.",t:"hour = שעה — אאוּר",cat:"🕐 זמן"},
+  {e:"minute",h:"דקה",p:"MIN-it",ex:"Wait five minutes please.",t:"minute = דקה — מיניט",cat:"🕐 זמן"},
+  {e:"early",h:"מוקדם",p:"ER-lee",ex:"I wake up early every day.",t:"early = מוקדם — ארלי",cat:"🕐 זמן"},
+  {e:"late",h:"מאוחר",p:"LAYT",ex:"Sorry I am late.",t:"late = מאוחר — לייט",cat:"🕐 זמן"},
+  {e:"always",h:"תמיד",p:"AWL-wayz",ex:"I always drink coffee in the morning.",t:"always = תמיד — אולווייז",cat:"🕐 זמן"},
+  {e:"never",h:"אף פעם לא",p:"NEV-er",ex:"I never eat meat.",t:"never = אף פעם — נבר",cat:"🕐 זמן"},
+  {e:"sometimes",h:"לפעמים",p:"SUM-tymz",ex:"I sometimes walk to work.",t:"some = קצת + times = פעמים",cat:"🕐 זמן"},
+  {e:"every day",h:"כל יום",p:"EV-ree DAY",ex:"I exercise every day.",t:"every = כל + day = יום",cat:"🕐 זמן"},
+  {e:"birthday",h:"יום הולדת",p:"BERTH-day",ex:"Happy birthday to you!",t:"birth = לידה + day = יום",cat:"🕐 זמן"},
+  {e:"holiday",h:"חג / חופשה",p:"HOL-i-day",ex:"I love the holidays.",t:"holy = קדוש + day = יום",cat:"🕐 זמן"},
+
+  // 💰 כסף ובנק (קטגוריה חדשה)
+  {e:"bank",h:"בנק",p:"BANK",ex:"I need to go to the bank.",t:"bank = בנק — כמו בעברית",cat:"💰 כסף"},
+  {e:"money",h:"כסף",p:"MUN-ee",ex:"I need more money.",t:"money = כסף — מאני",cat:"💰 כסף"},
+  {e:"wallet",h:"ארנק",p:"WOL-et",ex:"I lost my wallet.",t:"wallet = ארנק — וולט",cat:"💰 כסף"},
+  {e:"ATM",h:"כספומט",p:"AY-TEE-EM",ex:"Where is the ATM?",t:"ATM = כספומט — כמו בעברית",cat:"💰 כסף"},
+  {e:"withdraw",h:"למשוך כסף",p:"with-DRAW",ex:"I need to withdraw money.",t:"with = עם + draw = למשוך",cat:"💰 כסף"},
+  {e:"deposit",h:"להפקיד",p:"de-POZ-it",ex:"I want to deposit money.",t:"deposit = להפקיד — דיפוזיט",cat:"💰 כסף"},
+  {e:"transfer",h:"העברה",p:"TRANS-fer",ex:"I need to transfer money.",t:"transfer = העברה — טרנספר",cat:"💰 כסף"},
+  {e:"account",h:"חשבון בנק",p:"uh-KOWNT",ex:"I have a savings account.",t:"account = חשבון — אקאונט",cat:"💰 כסף"},
+  {e:"coin",h:"מטבע",p:"KOYN",ex:"I have no coins.",t:"coin = מטבע — קויין",cat:"💰 כסף"},
+  {e:"expensive",h:"יקר",p:"ek-SPEN-siv",ex:"This is too expensive for me.",t:"expensive = יקר — אקספנסיב",cat:"💰 כסף"},
+  {e:"cheap",h:"זול",p:"CHEEP",ex:"I am looking for something cheap.",t:"cheap = זול — צ'יפ",cat:"💰 כסף"},
+  {e:"free",h:"חינם",p:"FREE",ex:"Is this service free?",t:"free = חינם — פרי",cat:"💰 כסף"},
+  {e:"bill",h:"שטר / חשבון",p:"BIL",ex:"I pay all my bills on time.",t:"bill = שטר / חשבון — ביל",cat:"💰 כסף"},
+  {e:"tax",h:"מס",p:"TAKS",ex:"The price includes tax.",t:"tax = מס — טקס",cat:"💰 כסף"},
+
+  // 🌳 טבע ופנאי (קטגוריה חדשה)
+  {e:"park",h:"פארק",p:"PARK",ex:"Let's walk in the park.",t:"park = פארק — כמו בעברית",cat:"🌳 פנאי"},
+  {e:"garden",h:"גן / גינה",p:"GAR-den",ex:"The botanical garden is beautiful.",t:"garden = גן — גארדן",cat:"🌳 פנאי"},
+  {e:"flower",h:"פרח",p:"FLOW-er",ex:"I love red flowers.",t:"flower = פרח — פלאואר",cat:"🌳 פנאי"},
+  {e:"tree",h:"עץ",p:"TREE",ex:"This tree is very old.",t:"tree = עץ — טרי",cat:"🌳 פנאי"},
+  {e:"bird",h:"ציפור",p:"BERD",ex:"I hear a bird singing.",t:"bird = ציפור — בּרד",cat:"🌳 פנאי"},
+  {e:"cat",h:"חתול",p:"KAT",ex:"I have a cat at home.",t:"cat = חתול — קאט",cat:"🌳 פנאי"},
+  {e:"dog",h:"כלב",p:"DOG",ex:"My dog loves to walk.",t:"dog = כלב — דוֹג",cat:"🌳 פנאי"},
+  {e:"walk",h:"לטייל / ללכת",p:"WAWK",ex:"I walk every morning.",t:"walk = לטייל — וואק",cat:"🌳 פנאי"},
+  {e:"exercise",h:"פעילות גופנית",p:"EK-ser-syz",ex:"I exercise three times a week.",t:"exercise = פעילות — אקסרסייז",cat:"🌳 פנאי"},
+  {e:"swimming",h:"שחייה",p:"SWIM-ing",ex:"I love swimming.",t:"swim = לשחות + ing",cat:"🌳 פנאי"},
+  {e:"book",h:"ספר",p:"BOOK",ex:"I read a book every week.",t:"book = ספר — בּוּק",cat:"🌳 פנאי"},
+  {e:"music",h:"מוזיקה",p:"MYOO-zik",ex:"I love classical music.",t:"music = מוזיקה — כמו בעברית",cat:"🌳 פנאי"},
+  {e:"movie",h:"סרט",p:"MOO-vee",ex:"Let's watch a movie tonight.",t:"movie = סרט — מוּבי",cat:"🌳 פנאי"},
+  {e:"theater",h:"תיאטרון",p:"THEE-uh-ter",ex:"I love going to the theater.",t:"theater = תיאטרון — כמו בעברית",cat:"🌳 פנאי"},
+  {e:"concert",h:"קונצרט",p:"KON-sert",ex:"I have tickets for a concert.",t:"concert = קונצרט — כמו בעברית",cat:"🌳 פנאי"},
+  {e:"hobby",h:"תחביב",p:"HOB-ee",ex:"What is your hobby?",t:"hobby = תחביב — הובי",cat:"🌳 פנאי"},
+  {e:"volunteer",h:"מתנדב",p:"vol-un-TEER",ex:"I volunteer at the hospital.",t:"volunteer = מתנדב — וולנטיר",cat:"🌳 פנאי"},
+  {e:"class",h:"שיעור / כיתה",p:"KLASS",ex:"I take an English class.",t:"class = שיעור — קלאס",cat:"🌳 פנאי"},
+  {e:"trip",h:"טיול",p:"TRIP",ex:"We are planning a trip.",t:"trip = טיול — טריפ",cat:"🌳 פנאי"},
+  {e:"photograph",h:"לצלם / תמונה",p:"FOH-toh-graf",ex:"I love to photograph landscapes.",t:"photo = אור + graph = לכתוב",cat:"🌳 פנאי"},
+
+  // 🏙️ בעיר ושירותים (קטגוריה חדשה)
+  {e:"post office",h:"דואר",p:"POHST OF-is",ex:"I need to go to the post office.",t:"post = דואר + office = משרד",cat:"🏙️ בעיר"},
+  {e:"supermarket",h:"סופרמרקט",p:"SOO-per-mar-ket",ex:"The supermarket is open until 10.",t:"super = ענק + market = שוק",cat:"🏙️ בעיר"},
+  {e:"pharmacy",h:"בית מרקחת",p:"FAR-muh-see",ex:"The pharmacy is on Main Street.",t:"pharmacy = בית מרקחת — פארמסי",cat:"🏙️ בעיר"},
+  {e:"police",h:"משטרה",p:"puh-LEES",ex:"Call the police!",t:"police = משטרה — פוליס",cat:"🏙️ בעיר"},
+  {e:"fire station",h:"תחנת כיבוי",p:"FYR STAY-shun",ex:"The fire station is nearby.",t:"fire = אש + station = תחנה",cat:"🏙️ בעיר"},
+  {e:"library",h:"ספרייה",p:"LY-brer-ee",ex:"I borrow books from the library.",t:"library = ספרייה — לייברה...",cat:"🏙️ בעיר"},
+  {e:"church",h:"כנסייה",p:"CHERCH",ex:"There is a beautiful church here.",t:"church = כנסייה — צ'רץ'",cat:"🏙️ בעיר"},
+  {e:"synagogue",h:"בית כנסת",p:"SIN-uh-gog",ex:"The synagogue is open on Friday.",t:"synagogue = בית כנסת — סינגוג",cat:"🏙️ בעיר"},
+  {e:"street",h:"רחוב",p:"STREET",ex:"What street do you live on?",t:"street = רחוב — סטריט",cat:"🏙️ בעיר"},
+  {e:"traffic",h:"תנועה",p:"TRAF-ik",ex:"There is heavy traffic today.",t:"traffic = תנועה — טראפיק",cat:"🏙️ בעיר"},
+  {e:"traffic light",h:"רמזור",p:"TRAF-ik LYT",ex:"Stop at the traffic light.",t:"traffic = תנועה + light = אור",cat:"🏙️ בעיר"},
+  {e:"parking",h:"חניה",p:"PAR-king",ex:"Where can I find parking?",t:"parking = חניה — פארקינג",cat:"🏙️ בעיר"},
+  {e:"gas station",h:"תחנת דלק",p:"GAS STAY-shun",ex:"I need to stop at the gas station.",t:"gas = דלק + station = תחנה",cat:"🏙️ בעיר"},
+  {e:"car",h:"מכונית",p:"KAR",ex:"My car is very old.",t:"car = מכונית — קאר",cat:"🏙️ בעיר"},
+  {e:"train",h:"רכבת",p:"TRAYN",ex:"Take the train to Jerusalem.",t:"train = רכבת — טריין",cat:"🏙️ בעיר"},
+  {e:"station",h:"תחנה",p:"STAY-shun",ex:"Where is the train station?",t:"station = תחנה — סטיישן",cat:"🏙️ בעיר"},
+  {e:"suburb",h:"פרוור",p:"SUB-erb",ex:"I live in the suburbs.",t:"sub = מתחת + urb = עיר",cat:"🏙️ בעיר"},
+  {e:"city center",h:"מרכז העיר",p:"SIT-ee SEN-ter",ex:"The mall is in the city center.",t:"city = עיר + center = מרכז",cat:"🏙️ בעיר"},
+  {e:"neighborhood",h:"שכונה",p:"NAY-ber-hood",ex:"This is a quiet neighborhood.",t:"neighbor = שכן + hood = מצב",cat:"🏙️ בעיר"},
+  {e:"corner",h:"פינה",p:"KOR-ner",ex:"Turn left at the corner.",t:"corner = פינה — קורנר",cat:"🏙️ בעיר"},
+  {e:"bridge",h:"גשר",p:"BRIJ",ex:"Cross the bridge and turn right.",t:"bridge = גשר — ברידג'",cat:"🏙️ בעיר"},
+  {e:"market",h:"שוק",p:"MAR-ket",ex:"I love the open market.",t:"market = שוק — מארקט",cat:"🏙️ בעיר"},
+  {e:"mall",h:"קניון",p:"MAWL",ex:"Let's meet at the mall.",t:"mall = קניון — מול",cat:"🏙️ בעיר"},
+  {e:"cinema",h:"קולנוע",p:"SIN-uh-muh",ex:"The cinema is open tonight.",t:"cinema = קולנוע — סינמה",cat:"🏙️ בעיר"},
+  {e:"restaurant",h:"מסעדה",p:"RES-tuh-ront",ex:"That restaurant is excellent.",t:"restaurant = מסעדה — כמו בעברית",cat:"🏙️ בעיר"},
+  {e:"cafe",h:"בית קפה",p:"kuh-FAY",ex:"Let's meet at the cafe.",t:"cafe = בית קפה — כמו בעברית",cat:"🏙️ בעיר"},
+  {e:"school",h:"בית ספר",p:"SKOOL",ex:"The school is nearby.",t:"school = בית ספר — סקול",cat:"🏙️ בעיר"},
+  {e:"university",h:"אוניברסיטה",p:"yoo-ni-VER-si-tee",ex:"My grandson is at university.",t:"university = אוניברסיטה — כמו בעברית",cat:"🏙️ בעיר"},
+  {e:"office",h:"משרד",p:"OF-is",ex:"I work in an office.",t:"office = משרד — אופיס",cat:"🏙️ בעיר"},
+  {e:"building",h:"בניין",p:"BIL-ding",ex:"This building is very tall.",t:"build = לבנות + ing = בניין",cat:"🏙️ בעיר"},
+
+  // 🍳 בישול ואוכל (קטגוריה חדשה)
+  {e:"cook",h:"לבשל",p:"KOOK",ex:"I love to cook.",t:"cook = לבשל — קוּק",cat:"🍳 בישול"},
+  {e:"recipe",h:"מתכון",p:"RES-uh-pee",ex:"This recipe is easy.",t:"recipe = מתכון — רסיפי",cat:"🍳 בישול"},
+  {e:"ingredient",h:"מרכיב",p:"in-GREE-dee-ent",ex:"What ingredients do you need?",t:"ingredient = מרכיב — אינגרדיינט",cat:"🍳 בישול"},
+  {e:"boil",h:"לבשל / להרתיח",p:"BOYL",ex:"Boil the water first.",t:"boil = להרתיח — בויל",cat:"🍳 בישול"},
+  {e:"fry",h:"לטגן",p:"FRY",ex:"Fry the onion in oil.",t:"fry = לטגן — פריי",cat:"🍳 בישול"},
+  {e:"bake",h:"לאפות",p:"BAYK",ex:"I like to bake cakes.",t:"bake = לאפות — בייק",cat:"🍳 בישול"},
+  {e:"grill",h:"לצלות",p:"GRIL",ex:"Let's grill chicken tonight.",t:"grill = לצלות — גריל",cat:"🍳 בישול"},
+  {e:"stir",h:"לערבב",p:"STER",ex:"Stir the soup slowly.",t:"stir = לערבב — סטר",cat:"🍳 בישול"},
+  {e:"mix",h:"לערבב",p:"MIKS",ex:"Mix all the ingredients.",t:"mix = לערבב — מיקס",cat:"🍳 בישול"},
+  {e:"slice",h:"לפרוס",p:"SLYS",ex:"Slice the bread please.",t:"slice = לפרוס — סלייס",cat:"🍳 בישול"},
+  {e:"oven",h:"תנור",p:"UV-en",ex:"Preheat the oven to 180.",t:"oven = תנור — אובן",cat:"🍳 בישול"},
+  {e:"pan",h:"מחבת",p:"PAN",ex:"Heat the pan on the stove.",t:"pan = מחבת — פאן",cat:"🍳 בישול"},
+  {e:"pot",h:"סיר",p:"POT",ex:"Use a big pot for the soup.",t:"pot = סיר — פוֹט",cat:"🍳 בישול"},
+  {e:"frozen",h:"קפוא",p:"FROH-zen",ex:"I bought frozen vegetables.",t:"frozen = קפוא — פרוזן",cat:"🍳 בישול"},
+  {e:"fresh",h:"טרי",p:"FRESH",ex:"Buy fresh vegetables today.",t:"fresh = טרי — פרש",cat:"🍳 בישול"},
+  {e:"tasty",h:"טעים",p:"TAYS-tee",ex:"This food is very tasty.",t:"taste = טעם + y = טעים",cat:"🍳 בישול"},
+  {e:"hungry",h:"רעב",p:"HUNG-gree",ex:"I am very hungry.",t:"hungry = רעב — האנגרי",cat:"🍳 בישול"},
+  {e:"thirsty",h:"צמא",p:"THER-stee",ex:"I am thirsty, I need water.",t:"thirst = צמא + y = צמא",cat:"🍳 בישול"},
+  {e:"full",h:"שבע",p:"FOOL",ex:"I am full, thank you.",t:"full = שבע / מלא — פול",cat:"🍳 בישול"},
+  {e:"portion",h:"מנה",p:"POR-shun",ex:"This portion is very large.",t:"portion = מנה — פורשן",cat:"🍳 בישול"},
+
+  // 💼 עבודה (קטגוריה חדשה)
+  {e:"work",h:"עבודה / לעבוד",p:"WERK",ex:"I work every day.",t:"work = עבודה — וורק",cat:"💼 עבודה"},
+  {e:"job",h:"משרה",p:"JOB",ex:"I have a new job.",t:"job = משרה — ג'וֹב",cat:"💼 עבודה"},
+  {e:"retired",h:"בדימוס / פנסיונר",p:"re-TYRD",ex:"I am retired now.",t:"retire = לפרוש — ריטיירד",cat:"💼 עבודה"},
+  {e:"pension",h:"פנסיה",p:"PEN-shun",ex:"I receive a pension every month.",t:"pension = פנסיה — כמו בעברית",cat:"💼 עבודה"},
+  {e:"salary",h:"משכורת",p:"SAL-uh-ree",ex:"The salary is good.",t:"salary = משכורת — סלרי",cat:"💼 עבודה"},
+  {e:"boss",h:"בוס / מנהל",p:"BAWSS",ex:"My boss is very nice.",t:"boss = מנהל — כמו בעברית",cat:"💼 עבודה"},
+  {e:"colleague",h:"עמית לעבודה",p:"KOL-eeg",ex:"My colleagues are friendly.",t:"colleague = עמית — קוליג",cat:"💼 עבודה"},
+  {e:"meeting",h:"פגישה",p:"MEET-ing",ex:"I have a meeting at 10.",t:"meet = להיפגש + ing = פגישה",cat:"💼 עבודה"},
+  {e:"busy",h:"עסוק",p:"BIZ-ee",ex:"I am very busy today.",t:"busy = עסוק — ביזי",cat:"💼 עבודה"},
+  {e:"free",h:"פנוי",p:"FREE",ex:"Are you free tomorrow?",t:"free = חופשי — פרי",cat:"💼 עבודה"},
+  {e:"volunteer",h:"להתנדב",p:"vol-un-TEER",ex:"I volunteer at the school.",t:"volunteer = מתנדב — וולנטיר",cat:"💼 עבודה"},
+
+  // 📚 למידה (קטגוריה חדשה)
+  {e:"learn",h:"ללמוד",p:"LERN",ex:"I want to learn English.",t:"learn = ללמוד — לרן",cat:"📚 למידה"},
+  {e:"study",h:"לחקור / לעיין",p:"STUD-ee",ex:"I study English every day.",t:"study = לחקור — סטאדי",cat:"📚 למידה"},
+  {e:"practice",h:"לתרגל",p:"PRAK-tis",ex:"Practice makes perfect.",t:"practice = תרגול — פרקטיס",cat:"📚 למידה"},
+  {e:"remember",h:"לזכור",p:"re-MEM-ber",ex:"I cannot remember this word.",t:"remember = לזכור — ריממבר",cat:"📚 למידה"},
+  {e:"forget",h:"לשכוח",p:"fer-GET",ex:"I always forget words.",t:"forget = לשכוח — פורגט",cat:"📚 למידה"},
+  {e:"understand",h:"להבין",p:"un-der-STAND",ex:"Now I understand!",t:"under + stand = מבין",cat:"📚 למידה"},
+  {e:"difficult",h:"קשה",p:"DIF-i-kult",ex:"This word is difficult.",t:"difficult = קשה — דיפיקלט",cat:"📚 למידה"},
+  {e:"easy",h:"קל",p:"EE-zee",ex:"This exercise is easy.",t:"easy = קל — איזי",cat:"📚 למידה"},
+  {e:"correct",h:"נכון",p:"kuh-REKT",ex:"Your answer is correct.",t:"correct = נכון — קורקט",cat:"📚 למידה"},
+  {e:"wrong",h:"שגוי",p:"RONG",ex:"Sorry, that is wrong.",t:"wrong = שגוי — ררונג",cat:"📚 למידה"},
+  {e:"question",h:"שאלה",p:"KWES-chun",ex:"I have a question.",t:"question = שאלה — קוסצ'ן",cat:"📚 למידה"},
+  {e:"answer",h:"תשובה",p:"AN-ser",ex:"What is the answer?",t:"answer = תשובה — אנסר",cat:"📚 למידה"},
+  {e:"word",h:"מילה",p:"WERD",ex:"I learn ten new words a day.",t:"word = מילה — וורד",cat:"📚 למידה"},
+  {e:"sentence",h:"משפט",p:"SEN-tens",ex:"Write a sentence with this word.",t:"sentence = משפט — סנטנס",cat:"📚 למידה"},
+  {e:"pronunciation",h:"הגייה",p:"pruh-nun-see-AY-shun",ex:"The pronunciation is difficult.",t:"pronounce = לבטא — פרונאנסיאיישן",cat:"📚 למידה"},
+  {e:"vocabulary",h:"אוצר מילים",p:"voh-KAB-yuh-ler-ee",ex:"I want to improve my vocabulary.",t:"vocabulary = אוצר מילים",cat:"📚 למידה"},
+  {e:"grammar",h:"דקדוק",p:"GRAM-er",ex:"English grammar is not easy.",t:"grammar = דקדוק — גראמר",cat:"📚 למידה"},
+  {e:"translate",h:"לתרגם",p:"TRANS-layt",ex:"Can you translate this for me?",t:"translate = לתרגם — טרנסלייט",cat:"📚 למידה"},
+  {e:"dictionary",h:"מילון",p:"DIK-shuh-ner-ee",ex:"Use a dictionary to find the word.",t:"dictionary = מילון — דיקשנרי",cat:"📚 למידה"},
+  {e:"fluent",h:"שוטף",p:"FLOO-ent",ex:"I want to speak fluent English.",t:"fluent = שוטף — פלואנט",cat:"📚 למידה"},
+
+  // 😊 רגשות ותחושות (קטגוריה חדשה)
+  {e:"happy",h:"שמח",p:"HAP-ee",ex:"I am very happy today.",t:"happy = שמח — האפי",cat:"😊 רגשות"},
+  {e:"sad",h:"עצוב",p:"SAD",ex:"Why are you sad?",t:"sad = עצוב — סאד",cat:"😊 רגשות"},
+  {e:"angry",h:"כועס",p:"ANG-gree",ex:"I am not angry, just tired.",t:"angry = כועס — אנגרי",cat:"😊 רגשות"},
+  {e:"scared",h:"מפוחד",p:"SKAIRD",ex:"I was scared of the dog.",t:"scared = מפוחד — סקיירד",cat:"😊 רגשות"},
+  {e:"excited",h:"נרגש",p:"ek-SY-ted",ex:"I am excited about the trip.",t:"excited = נרגש — אקסייטד",cat:"😊 רגשות"},
+  {e:"worried",h:"מודאג",p:"WER-eed",ex:"I am worried about my health.",t:"worried = מודאג — וורייד",cat:"😊 רגשות"},
+  {e:"relaxed",h:"רגוע",p:"re-LAKST",ex:"I feel relaxed at the beach.",t:"relax = להירגע + ed",cat:"😊 רגשות"},
+  {e:"bored",h:"משועמם",p:"BORD",ex:"I am bored at home.",t:"bored = משועמם — בּורד",cat:"😊 רגשות"},
+  {e:"confused",h:"מבולבל",p:"kun-FYOOZD",ex:"I am confused by this.",t:"confused = מבולבל — קנפיוזד",cat:"😊 רגשות"},
+  {e:"surprised",h:"מופתע",p:"ser-PRYZT",ex:"I was surprised by the gift.",t:"surprised = מופתע — סרפריייזד",cat:"😊 רגשות"},
+  {e:"proud",h:"גאה",p:"PROWD",ex:"I am proud of my children.",t:"proud = גאה — פראוד",cat:"😊 רגשות"},
+  {e:"lonely",h:"בודד",p:"LOHN-lee",ex:"I feel lonely sometimes.",t:"lone = לבד + ly = בודד",cat:"😊 רגשות"},
+  {e:"grateful",h:"אסיר תודה",p:"GRAYT-ful",ex:"I am grateful for your help.",t:"grateful = אסיר תודה — גריייטפול",cat:"😊 רגשות"},
+  {e:"love",h:"אהבה / לאהוב",p:"LUV",ex:"I love my family.",t:"love = אהבה — לאב",cat:"😊 רגשות"},
+  {e:"miss",h:"לגעגע",p:"MIS",ex:"I miss my children.",t:"miss = לגעגע — מיס",cat:"😊 רגשות"},
+
+  // 🎨 תיאורים ותכונות
+  {e:"big",h:"גדול",p:"BIG",ex:"This is a very big house.",t:"big = גדול — ביג",cat:"🎨 תיאורים"},
+  {e:"small",h:"קטן",p:"SMAWL",ex:"This room is too small.",t:"small = קטן — סמול",cat:"🎨 תיאורים"},
+  {e:"tall",h:"גבוה",p:"TAWL",ex:"My son is very tall.",t:"tall = גבוה — טול",cat:"🎨 תיאורים"},
+  {e:"short",h:"קצר / נמוך",p:"SHORT",ex:"This dress is too short.",t:"short = קצר — שורט",cat:"🎨 תיאורים"},
+  {e:"long",h:"ארוך",p:"LAWNG",ex:"It is a long walk.",t:"long = ארוך — לונג",cat:"🎨 תיאורים"},
+  {e:"wide",h:"רחב",p:"WYD",ex:"The road is very wide.",t:"wide = רחב — ווייד",cat:"🎨 תיאורים"},
+  {e:"narrow",h:"צר",p:"NAIR-oh",ex:"This street is very narrow.",t:"narrow = צר — נארו",cat:"🎨 תיאורים"},
+  {e:"heavy",h:"כבד",p:"HEV-ee",ex:"This bag is too heavy.",t:"heavy = כבד — הבי",cat:"🎨 תיאורים"},
+  {e:"light",h:"קל / אור",p:"LYT",ex:"This bag is very light.",t:"light = קל / אור — לייט",cat:"🎨 תיאורים"},
+  {e:"clean",h:"נקי",p:"KLEEN",ex:"Keep your house clean.",t:"clean = נקי — קלין",cat:"🎨 תיאורים"},
+  {e:"dirty",h:"מלוכלך",p:"DER-tee",ex:"My shoes are dirty.",t:"dirty = מלוכלך — דרטי",cat:"🎨 תיאורים"},
+  {e:"new",h:"חדש",p:"NYOO",ex:"I have a new phone.",t:"new = חדש — ניו",cat:"🎨 תיאורים"},
+  {e:"old",h:"ישן / זקן",p:"OHLD",ex:"This building is very old.",t:"old = ישן — אולד",cat:"🎨 תיאורים"},
+  {e:"fast",h:"מהיר",p:"FAST",ex:"The train is very fast.",t:"fast = מהיר — פאסט",cat:"🎨 תיאורים"},
+  {e:"slow",h:"איטי",p:"SLOH",ex:"Please drive slow.",t:"slow = איטי — סלוֹ",cat:"🎨 תיאורים"},
+  {e:"quiet",h:"שקט",p:"KWY-et",ex:"This neighborhood is very quiet.",t:"quiet = שקט — קוואיט",cat:"🎨 תיאורים"},
+  {e:"loud",h:"רועש",p:"LOWD",ex:"The music is too loud.",t:"loud = רועש — לאוד",cat:"🎨 תיאורים"},
+  {e:"beautiful",h:"יפה",p:"BYOO-ti-ful",ex:"What a beautiful garden!",t:"beautiful = יפה — ביוטיפול",cat:"🎨 תיאורים"},
+  {e:"ugly",h:"מכוער",p:"UG-lee",ex:"This painting is ugly.",t:"ugly = מכוער — אגלי",cat:"🎨 תיאורים"},
+  {e:"good",h:"טוב",p:"GOOD",ex:"This food is very good.",t:"good = טוב — גוד",cat:"🎨 תיאורים"},
+  {e:"bad",h:"רע",p:"BAD",ex:"The weather is bad today.",t:"bad = רע — באד",cat:"🎨 תיאורים"},
+  {e:"important",h:"חשוב",p:"im-POR-tant",ex:"This is very important.",t:"important = חשוב — אימפורטנט",cat:"🎨 תיאורים"},
+  {e:"interesting",h:"מעניין",p:"IN-tuh-res-ting",ex:"This book is very interesting.",t:"interesting = מעניין — אינטרסטינג",cat:"🎨 תיאורים"},
+  {e:"boring",h:"משעמם",p:"BOR-ing",ex:"This movie is boring.",t:"bore = לשעמם + ing = משעמם",cat:"🎨 תיאורים"},
+  {e:"enough",h:"מספיק",p:"ee-NUF",ex:"I have enough money.",t:"enough = מספיק — אינאף",cat:"🎨 תיאורים"},
+  {e:"ready",h:"מוכן",p:"RED-ee",ex:"Are you ready to go?",t:"ready = מוכן — רדי",cat:"🎨 תיאורים"},
+  {e:"safe",h:"בטוח",p:"SAYF",ex:"This neighborhood is safe.",t:"safe = בטוח — סייף",cat:"🎨 תיאורים"},
+  {e:"dangerous",h:"מסוכן",p:"DAYN-jer-us",ex:"This road is dangerous.",t:"danger = סכנה + ous = מסוכן",cat:"🎨 תיאורים"},
+  {e:"open",h:"פתוח",p:"OH-pen",ex:"The shop is open.",t:"open = פתוח — אוֹפן",cat:"🎨 תיאורים"},
+  {e:"closed",h:"סגור",p:"KLOHZD",ex:"The bank is closed today.",t:"closed = סגור — קלוֹזד",cat:"🎨 תיאורים"},
+
+  // ✋ פעלים יומיומיים
+  {e:"go",h:"ללכת / לנסוע",p:"GOH",ex:"Let's go to the market.",t:"go = ללכת — גוֹ",cat:"✋ פעלים"},
+  {e:"come",h:"לבוא",p:"KUM",ex:"Come here please.",t:"come = לבוא — קאם",cat:"✋ פעלים"},
+  {e:"eat",h:"לאכול",p:"EET",ex:"I eat three times a day.",t:"eat = לאכול — איט",cat:"✋ פעלים"},
+  {e:"drink",h:"לשתות",p:"DRINK",ex:"I drink water every hour.",t:"drink = לשתות — דרינק",cat:"✋ פעלים"},
+  {e:"sleep",h:"לישון",p:"SLEEP",ex:"I sleep eight hours a night.",t:"sleep = לישון — סליפ",cat:"✋ פעלים"},
+  {e:"wake up",h:"להתעורר",p:"WAYK UP",ex:"I wake up at seven.",t:"wake = להתעורר + up",cat:"✋ פעלים"},
+  {e:"sit",h:"לשבת",p:"SIT",ex:"Please sit down.",t:"sit = לשבת — סיט",cat:"✋ פעלים"},
+  {e:"stand",h:"לעמוד",p:"STAND",ex:"Please stand up.",t:"stand = לעמוד — סטאנד",cat:"✋ פעלים"},
+  {e:"open",h:"לפתוח",p:"OH-pen",ex:"Open the door please.",t:"open = לפתוח — אוֹפן",cat:"✋ פעלים"},
+  {e:"close",h:"לסגור",p:"KLOHZ",ex:"Close the window.",t:"close = לסגור — קלוֹז",cat:"✋ פעלים"},
+  {e:"buy",h:"לקנות",p:"BY",ex:"I want to buy this.",t:"buy = לקנות — בּאי",cat:"✋ פעלים"},
+  {e:"pay",h:"לשלם",p:"PAY",ex:"I will pay by card.",t:"pay = לשלם — פיי",cat:"✋ פעלים"},
+  {e:"call",h:"להתקשר",p:"KAWL",ex:"Call me when you arrive.",t:"call = להתקשר — קול",cat:"✋ פעלים"},
+  {e:"send",h:"לשלוח",p:"SEND",ex:"Send me the address.",t:"send = לשלוח — סנד",cat:"✋ פעלים"},
+  {e:"show",h:"להראות",p:"SHOH",ex:"Show me the way please.",t:"show = להראות — שוֹ",cat:"✋ פעלים"},
+  {e:"give",h:"לתת",p:"GIV",ex:"Give me the menu please.",t:"give = לתת — גיב",cat:"✋ פעלים"},
+  {e:"take",h:"לקחת",p:"TAYK",ex:"Take this medicine twice a day.",t:"take = לקחת — טייק",cat:"✋ פעלים"},
+  {e:"bring",h:"להביא",p:"BRING",ex:"Bring me a glass of water.",t:"bring = להביא — ברינג",cat:"✋ פעלים"},
+  {e:"find",h:"למצוא",p:"FYND",ex:"I cannot find my glasses.",t:"find = למצוא — פיינד",cat:"✋ פעלים"},
+  {e:"lose",h:"לאבד",p:"LOOZ",ex:"I always lose my keys.",t:"lose = לאבד — לוּז",cat:"✋ פעלים"},
+  {e:"know",h:"לדעת",p:"NOH",ex:"I do not know this word.",t:"know = לדעת — נוֹ",cat:"✋ פעלים"},
+  {e:"think",h:"לחשוב",p:"THINK",ex:"I think you are right.",t:"think = לחשוב — ת'ינק",cat:"✋ פעלים"},
+  {e:"want",h:"לרצות",p:"WONT",ex:"I want a cup of tea.",t:"want = לרצות — וונט",cat:"✋ פעלים"},
+  {e:"need",h:"להזדקק",p:"NEED",ex:"I need your help.",t:"need = להזדקק — ניד",cat:"✋ פעלים"},
+  {e:"feel",h:"להרגיש",p:"FEEL",ex:"How do you feel today?",t:"feel = להרגיש — פיל",cat:"✋ פעלים"},
+  {e:"hear",h:"לשמוע",p:"HEER",ex:"I cannot hear you well.",t:"hear = לשמוע — היר",cat:"✋ פעלים"},
+  {e:"see",h:"לראות",p:"SEE",ex:"I cannot see without glasses.",t:"see = לראות — סי",cat:"✋ פעלים"},
+  {e:"try",h:"לנסות",p:"TRY",ex:"Try this delicious cake.",t:"try = לנסות — טריי",cat:"✋ פעלים"},
+  {e:"help",h:"לעזור",p:"HELP",ex:"Can you help me please?",t:"help = לעזור — הלפ",cat:"✋ פעלים"},
+  {e:"wait",h:"לחכות",p:"WAYT",ex:"Please wait five minutes.",t:"wait = לחכות — ווייט",cat:"✋ פעלים"},
 ];
 
-function getWordCat(eng){for(const[cat,words]of Object.entries(CATS)){if(words.includes(eng))return cat;}return "כללי";}
-WORDS.forEach(w=>w.cat=getWordCat(w.e));
+// ========== CONVERSATIONS ==========
+const CONVOS = [
+  {
+    title:"בסופרמרקט",
+    sub:"Shopping at the supermarket",
+    bubbles:[
+      {lang:"en",text:'Good morning! Can I <w>help</w> you?'},
+      {lang:"he",text:'בוקר טוב. כן, איפה הלחם?'},
+      {lang:"en",text:'The <w>bread</w> is in aisle three.'},
+      {lang:"he",text:'תודה. וכמה עולה החלב?'},
+      {lang:"en",text:'The <w>milk</w> is three dollars. It is on <w>sale</w> today.'},
+      {lang:"he",text:'מצוין! אני לוקח אחד.'},
+      {lang:"en",text:'Would you like a <w>bag</w>?'},
+      {lang:"he",text:'כן בבקשה.'},
+    ]
+  },
+  {
+    title:"במסעדה",
+    sub:"At the restaurant",
+    bubbles:[
+      {lang:"en",text:'Hello! A <w>table</w> for two?'},
+      {lang:"he",text:'כן בבקשה.'},
+      {lang:"en",text:'Here is the <w>menu</w>. Can I bring you something to drink?'},
+      {lang:"he",text:'מים בבקשה.'},
+      {lang:"en",text:'Are you ready to order? The <w>chicken</w> is very <w>delicious</w> today.'},
+      {lang:"he",text:'אני ניקח עוף. תודה.'},
+      {lang:"en",text:'Excellent! And for <w>dessert</w>?'},
+      {lang:"he",text:'לא תודה. רק את החשבון בבקשה.'},
+      {lang:"en",text:'Of course. Here is the <w>bill</w>.'},
+    ]
+  },
+  {
+    title:"בתחנת האוטובוס",
+    sub:"At the bus station",
+    bubbles:[
+      {lang:"he",text:'סליחה, אני צריך עזרה.'},
+      {lang:"en",text:'Of course! Are you <w>lost</w>?'},
+      {lang:"he",text:'כן, אני מחפש את מלון הילטון.'},
+      {lang:"en",text:'Go <w>straight</w>, then turn <w>right</w> at the traffic light.'},
+      {lang:"he",text:'כמה זמן לרגל?'},
+      {lang:"en",text:'About ten minutes. Or take <w>bus</w> number five.'},
+      {lang:"he",text:'תודה רבה!'},
+      {lang:"en",text:'You are welcome! Have a nice day.'},
+    ]
+  },
+  {
+    title:"בחנות בגדים",
+    sub:"At the clothing store",
+    bubbles:[
+      {lang:"en",text:'Hello! Can I help you find something?'},
+      {lang:"he",text:'כן, אני מחפש חולצה.'},
+      {lang:"en",text:'What <w>size</w> do you wear?'},
+      {lang:"he",text:'מידה בינונית. ואיזה <w>color</w> יש לכם?'},
+      {lang:"en",text:'We have blue, white, and green. The <w>fitting room</w> is over there.'},
+      {lang:"he",text:'מצוין, אנסה את הכחולה.'},
+      {lang:"en",text:'Great! Is the <w>price</w> okay for you?'},
+      {lang:"he",text:'קצת <w>expensive</w>. יש משהו יותר זול?'},
+      {lang:"en",text:'Yes, this one is <w>cheaper</w>!'},
+    ]
+  },
+  {
+    title:"אצל הרופא",
+    sub:"At the doctor",
+    bubbles:[
+      {lang:"en",text:'Good morning! What is the problem?'},
+      {lang:"he",text:'יש לי כאב בגב.'},
+      {lang:"en",text:'How long have you had this <w>pain</w>?'},
+      {lang:"he",text:'שלושה ימים.'},
+      {lang:"en",text:'Are you <w>allergic</w> to any <w>medicine</w>?'},
+      {lang:"he",text:'לא, אני לא אלרגי לשום דבר.'},
+      {lang:"en",text:'Okay. I will give you some <w>medicine</w>. Rest and drink plenty of <w>water</w>.'},
+      {lang:"he",text:'תודה דוקטור.'},
+    ]
+  },
+];
 
-const SENTENCES=[{word:"Abundant",sentence:"The region is _____ in natural resources, making it a prime target for investment.",distractors:["Scarce","Rigid","Vague"]},{word:"Reluctant",sentence:"She was _____ to accept the offer, fearing it came with hidden conditions.",distractors:["Eager","Compelled","Determined"]},{word:"Meticulous",sentence:"A _____ editor will catch even the smallest errors before publication.",distractors:["Vague","Abrupt","Arbitrary"]},{word:"Vague",sentence:"His instructions were so _____ that no one knew how to proceed.",distractors:["Precise","Rigid","Evident"]},{word:"Ambiguous",sentence:"The contract was _____, leaving room for multiple interpretations.",distractors:["Valid","Explicit","Coherent"]},{word:"Inevitable",sentence:"Given the declining sales, layoffs seemed _____.",distractors:["Avoidable","Temporary","Vague"]},{word:"Deteriorate",sentence:"Without proper maintenance, the building will _____ rapidly.",distractors:["Enhance","Stabilize","Persist"]},{word:"Enhance",sentence:"Regular exercise can _____ both physical and mental well-being.",distractors:["Diminish","Eliminate","Harm"]},{word:"Persist",sentence:"Despite repeated failures, she continued to _____ in her efforts.",distractors:["Cease","Avoid","Decline"]},{word:"Cease",sentence:"The factory was ordered to _____ production until safety issues were resolved.",distractors:["Commence","Enhance","Persist"]},{word:"Eliminate",sentence:"The new policy aims to _____ unnecessary bureaucratic procedures.",distractors:["Retain","Generate","Impose"]},{word:"Verify",sentence:"Before publishing, journalists must _____ all facts from multiple sources.",distractors:["Assume","Imply","Deny"]},{word:"Infer",sentence:"From the data, researchers were able to _____ a link between diet and disease.",distractors:["Ignore","Confirm","Impose"]},{word:"Fluctuate",sentence:"Stock prices tend to _____ in response to economic news.",distractors:["Stabilize","Cease","Preserve"]},{word:"Acquire",sentence:"The company plans to _____ several smaller firms to expand its market share.",distractors:["Eliminate","Reduce","Deny"]},{word:"Significant",sentence:"The study found a _____ correlation between sleep deprivation and poor decision-making.",distractors:["Minor","Vague","Temporary"]},{word:"Permanent",sentence:"The scar left a _____ mark on his arm that would never fully fade.",distractors:["Temporary","Brief","Vague"]},{word:"Justify",sentence:"She struggled to _____ her decision to leave a stable job for a startup.",distractors:["Deny","Contradict","Ignore"]},{word:"Preserve",sentence:"The museum works hard to _____ ancient artifacts for future generations.",distractors:["Destroy","Eliminate","Expose"]},{word:"Crucial",sentence:"Timing is _____ in emergency medicine — every second counts.",distractors:["Minor","Vague","Adequate"]},{word:"Bias",sentence:"Confirmation _____ leads people to seek information that supports their existing beliefs.",distractors:["Insight","Framework","Factor"]},{word:"Collapse",sentence:"The economy began to _____ after years of mismanagement and corruption.",distractors:["Enhance","Stabilize","Expand"]},{word:"Convey",sentence:"A good writer can _____ complex emotions with just a few carefully chosen words.",distractors:["Conceal","Eliminate","Deny"]},{word:"Derive",sentence:"Scientists _____ energy from the sun using photovoltaic cells.",distractors:["Consume","Impose","Detach"]},{word:"Disrupt",sentence:"The new technology threatens to _____ traditional industries entirely.",distractors:["Preserve","Maintain","Retain"]},{word:"Emerge",sentence:"New economic powers began to _____ in the latter half of the 20th century.",distractors:["Collapse","Cease","Diminish"]},{word:"Enforce",sentence:"The government must _____ environmental regulations strictly to combat pollution.",distractors:["Ignore","Abolish","Evade"]},{word:"Facilitate",sentence:"The new software was designed to _____ communication between remote teams.",distractors:["Hinder","Diminish","Isolate"]},{word:"Fundamental",sentence:"Access to clean water is a _____ human right that should never be compromised.",distractors:["Temporary","Minor","Arbitrary"]},{word:"Hypothesis",sentence:"The scientist proposed a bold _____ that challenged decades of established theory.",distractors:["Barrier","Insight","Framework"]},{word:"Implement",sentence:"The school board voted to _____ the new curriculum starting next semester.",distractors:["Abolish","Deny","Eliminate"]},{word:"Integrity",sentence:"A leader without _____ will quickly lose the trust of their team.",distractors:["Bias","Hypothesis","Incentive"]},{word:"Isolate",sentence:"Researchers need to _____ the virus in order to develop an effective vaccine.",distractors:["Integrate","Advocate","Expose"]},{word:"Alleviate",sentence:"The new medication was found to _____ symptoms without major side effects.",distractors:["Intensify","Deteriorate","Impose"]},{word:"Arbitrary",sentence:"The committee's decisions seemed completely _____, with no clear criteria.",distractors:["Logical","Systematic","Precise"]},{word:"Advocate",sentence:"The lawyer continued to _____ for stricter environmental regulations.",distractors:["Oppose","Prohibit","Eliminate"]},{word:"Dominate",sentence:"One company has managed to _____ the smartphone market for over a decade.",distractors:["Comply","Diminish","Isolate"]},{word:"Accumulate",sentence:"Over time, small investments can _____ into significant wealth.",distractors:["Diminish","Scatter","Reduce"]},{word:"Acknowledge",sentence:"The company finally decided to _____ the mistake in its annual report.",distractors:["Conceal","Deny","Ignore"]},{word:"Credible",sentence:"A _____ witness is essential for a convincing court case.",distractors:["Dubious","Vague","Biased"]},{word:"Subtle",sentence:"The difference between the two proposals was _____ but important.",distractors:["Obvious","Explicit","Massive"]},{word:"Coherent",sentence:"His argument was well-structured and _____, making it easy to follow.",distractors:["Vague","Contradictory","Ambiguous"]},{word:"Chronic",sentence:"The patient suffered from _____ back pain that had lasted for years.",distractors:["Temporary","Sudden","Brief"]},{word:"Paradox",sentence:"It is a _____ that the more choices we have, the less satisfied we feel.",distractors:["Hypothesis","Criterion","Anomaly"]},{word:"Obsolete",sentence:"Many traditional jobs are becoming _____ due to automation.",distractors:["Modern","Relevant","Effective"]}];
+const CATS = [...new Set(WORDS.map(w=>w.cat))];
 
-// ========== USER MANAGEMENT ==========
 let currentUser=null;
 let S={ws:{},sessions:[]};
+let flashQ=[],flashI=0,flashFlipped=false;
+let quizQ=[],quizI=0,quizAnswered=false,quizType='eng';
+let sPass=0,sFail=0,sMode='';
+let matchSel=null,matchPairs=0;
+let smQ=[],smI=0;
+let currentCat='הכל';
+let convoI=0,currentConvoWord=null;
+let audioCtx=null,soundOn=true;
 
-function ukey(n){return 'psy4_'+n.trim().toLowerCase().replace(/\s+/g,'_');}
+// ========== AUDIO ==========
+function getAudioCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx;}
+function toggleSound(){soundOn=!soundOn;document.getElementById('sound-btn').textContent=soundOn?'🔊':'🔇';if(soundOn)playTone('flip');}
+function playTone(type){
+  if(!soundOn)return;
+  try{
+    const ctx=getAudioCtx(),now=ctx.currentTime;
+    const osc=ctx.createOscillator(),gain=ctx.createGain();
+    osc.connect(gain);gain.connect(ctx.destination);
+    if(type==='correct'){osc.type='sine';osc.frequency.setValueAtTime(440,now);osc.frequency.setValueAtTime(660,now+0.12);gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(0.25,now+0.02);gain.gain.setValueAtTime(0.25,now+0.18);gain.gain.linearRampToValueAtTime(0,now+0.35);osc.start(now);osc.stop(now+0.35);}
+    else if(type==='wrong'){osc.type='sawtooth';osc.frequency.setValueAtTime(320,now);osc.frequency.linearRampToValueAtTime(180,now+0.25);gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(0.18,now+0.02);gain.gain.linearRampToValueAtTime(0,now+0.28);osc.start(now);osc.stop(now+0.28);}
+    else if(type==='flip'){osc.type='sine';osc.frequency.setValueAtTime(800,now);osc.frequency.linearRampToValueAtTime(600,now+0.08);gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(0.1,now+0.01);gain.gain.linearRampToValueAtTime(0,now+0.1);osc.start(now);osc.stop(now+0.1);}
+    else if(type==='complete'){const notes=[523,659,784,1047];notes.forEach((freq,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.type='sine';const t=now+i*0.13;o.frequency.setValueAtTime(freq,t);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.2,t+0.02);g.gain.linearRampToValueAtTime(0,t+0.18);o.start(t);o.stop(t+0.2);});}
+    else if(type==='match'){osc.type='sine';osc.frequency.setValueAtTime(523,now);osc.frequency.setValueAtTime(784,now+0.08);gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(0.2,now+0.02);gain.gain.setValueAtTime(0.2,now+0.1);gain.gain.linearRampToValueAtTime(0,now+0.22);osc.start(now);osc.stop(now+0.22);}
+    else if(type==='save'){osc.type='sine';osc.frequency.setValueAtTime(660,now);gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(0.12,now+0.01);gain.gain.linearRampToValueAtTime(0,now+0.12);osc.start(now);osc.stop(now+0.12);}
+  }catch(e){}
+}
+
+// ========== SPEECH SYNTHESIS ==========
+let speechSupported='speechSynthesis' in window;
+let voicesLoaded=false;
+let cachedVoice=null;
+
+function getEnglishVoice(){
+  if(cachedVoice) return cachedVoice;
+  const voices=window.speechSynthesis.getVoices();
+  if(!voices.length) return null;
+  cachedVoice=
+    voices.find(v=>v.lang==='en-US'&&v.name.includes('Samantha'))||
+    voices.find(v=>v.lang==='en-US'&&v.name.includes('Google US'))||
+    voices.find(v=>v.lang==='en-US'&&!v.name.includes('('))||
+    voices.find(v=>v.lang.startsWith('en-US'))||
+    voices.find(v=>v.lang.startsWith('en-GB'))||
+    voices.find(v=>v.lang.startsWith('en'))||
+    null;
+  return cachedVoice;
+}
+
+function speakText(text,btn){
+  if(!speechSupported){
+    alert('הדפדפן שלך לא תומך בהגייה.\nנסה Chrome או Safari.');
+    return;
+  }
+  // Reset button states
+  if(btn){
+    document.querySelectorAll('.speak-btn').forEach(b=>{
+      b.classList.remove('speaking');
+      b.innerHTML='🔊 שמע הגייה';
+    });
+    btn.classList.add('speaking');
+    btn.innerHTML='🔊 מדבר...';
+  }
+
+  // Cancel any ongoing speech
+  window.speechSynthesis.cancel();
+
+  const doSpeak=()=>{
+    const utter=new SpeechSynthesisUtterance(text);
+    utter.lang='en-US';
+    utter.rate=0.75;
+    utter.pitch=1;
+    utter.volume=1;
+    const voice=getEnglishVoice();
+    if(voice) utter.voice=voice;
+    utter.onend=()=>{
+      if(btn){btn.classList.remove('speaking');btn.innerHTML='🔊 שמע הגייה';}
+    };
+    utter.onerror=(err)=>{
+      if(btn){btn.classList.remove('speaking');btn.innerHTML='🔊 שמע הגייה';}
+      console.log('Speech error:',err.error);
+    };
+    window.speechSynthesis.speak(utter);
+    // iOS Safari bug: speech sometimes stalls — kick it after 100ms
+    setTimeout(()=>{
+      if(window.speechSynthesis.paused) window.speechSynthesis.resume();
+    },100);
+  };
+
+  // If voices not yet loaded, wait for them
+  const voices=window.speechSynthesis.getVoices();
+  if(voices.length>0){
+    doSpeak();
+  } else {
+    // Wait up to 1 second for voices to load
+    let tries=0;
+    const wait=setInterval(()=>{
+      tries++;
+      const v=window.speechSynthesis.getVoices();
+      if(v.length>0||tries>10){
+        clearInterval(wait);
+        doSpeak();
+      }
+    },100);
+  }
+}
+
+function speakWord(e){
+  e.stopPropagation();
+  const word=document.getElementById('fc-word').textContent;
+  speakText(word,e.currentTarget);
+}
+
+function speakExample(e){
+  e.stopPropagation();
+  const ex=document.getElementById('fc-example').textContent.replace(/["""]/g,'');
+  speakText(ex,e.currentTarget);
+}
+
+// Preload voices
+if(speechSupported){
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged=()=>{
+    cachedVoice=null; // reset cache so we pick fresh
+    getEnglishVoice();
+  };
+}
+
+// ========== USER ==========
+function ukey(n){return 'eng_seniors_'+n.trim().toLowerCase().replace(/\s+/g,'_');}
 function doLogin(){
   const name=document.getElementById('login-name').value.trim();
   if(!name){document.getElementById('login-name').style.borderColor='#C94040';return;}
   currentUser=name;
   try{const d=localStorage.getItem(ukey(name));if(d){const p=JSON.parse(d);S.ws=p.ws||{};S.sessions=p.sessions||[];}else{S.ws={};S.sessions=[];}}catch(e){S.ws={};S.sessions=[];}
-  localStorage.setItem('psy4_last',name);
+  localStorage.setItem('eng_seniors_last',name);
   document.getElementById('user-chip').textContent='👤 '+name;
-  showScreen('home');updateStats();renderCatTabs();renderList('all');renderDash();
+  showScreen('home');updateStats();renderCatCards();renderDash();
 }
 function switchUser(){if(confirm('לעבור למשתמש אחר?')){currentUser=null;S={ws:{},sessions:[]};document.getElementById('login-name').value='';showScreen('login');}}
 function saveS(){if(!currentUser)return;try{localStorage.setItem(ukey(currentUser),JSON.stringify({ws:S.ws,sessions:S.sessions}));}catch(e){}}
-function addSession(mode,pass,fail,skip){
-  S.sessions.unshift({mode,pass,fail,skip,date:new Date().toLocaleDateString('he-IL'),ts:Date.now()});
-  if(S.sessions.length>20)S.sessions=S.sessions.slice(0,20);
-  saveS();
-}
+function addSession(mode,pass,fail){S.sessions.unshift({mode,pass,fail,date:new Date().toLocaleDateString('he-IL')});if(S.sessions.length>20)S.sessions=S.sessions.slice(0,20);saveS();}
 document.getElementById('login-name').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-try{const last=localStorage.getItem('psy4_last');if(last){document.getElementById('login-name').value=last;document.getElementById('login-hint').innerHTML='שימוש אחרון: <strong>'+last+'</strong>';}}catch(e){}
+try{const last=localStorage.getItem('eng_seniors_last');if(last){document.getElementById('login-name').value=last;document.getElementById('login-hint').innerHTML='שימוש אחרון: <strong>'+last+'</strong>';}}catch(e){}
 
-// ========== STATE ==========
-let flashQ=[],flashI=0,flashFlipped=false,flashMode='all';
-let quizQ=[],quizI=0,quizAnswered=false,quizType='eng';
-let sPass=0,sFail=0,sSkip=0,sMode='';
-let matchSel=null,matchPairs=0;
-let psychoQ=[],psychoI=0,psychoAnswers=[],psychoTimer=null,psychoTime=0,psychoAnswered=false;
-let smQ=[],smI=0;
-let currentCat='הכל';
-
-// ========== STATS & UI ==========
+// ========== STATS ==========
 function gs(e){return S.ws[e]||'new';}
 function ss(e,s){S.ws[e]=s;saveS();updateStats();}
-
 function updateStats(){
   const m=WORDS.filter(w=>gs(w.e)==='mastered').length;
   const f=WORDS.filter(w=>gs(w.e)==='failed').length;
@@ -485,179 +1281,206 @@ function updateStats(){
   document.getElementById('tot-f').textContent=f;
   document.getElementById('tot-w').textContent=WORDS.length;
   const fb=document.getElementById('failed-badge');
-  fb.textContent=f;
-  fb.style.display=f>0?'':'none';
+  fb.textContent=f;fb.style.display=f>0?'':'none';
+  // Refresh cat cards if visible
+  if(document.getElementById('screen-home').classList.contains('active')){
+    renderCatCards();
+  }
+}
+function renderCatCards(){
+  const container=document.getElementById('cat-cards');
+  if(!container) return;
+  container.innerHTML='';
+  // "הכל" card first
+  const allMastered=WORDS.filter(w=>gs(w.e)==='mastered').length;
+  const allPct=Math.round(allMastered/WORDS.length*100);
+  const allCard=document.createElement('div');
+  allCard.className='cat-card';
+  allCard.style.borderColor='#1565C0';allCard.style.background='#EEF4FB';
+  allCard.innerHTML=`
+    <div class="cat-card-left">
+      <div class="cat-card-icon">📚</div>
+      <div><div class="cat-card-name" style="color:#1565C0">כל המילים</div><div class="cat-card-count">${WORDS.length} מילים</div></div>
+    </div>
+    <div class="cat-card-right">
+      <div class="cat-prog"><div class="cat-prog-fill" style="width:${allPct}%"></div></div>
+      <div class="cat-prog-pct">${allPct}%</div>
+      <button class="cat-start-btn" onclick="startFlashCat('all',event)">התחל ←</button>
+    </div>`;
+  container.appendChild(allCard);
+
+  CATS.forEach(cat=>{
+    const words=WORDS.filter(w=>w.cat===cat);
+    const mastered=words.filter(w=>gs(w.e)==='mastered').length;
+    const pct=Math.round(mastered/words.length*100);
+    const d=document.createElement('div');
+    d.className='cat-card';
+    d.innerHTML=`
+      <div class="cat-card-left">
+        <div class="cat-card-icon">${cat.split(' ')[0]}</div>
+        <div><div class="cat-card-name">${cat.split(' ').slice(1).join(' ')}</div><div class="cat-card-count">${words.length} מילים · ${mastered} ידעתי</div></div>
+      </div>
+      <div class="cat-card-right">
+        <div class="cat-prog"><div class="cat-prog-fill" style="width:${pct}%"></div></div>
+        <div class="cat-prog-pct">${pct}%</div>
+        <button class="cat-start-btn" onclick="startFlashCat('${cat}',event)">התחל ←</button>
+      </div>`;
+    container.appendChild(d);
+  });
+}
+
+function startFlashCat(cat,e){
+  if(e) e.stopPropagation();
+  currentCat=cat;
+  startFlash('all');
+}
+
+function renderFlashCatTabs(){
+  const row=document.getElementById('flash-cat-row');
+  if(!row) return;
+  row.innerHTML='';
+  ['הכל',...CATS].forEach(cat=>{
+    const b=document.createElement('button');
+    b.className='flash-cat-btn'+(cat===currentCat?' active':'');
+    b.textContent=cat==='הכל'?'📚 הכל':cat;
+    b.onclick=()=>{
+      currentCat=cat;
+      document.querySelectorAll('.flash-cat-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      startFlash('all');
+    };
+    row.appendChild(b);
+  });
 }
 
 function renderDash(){
-  const total=WORDS.length;
-  const m=WORDS.filter(w=>gs(w.e)==='mastered').length;
-  const f=WORDS.filter(w=>gs(w.e)==='failed').length;
+  const total=WORDS.length,m=WORDS.filter(w=>gs(w.e)==='mastered').length,f=WORDS.filter(w=>gs(w.e)==='failed').length;
   document.getElementById('d-mastered').textContent=m;
   document.getElementById('d-failed').textContent=f;
   document.getElementById('d-sessions').textContent=S.sessions.length;
   const mp=total?Math.round(m/total*100):0;
-  const fp=total?Math.round(f/total*100):0;
   document.getElementById('prog-mastered').style.width=mp+'%';
   document.getElementById('prog-mastered-pct').textContent=mp+'%';
-  document.getElementById('prog-failed').style.width=fp+'%';
-  document.getElementById('prog-failed-pct').textContent=fp+'%';
-  const sl=document.getElementById('session-list');
-  sl.innerHTML='';
-  if(!S.sessions.length){sl.innerHTML='<div style="font-size:12px;color:#aaa;padding:6px 0">עדיין אין סשנים — התחילי לתרגל!</div>';return;}
-  S.sessions.slice(0,8).forEach(s=>{
-    const tot=s.pass+s.fail+(s.skip||0);
-    const pct=tot?Math.round(s.pass/tot*100):0;
-    const modeNames={'flash':'כרטיסיות','quiz':'חידון','psycho':'מבחן','match':'שידוך','self':'סימון עצמי'};
+  const sl=document.getElementById('session-list');sl.innerHTML='';
+  if(!S.sessions.length){sl.innerHTML='<div style="font-size:12px;color:#aaa;padding:6px 0">עדיין אין סשנים — התחל לתרגל!</div>';return;}
+  const modes={'flash':'אוצר מילים','quiz':'חידון','match':'התאמת זוגות','self':'סימון עצמי','convo':'שיחה','fill':'השלמת מילים'};
+  S.sessions.slice(0,6).forEach(s=>{
+    const tot=s.pass+s.fail,pct=tot?Math.round(s.pass/tot*100):0;
     const d=document.createElement('div');d.className='session-item';
-    d.innerHTML=`<span class="session-mode">${modeNames[s.mode]||s.mode}</span><span class="session-score ${pct>=70?'good':'bad'}">${pct}% (${s.pass}/${tot})</span><span class="session-date">${s.date}</span>`;
+    d.innerHTML=`<span>${modes[s.mode]||s.mode}</span><span class="session-score ${pct>=70?'good':'bad'}">${pct}% (${s.pass}/${tot})</span><span class="session-date">${s.date}</span>`;
     sl.appendChild(d);
   });
 }
-
 function renderCatTabs(){
   const tabs=document.getElementById('cat-tabs');tabs.innerHTML='';
-  ['הכל',...Object.keys(CATS)].forEach(cat=>{
-    const b=document.createElement('button');
-    b.className='cat-tab'+(cat===currentCat?' active':'');
-    b.textContent=cat;b.onclick=()=>{currentCat=cat;document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));b.classList.add('active');renderList(document.querySelector('.fb.active').dataset.f||'all');};
+  ['הכל',...CATS].forEach(cat=>{
+    const b=document.createElement('button');b.className='cat-tab'+(cat===currentCat?' active':'');
+    b.textContent=cat;b.onclick=()=>{currentCat=cat;document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));b.classList.add('active');renderList(document.querySelector('.fb.active')?.dataset.f||'all');};
     tabs.appendChild(b);
   });
 }
-
 function renderList(f){
   const list=document.getElementById('word-list');
-  let arr=f==='all'?WORDS:f==='mastered'?WORDS.filter(w=>gs(w.e)==='mastered'):WORDS.filter(w=>gs(w.e)==='failed'||gs(w.e)==='new');
+  let arr=f==='all'?WORDS:f==='mastered'?WORDS.filter(w=>gs(w.e)==='mastered'):WORDS.filter(w=>gs(w.e)==='failed');
   if(currentCat!=='הכל') arr=arr.filter(w=>w.cat===currentCat);
   document.getElementById('wcount').textContent=arr.length;
   list.innerHTML='';
   arr.forEach(w=>{
-    const st=gs(w.e);
-    const note=S.ws[w.e+'_note']||'';
-    const d=document.createElement('div');
-    d.className='wi'+(st==='mastered'?' mastered':st==='failed'?' failed':'');
+    const st=gs(w.e),note=S.ws[w.e+'_note']||'';
+    const d=document.createElement('div');d.className='wi'+(st==='mastered'?' mastered':st==='failed'?' failed':'');
     d.innerHTML=`<div class="wdot"></div>
-    <div style="flex:1;min-width:0">
-      <div style="display:flex;align-items:center;gap:6px">
-        <div class="weng">${w.e}</div>
-        <div class="wheb">${w.h}</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <div class="weng">${w.e}</div><div class="wheb">${w.h}</div>
+        </div>
+        <div class="wexample">${w.ex}</div>
+        ${note?`<div style="font-size:11px;color:#1565C0;margin-top:2px">📝 ${note}</div>`:''}
       </div>
-      ${note?`<div style="font-size:11px;color:#1A5C9A;margin-top:2px">📝 ${note}</div>`:''}
-    </div>
-    <div class="self-mark-btns">
-      <button class="sm-btn sm-ok" onclick="quickMark('${w.e}','mastered',event)">✓</button>
-      <button class="sm-btn sm-no" onclick="quickMark('${w.e}','failed',event)">✗</button>
-    </div>`;
+      <button onclick="speakText('${w.e.replace(/'/g,"\\'")}',this);event.stopPropagation()" style="font-size:18px;background:none;border:none;cursor:pointer;padding:2px 6px;color:#1565C0;flex-shrink:0" title="שמע הגייה">🔊</button>
+      <div class="sm-btns">
+        <button class="sm-btn sm-ok" onclick="quickMark('${w.e}','mastered',event)">✓</button>
+        <button class="sm-btn sm-no" onclick="quickMark('${w.e}','failed',event)">✗</button>
+      </div>`;
     list.appendChild(d);
   });
 }
-
-function quickMark(eng,status,e){e.stopPropagation();ss(eng,status);renderList(document.querySelector('.fb.active').dataset.f||'all');}
-
-function filterW(f,btn){
-  document.querySelectorAll('.fb').forEach(b=>{b.classList.remove('active');b.dataset.f=b.dataset.f||'all';});
-  btn.classList.add('active');btn.dataset.f=f;renderList(f);
-}
-
+function quickMark(eng,status,e){e.stopPropagation();ss(eng,status);renderList(document.querySelector('.fb.active')?.dataset.f||'all');}
+function filterW(f,btn){document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderList(f);}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+id).classList.add('active');}
-function goHome(){clearInterval(psychoTimer);showScreen('home');updateStats();renderDash();renderList('all');}
+function goHome(){stopCamera();showScreen('home');updateStats();renderCatCards();renderDash();}
 
 // ========== FLASHCARD ==========
 function startFlash(mode){
-  let q;
-  if(mode==='failed'){
-    q=WORDS.filter(w=>gs(w.e)==='failed');
-    if(!q.length){alert('אין מילים שגויות לתרגול!\nשחקי קודם חידון או מבחן.');return;}
-  } else {
-    q=[...WORDS];
-  }
+  let q=mode==='failed'?WORDS.filter(w=>gs(w.e)==='failed'):[...WORDS];
   if(currentCat!=='הכל') q=q.filter(w=>w.cat===currentCat);
-  q=shuf(q);
-  if(!q.length){alert('אין מילים בקטגוריה זו');return;}
-  flashQ=q;flashI=0;sPass=0;sFail=0;flashMode=mode;sMode='flash';
-  showScreen('flash');renderFlash();
+  if(!q.length){alert(mode==='failed'?'אין מילים שגויות לתרגול!':'אין מילים בקטגוריה זו');return;}
+  flashQ=shuf(q);flashI=0;sPass=0;sFail=0;sMode='flash';
+  showScreen('flash');
+  renderFlashCatTabs();
+  renderFlash();
 }
-
 function renderFlash(){
   const w=flashQ[flashI],tot=flashQ.length;
   document.getElementById('fp').style.width=(flashI/tot*100)+'%';
   document.getElementById('fc-ctr').textContent=(flashI+1)+' / '+tot;
   document.getElementById('fc-cat').textContent=w.cat;
   document.getElementById('fc-word').textContent=w.e;
+  document.getElementById('fc-pron').textContent='🔉 '+w.p;
   document.getElementById('fc-meaning').textContent=w.h;
+  document.getElementById('fc-example').textContent='"'+w.ex+'"';
   document.getElementById('fc-trick').textContent=w.t;
   const card=document.getElementById('flashcard');
   card.classList.remove('flipped');
   document.getElementById('btn-flip').style.display='';
   document.getElementById('fc-ar').style.display='none';
   document.getElementById('fc-note-wrap').style.display='none';
+  // Reset speak buttons
+  document.querySelectorAll('.speak-btn').forEach(b=>{b.classList.remove('speaking');b.innerHTML='🔊 שמע הגייה';});
+  document.getElementById('speak-front-btn').style.display='inline-flex';
   flashFlipped=false;
-}
-
-function showNoteSection(eng){
-  const wrap=document.getElementById('fc-note-wrap');
-  wrap.style.display='block';
-  const note=S.ws[eng+'_note']||'';
-  const disp=document.getElementById('fc-note-display');
-  const edit=document.getElementById('fc-note-edit');
-  const addBtn=document.getElementById('fc-note-add-btn');
-  const inp=document.getElementById('fc-note-input');
-  if(note){
-    disp.textContent=note;
-    disp.style.display='block';
-    edit.style.display='none';
-    addBtn.style.display='none';
-  } else {
-    disp.style.display='none';
-    edit.style.display='none';
-    addBtn.style.display='block';
-    inp.value='';
-  }
-  document.getElementById('note-saved-msg').style.display='none';
-}
-
-function openNoteEdit(){
-  const w=flashQ[flashI];
-  const note=S.ws[w.e+'_note']||'';
-  document.getElementById('fc-note-input').value=note;
-  document.getElementById('fc-note-display').style.display='none';
-  document.getElementById('fc-note-edit').style.display='block';
-  document.getElementById('fc-note-add-btn').style.display='none';
-  document.getElementById('fc-note-input').focus();
-}
-
-function saveNote(){
-  const w=flashQ[flashI];
-  const val=document.getElementById('fc-note-input').value.trim();
-  if(val) S.ws[w.e+'_note']=val;
-  else delete S.ws[w.e+'_note'];
-  saveS();
-  playTone('save');
-  const msg=document.getElementById('note-saved-msg');
-  msg.style.display='inline';
-  setTimeout(()=>{msg.style.display='none';},1500);
-  if(val){
-    document.getElementById('fc-note-display').textContent=val;
-    document.getElementById('fc-note-display').style.display='block';
-    document.getElementById('fc-note-edit').style.display='none';
-  }
+  // Auto-speak the word after a short delay
+  setTimeout(()=>speakText(w.e), 400);
 }
 function flipCard(){
-  if(flashFlipped)return;
-  flashFlipped=true;
-  playTone('flip');
+  if(flashFlipped)return;flashFlipped=true;playTone('flip');
   document.getElementById('flashcard').classList.add('flipped');
   document.getElementById('btn-flip').style.display='none';
   document.getElementById('fc-ar').style.display='flex';
-  const w=flashQ[flashI];
-  showNoteSection(w.e);
+  showNoteSection(flashQ[flashI].e);
 }
+
 function markCard(passed){
   const w=flashQ[flashI];
   if(passed){sPass++;ss(w.e,'mastered');playTone('correct');}
   else{sFail++;ss(w.e,'failed');playTone('wrong');}
   flashI++;
   if(flashI>=flashQ.length)showResults('flash');else renderFlash();
+}
+
+// ========== NOTES ==========
+function showNoteSection(eng){
+  const wrap=document.getElementById('fc-note-wrap');wrap.style.display='block';
+  const note=S.ws[eng+'_note']||'';
+  const disp=document.getElementById('fc-note-display'),edit=document.getElementById('fc-note-edit'),addBtn=document.getElementById('fc-note-add-btn'),inp=document.getElementById('fc-note-input');
+  if(note){disp.textContent=note;disp.style.display='block';edit.style.display='none';addBtn.style.display='none';}
+  else{disp.style.display='none';edit.style.display='none';addBtn.style.display='block';inp.value='';}
+  document.getElementById('note-saved-msg').style.display='none';
+}
+function openNoteEdit(){
+  const w=flashQ[flashI],note=S.ws[w.e+'_note']||'';
+  document.getElementById('fc-note-input').value=note;
+  document.getElementById('fc-note-display').style.display='none';
+  document.getElementById('fc-note-edit').style.display='block';
+  document.getElementById('fc-note-add-btn').style.display='none';
+  document.getElementById('fc-note-input').focus();
+}
+function saveNote(){
+  const w=flashQ[flashI],val=document.getElementById('fc-note-input').value.trim();
+  if(val) S.ws[w.e+'_note']=val; else delete S.ws[w.e+'_note'];
+  saveS();playTone('save');
+  const msg=document.getElementById('note-saved-msg');msg.style.display='inline';
+  setTimeout(()=>msg.style.display='none',1500);
+  if(val){document.getElementById('fc-note-display').textContent=val;document.getElementById('fc-note-display').style.display='block';document.getElementById('fc-note-edit').style.display='none';}
 }
 
 // ========== SELF MARK ==========
@@ -672,14 +1495,18 @@ function renderSelfMark(){
   const w=smQ[smI],tot=smQ.length;
   document.getElementById('sm-fp').style.width=(smI/tot*100)+'%';
   document.getElementById('sm-ctr').textContent=(smI+1)+' / '+tot;
+  document.getElementById('sm-cat').textContent=w.cat;
   document.getElementById('sm-word').textContent=w.e;
+  document.getElementById('sm-pron').textContent='🔉 '+w.p;
   document.getElementById('sm-heb').textContent=w.h;
+  document.getElementById('sm-ex').textContent='"'+w.ex+'"';
   document.getElementById('sm-trick').textContent='💡 '+w.t;
+  // Auto-speak
+  setTimeout(()=>speakText(w.e), 300);
 }
 function selfMark(knew){
   const w=smQ[smI];
-  if(knew){sPass++;ss(w.e,'mastered');playTone('correct');}
-  else{sFail++;ss(w.e,'failed');playTone('wrong');}
+  if(knew){sPass++;ss(w.e,'mastered');playTone('correct');}else{sFail++;ss(w.e,'failed');playTone('wrong');}
   smI++;
   if(smI>=smQ.length)showResults('self');else renderSelfMark();
 }
@@ -687,9 +1514,8 @@ function selfMark(knew){
 // ========== QUIZ ==========
 function setQType(type,btn){quizType=type;document.querySelectorAll('.qt-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 function startQuiz(){
-  let pool=WORDS;
-  if(currentCat!=='הכל') pool=pool.filter(w=>w.cat===currentCat);
-  quizQ=shuf([...pool]).slice(0,15);quizI=0;sPass=0;sFail=0;sMode='quiz';
+  let pool=currentCat!=='הכל'?WORDS.filter(w=>w.cat===currentCat):WORDS;
+  quizQ=shuf([...pool]).slice(0,12);quizI=0;sPass=0;sFail=0;sMode='quiz';
   showScreen('quiz');renderQuiz();
 }
 function renderQuiz(){
@@ -698,15 +1524,31 @@ function renderQuiz(){
   document.getElementById('q-ctr').textContent=(quizI+1)+' / '+tot;
   const isEng=quizType==='eng';
   document.getElementById('q-word').textContent=isEng?q.e:q.h;
+  document.getElementById('q-sub').textContent=isEng?'🔉 '+q.p:'מה התרגום לאנגלית?';
   document.getElementById('q-fb').textContent='';
   document.getElementById('q-next').style.display='none';
+  // Show speak button only when English word is shown
+  const speakBtn=document.getElementById('q-speak-btn');
+  if(isEng){
+    speakBtn.style.display='inline-flex';
+    speakBtn.innerHTML='🔊 שמע הגייה';
+    speakBtn.classList.remove('speaking');
+    speakBtn.onclick=()=>speakText(q.e,speakBtn);
+    setTimeout(()=>speakText(q.e),300);
+  } else {
+    speakBtn.style.display='none';
+  }
   quizAnswered=false;
   const correct=isEng?q.h:q.e;
   const opts=[correct];
   shuf(WORDS.filter(w=>w.e!==q.e)).slice(0,3).forEach(w=>opts.push(isEng?w.h:w.e));
   shuf(opts);
   const c=document.getElementById('q-opts');c.innerHTML='';
-  opts.forEach(opt=>{const b=document.createElement('div');b.className='qopt';b.textContent=opt;b.onclick=()=>answerQ(b,opt,correct,q);c.appendChild(b);});
+  opts.forEach(opt=>{
+    const b=document.createElement('div');b.className='qopt';b.textContent=opt;
+    b.onclick=()=>answerQ(b,opt,correct,q);
+    c.appendChild(b);
+  });
 }
 function answerQ(btn,chosen,correct,q){
   if(quizAnswered)return;quizAnswered=true;
@@ -719,258 +1561,479 @@ function nextQuiz(){quizI++;if(quizI>=quizQ.length)showResults('quiz');else rend
 
 // ========== MATCH ==========
 function startMatch(){
-  let pool=WORDS;if(currentCat!=='הכל') pool=pool.filter(w=>w.cat===currentCat);
+  let pool=currentCat!=='הכל'?WORDS.filter(w=>w.cat===currentCat):WORDS;
   const words=shuf([...pool]).slice(0,6);
   matchSel=null;matchPairs=words.length;
-  document.getElementById('mpairs').textContent=matchPairs;showScreen('match');
-  const eng=words.map(w=>({id:w.e,txt:w.e,pair:w.h}));
-  const heb=words.map(w=>({id:w.h,txt:w.h,pair:w.e}));
-  const all=shuf([...eng,...heb]);
-  const g=document.getElementById('mgrid');g.innerHTML='';
-  all.forEach(item=>{const c=document.createElement('div');c.className='mc';c.textContent=item.txt;c.dataset.id=item.id;c.dataset.pair=item.pair;c.onclick=()=>selMatch(c);g.appendChild(c);});
-}
-function selMatch(card){
-  if(card.classList.contains('matched'))return;
-  if(!matchSel){card.classList.add('selected');matchSel=card;return;}
-  if(matchSel===card){card.classList.remove('selected');matchSel=null;return;}
-  const prev=matchSel;const ok=prev.dataset.pair===card.dataset.id&&card.dataset.pair===prev.dataset.id;
-  prev.classList.remove('selected');matchSel=null;
-  if(ok){prev.classList.add('matched');card.classList.add('matched');matchPairs--;document.getElementById('mpairs').textContent=matchPairs;playTone('match');if(matchPairs===0){playTone('complete');setTimeout(()=>alert('מעולה! 🎉'),200);}}
-  else{prev.classList.add('wrong-s');card.classList.add('wrong-s');setTimeout(()=>{prev.classList.remove('wrong-s');card.classList.remove('wrong-s');},500);}
+  document.getElementById('mpairs').textContent=matchPairs;
+  showScreen('match');
+
+  const engCol=document.getElementById('match-col-eng');
+  const hebCol=document.getElementById('match-col-heb');
+  engCol.innerHTML='';hebCol.innerHTML='';
+
+  // English column — in shuffled order
+  const engOrder=shuf([...words]);
+  // Hebrew column — in different shuffled order
+  const hebOrder=shuf([...words]);
+
+  engOrder.forEach(w=>{
+    const c=document.createElement('div');
+    c.className='mc mc-eng';
+    c.textContent=w.e;
+    c.dataset.id=w.e;c.dataset.pair=w.h;c.dataset.type='eng';
+    c.onclick=()=>selMatch(c);
+    engCol.appendChild(c);
+  });
+
+  hebOrder.forEach(w=>{
+    const c=document.createElement('div');
+    c.className='mc mc-heb';
+    c.textContent=w.h;
+    c.dataset.id=w.h;c.dataset.pair=w.e;c.dataset.type='heb';
+    c.onclick=()=>selMatch(c);
+    hebCol.appendChild(c);
+  });
 }
 
-// ========== PSYCHO ==========
-function startPsycho(){
-  psychoQ=shuf([...SENTENCES]).slice(0,20);psychoI=0;psychoAnswers=[];sPass=0;sFail=0;sSkip=0;sMode='psycho';
-  showScreen('psycho');renderDots();renderPsycho();
+function selMatch(card){
+  if(card.classList.contains('matched'))return;
+  if(!matchSel){
+    // Deselect same column if already selected
+    const sameCol=card.dataset.type==='eng'?
+      document.getElementById('match-col-eng'):
+      document.getElementById('match-col-heb');
+    sameCol.querySelectorAll('.selected').forEach(b=>b.classList.remove('selected'));
+    card.classList.add('selected');
+    matchSel=card;
+    return;
+  }
+  if(matchSel===card){card.classList.remove('selected');matchSel=null;return;}
+  // Must be different types to match
+  if(matchSel.dataset.type===card.dataset.type){
+    // Same column — switch selection
+    matchSel.classList.remove('selected');
+    card.classList.add('selected');
+    matchSel=card;
+    return;
+  }
+  const prev=matchSel;
+  const ok=prev.dataset.pair===card.dataset.id&&card.dataset.pair===prev.dataset.id;
+  prev.classList.remove('selected');matchSel=null;
+  if(ok){prev.classList.add('matched');card.classList.add('matched');matchPairs--;document.getElementById('mpairs').textContent=matchPairs;playTone('match');if(matchPairs===0){playTone('complete');setTimeout(()=>alert('מעולה! 🎉'),200);}}
+  else{prev.classList.add('wrong-s');card.classList.add('wrong-s');playTone('wrong');setTimeout(()=>{prev.classList.remove('wrong-s');card.classList.remove('wrong-s');},500);}
 }
-function renderDots(){const d=document.getElementById('psych-dots');d.innerHTML='';psychoQ.forEach((_,i)=>{const dot=document.createElement('div');dot.className='psych-dot'+(i===psychoI?' current':'');dot.id='dot-'+i;d.appendChild(dot);});}
-function updateDots(){psychoQ.forEach((_,i)=>{const dot=document.getElementById('dot-'+i);if(!dot)return;dot.className='psych-dot';if(i===psychoI)dot.classList.add('current');const ans=psychoAnswers[i];if(ans===true)dot.classList.add('answered');else if(ans===false)dot.classList.add('wrong-dot');});}
-function renderPsycho(){
-  clearInterval(psychoTimer);psychoAnswered=false;
-  const q=psychoQ[psychoI];
-  document.getElementById('psych-qnum').textContent='שאלה '+(psychoI+1)+' מתוך '+psychoQ.length;
-  document.getElementById('psych-sent').innerHTML=q.sentence.replace('_____','<span class="blank">_______</span>');
-  const opts=shuf([q.word,...q.distractors]);
-  const c=document.getElementById('psych-opts');c.innerHTML='';
-  const letters=['א','ב','ג','ד'];
-  opts.forEach((opt,i)=>{const b=document.createElement('div');b.className='psych-opt';b.innerHTML=`<div class="opt-letter">${letters[i]}</div><div>${opt}</div>`;b.onclick=()=>answerPsycho(b,opt,q);c.appendChild(b);});
-  document.getElementById('psych-explain').className='psych-explain';
-  document.getElementById('psych-explain').innerHTML='';
-  document.getElementById('psych-next').style.display='none';
-  document.getElementById('psych-skip').style.display='';
-  psychoTime=90;const tc=document.getElementById('timer-circle');tc.textContent=90;tc.className='timer-circle';
-  psychoTimer=setInterval(()=>{psychoTime--;tc.textContent=psychoTime;if(psychoTime<=15)tc.className='timer-circle warn';if(psychoTime<=0){clearInterval(psychoTimer);autoSkip(q);}},1000);
-  updateDots();
+
+// ========== CONVO MODE ==========
+function startConvo(){convoI=0;showScreen('convo');renderConvo();}
+
+function renderConvo(){
+  const c=CONVOS[convoI%CONVOS.length];
+  document.getElementById('convo-title').textContent='💬 '+c.title;
+  document.getElementById('convo-sub').textContent=c.sub+' — לחץ על מילה מסומנת ללמוד אותה';
+  document.getElementById('convo-word-info').style.display='none';
+  const wrap=document.getElementById('convo-bubbles');wrap.innerHTML='';
+  c.bubbles.forEach((b,i)=>{
+    const div=document.createElement('div');div.className='convo-bubble '+b.lang;
+    // Highlight clickable words
+    let text=b.text.replace(/<w>(.*?)<\/w>/g,(m,word)=>
+      `<span class="convo-word" onclick="showConvoWord('${word}')">${word}</span>`);
+    if(b.lang==='en'){
+      // Extract plain text for speaking (strip HTML tags)
+      const plainText=b.text.replace(/<w>(.*?)<\/w>/g,'$1');
+      div.innerHTML=`<div style="display:flex;align-items:flex-end;gap:6px;flex-direction:row-reverse">
+        <div class="bubble-text">${text}</div>
+        <button onclick="speakText('${plainText.replace(/'/g,"\\'")}',this)" 
+          style="font-size:16px;background:rgba(255,255,255,.25);border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;flex-shrink:0;margin-bottom:2px;display:flex;align-items:center;justify-content:center"
+          title="שמע">🔊</button>
+      </div>`;
+    } else {
+      div.innerHTML=`<div class="bubble-text">${text}</div>`;
+    }
+    wrap.appendChild(div);
+  });
 }
-function answerPsycho(btn,chosen,q){
-  if(psychoAnswered)return;psychoAnswered=true;clearInterval(psychoTimer);
-  document.querySelectorAll('.psych-opt').forEach(b=>b.classList.add('locked'));
-  const wordObj=WORDS.find(w=>w.e===q.word)||{e:q.word,h:'',t:''};
-  if(chosen===q.word){btn.classList.add('correct');sPass++;psychoAnswers[psychoI]=true;ss(q.word,'mastered');playTone('correct');}
-  else{btn.classList.add('wrong');document.querySelectorAll('.psych-opt').forEach(b=>{if(b.querySelector('div:last-child').textContent===q.word)b.classList.add('correct');});sFail++;psychoAnswers[psychoI]=false;ss(q.word,'failed');playTone('wrong');}
-  const exp=document.getElementById('psych-explain');
-  exp.innerHTML=`<strong>המילה הנכונה:</strong> ${q.word} = ${wordObj.h}<br><strong>טריק:</strong> ${wordObj.t}`;
-  exp.className='psych-explain show';
-  document.getElementById('psych-next').style.display='block';
-  document.getElementById('psych-skip').style.display='none';
-  updateDots();
+
+function showConvoWord(word){
+  const w=WORDS.find(x=>x.e.toLowerCase()===word.toLowerCase());
+  if(!w)return;
+  currentConvoWord=w;
+  document.getElementById('cw-eng').textContent=w.e+' ('+w.p+')';
+  document.getElementById('cw-heb').textContent=w.h;
+  document.getElementById('cw-ex').textContent='"'+w.ex+'"';
+  document.getElementById('convo-word-info').style.display='block';
+  playTone('flip');
+  // Auto-speak the word
+  setTimeout(()=>speakText(w.e), 200);
 }
-function autoSkip(q){
-  if(psychoAnswered)return;psychoAnswered=true;sSkip++;psychoAnswers[psychoI]=null;
-  document.querySelectorAll('.psych-opt').forEach(b=>{b.classList.add('locked');if(b.querySelector('div:last-child').textContent===q.word)b.classList.add('correct');});
-  const wordObj=WORDS.find(w=>w.e===q.word)||{e:q.word,h:'',t:''};
-  const exp=document.getElementById('psych-explain');
-  exp.innerHTML=`<strong>הזמן נגמר!</strong> ${q.word} = ${wordObj.h}`;
-  exp.className='psych-explain show';
-  document.getElementById('psych-next').style.display='block';document.getElementById('psych-skip').style.display='none';updateDots();
+
+function speakAllConvo(btn){
+  const c=CONVOS[convoI%CONVOS.length];
+  // Collect all English lines
+  const lines=c.bubbles
+    .filter(b=>b.lang==='en')
+    .map(b=>b.text.replace(/<w>(.*?)<\/w>/g,'$1'));
+  if(!lines.length) return;
+  btn.classList.add('speaking');
+  btn.innerHTML='🔊 מדבר...';
+  let idx=0;
+  function speakNext(){
+    if(idx>=lines.length){
+      btn.classList.remove('speaking');btn.innerHTML='🔊 השמע את השיחה';return;
+    }
+    const utter=new SpeechSynthesisUtterance(lines[idx]);
+    utter.lang='en-US';utter.rate=0.8;utter.pitch=1;utter.volume=1;
+    const voice=getEnglishVoice();if(voice)utter.voice=voice;
+    utter.onend=()=>{idx++;setTimeout(speakNext,400);};
+    utter.onerror=()=>{idx++;setTimeout(speakNext,400);};
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utter);
+  }
+  speakNext();
 }
-function skipPsycho(){
-  if(psychoAnswered)return;clearInterval(psychoTimer);psychoAnswered=true;sSkip++;
-  playTone('skip');
-  const q=psychoQ[psychoI];psychoAnswers[psychoI]=null;
-  document.querySelectorAll('.psych-opt').forEach(b=>{b.classList.add('locked');if(b.querySelector('div:last-child').textContent===q.word)b.classList.add('correct');});
-  const wordObj=WORDS.find(w=>w.e===q.word)||{e:q.word,h:'',t:''};
-  const exp=document.getElementById('psych-explain');
-  exp.innerHTML=`<strong>דילגת.</strong> ${q.word} = ${wordObj.h}`;
-  exp.className='psych-explain show';
-  document.getElementById('psych-next').style.display='block';document.getElementById('psych-skip').style.display='none';updateDots();
+
+function learnConvoWord(knew){
+  if(currentConvoWord){if(knew){ss(currentConvoWord.e,'mastered');playTone('correct');}closeConvoWord();}
 }
-function nextPsycho(){psychoI++;if(psychoI>=psychoQ.length)showResults('psycho');else renderPsycho();}
+function closeConvoWord(){document.getElementById('convo-word-info').style.display='none';currentConvoWord=null;}
+function nextConvo(){window.speechSynthesis.cancel();convoI++;renderConvo();}
 
 // ========== RESULTS ==========
 function showResults(mode){
-  clearInterval(psychoTimer);
-  addSession(mode,sPass,sFail,sSkip);
-  playTone('complete');
-  showScreen('results');
-  const tot=sPass+sFail+sSkip;
-  const pct=tot?Math.round(sPass/tot*100):0;
+  addSession(mode,sPass,sFail);playTone('complete');showScreen('results');
+  const tot=sPass+sFail,pct=tot?Math.round(sPass/tot*100):0;
   document.getElementById('res-pct').textContent=pct+'%';
   document.getElementById('res-pass').textContent=sPass+' נכון';
   document.getElementById('res-fail').textContent=sFail+' שגוי';
-  const skipEl=document.getElementById('res-skip');
-  if(sSkip>0){skipEl.textContent=sSkip+' דילוגים';skipEl.style.display='';}else skipEl.style.display='none';
-
-  const rev=document.getElementById('res-review');
-  const ft=document.getElementById('res-ftitle');
+  const rev=document.getElementById('res-review'),ft=document.getElementById('res-ftitle');
   rev.innerHTML='';
-
-  // Show failed words always
   const failedWords=WORDS.filter(w=>gs(w.e)==='failed');
-
-  if(mode==='psycho'){
-    ft.textContent='סקירת שאלות:';
-    psychoQ.forEach((q,i)=>{
-      const ans=psychoAnswers[i];
-      const wordObj=WORDS.find(w=>w.e===q.word)||{e:q.word,h:'',t:''};
-      const item=document.createElement('div');
-      item.className='review-item '+(ans===true?'rev-correct':ans===false?'rev-wrong':'');
-      item.innerHTML=`<div class="review-sentence">${ans===true?'✓':ans===false?'✗':'—'} ${q.sentence.replace('_____',q.word)}</div><div class="review-ans">${ans===true?'<span class="ca">נכון</span>':ans===false?`<span class="wa">שגוי</span> — <span class="ca">${q.word}</span>`:'<span>דולג</span>'} · ${wordObj.h}</div>`;
-      rev.appendChild(item);
-    });
-  } else if(failedWords.length){
+  if(failedWords.length){
     ft.textContent='מילים לתרגול נוסף ('+failedWords.length+'):';
     failedWords.forEach(w=>{
       const note=S.ws[w.e+'_note']||'';
-      const d=document.createElement('div');d.className='wi failed';
-      d.style.flexDirection='column';d.style.alignItems='stretch';
+      const d=document.createElement('div');d.className='wi failed';d.style.flexDirection='column';d.style.alignItems='stretch';
       d.innerHTML=`<div style="display:flex;align-items:center;gap:8px">
-        <div class="wdot"></div>
-        <div class="weng">${w.e}</div><div class="wheb">${w.h}</div>
-        <div class="self-mark-btns" style="margin-right:auto"><button class="sm-btn sm-ok" onclick="quickMark('${w.e}','mastered',event)">✓</button></div>
+        <div class="wdot"></div><div class="weng">${w.e}</div><div class="wheb">${w.h}</div>
+        <div class="sm-btns" style="margin-right:auto"><button class="sm-btn sm-ok" onclick="quickMark('${w.e}','mastered',event)">✓</button></div>
       </div>
-      ${note?`<div style="font-size:11px;color:#1A5C9A;margin-top:4px;padding-right:15px">📝 ${note}</div>`:''}
-      <div style="margin-top:6px;padding-right:15px">
-        <textarea id="note-res-${w.e}" class="note-textarea" rows="1" placeholder="הוסיפי הערה..." style="font-size:12px">${note}</textarea>
-        <button class="note-save" onclick="saveNoteFromResult('${w.e}')">שמור הערה</button>
-        <span id="note-res-saved-${w.e}" class="note-saved">✓ נשמר</span>
+      <div style="font-size:12px;color:#888;font-style:italic;padding-right:16px">"${w.ex}"</div>
+      ${note?`<div style="font-size:11px;color:#1565C0;padding-right:16px">📝 ${note}</div>`:''}
+      <div style="margin-top:6px;padding-right:16px">
+        <textarea id="note-res-${w.e.replace(/ /g,'_')}" class="note-textarea" rows="1" placeholder="הוסף הערה..." style="font-size:12px">${note}</textarea>
+        <button class="note-save" onclick="saveNoteFromResult('${w.e}','${w.e.replace(/ /g,'_')}')">שמור</button>
+        <span id="note-res-saved-${w.e.replace(/ /g,'_')}" class="note-saved">✓ נשמר</span>
       </div>`;
       rev.appendChild(d);
     });
+    document.getElementById('btn-retry').style.display='';
   } else {
-    ft.textContent='כל הכבוד — שלטת בכל המילים! 🎉';
+    ft.textContent='כל הכבוד! למדת את כל המילים! 🎉';
+    document.getElementById('btn-retry').style.display='none';
   }
-
-  document.getElementById('btn-retry').style.display=failedWords.length>0?'':'none';
-  document.getElementById('btn-retry-psycho').style.display=mode==='psycho'?'':'none';
-  const msgs=[[90,'מצוין! כמעט מושלם! 🏆'],[75,'כל הכבוד! 💪'],[60,'טוב! עוד קצת תרגול 📚'],[0,'המשך להתאמן! 💡']];
+  const msgs=[[90,'מצוין! 🏆'],[75,'כל הכבוד! 👏'],[60,'טוב מאוד! 📚'],[0,'המשך להתאמן! 💪']];
   document.getElementById('res-title').textContent=msgs.find(([t])=>pct>=t)[1];
 }
 
-// ========== AUDIO ENGINE ==========
-let audioCtx=null;
-let soundOn=true;
-
-function getAudioCtx(){
-  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  if(audioCtx.state==='suspended') audioCtx.resume();
-  return audioCtx;
+function saveNoteFromResult(eng,safeId){
+  const val=document.getElementById('note-res-'+safeId).value.trim();
+  if(val) S.ws[eng+'_note']=val; else delete S.ws[eng+'_note'];
+  saveS();playTone('save');
+  const msg=document.getElementById('note-res-saved-'+safeId);
+  msg.style.display='inline';setTimeout(()=>msg.style.display='none',1500);
 }
 
-function toggleSound(){
-  soundOn=!soundOn;
-  document.getElementById('sound-btn').textContent=soundOn?'🔊':'🔇';
-  if(soundOn) playTone('flip');
+// ========== FILL IN THE BLANK — word choices ==========
+let fillQ=[],fillI=0,fillPass=0,fillFail=0,fillAnswered=false,fillCorrect='';
+
+function startFill(){
+  let pool=currentCat!=='הכל'?WORDS.filter(w=>w.cat===currentCat):[...WORDS];
+  fillQ=shuf(pool).slice(0,15);
+  fillI=0;fillPass=0;fillFail=0;sMode='fill';
+  showScreen('fill');renderFill();
 }
 
-function playTone(type){
-  if(!soundOn) return;
+function renderFill(){
+  fillAnswered=false;
+  const w=fillQ[fillI],tot=fillQ.length;
+  fillCorrect=w.e;
+
+  document.getElementById('fill-p').style.width=(fillI/tot*100)+'%';
+  document.getElementById('fill-ctr').textContent=(fillI+1)+' / '+tot;
+  document.getElementById('fill-score-wrap').textContent=fillPass+' ✓  '+fillFail+' ✗';
+
+  // Sentence with blank
+  const sentence=w.ex.replace(new RegExp('\\b'+w.e+'\\b','i'),'________');
+  document.getElementById('fill-sentence-box').innerHTML=
+    `<span style="color:#555;font-size:15px">${sentence}</span>`;
+
+  // Speak button
+  const spk=document.getElementById('fill-speak-btn');
+  spk.innerHTML='🔊 שמע הגייה';
+  spk.classList.remove('speaking');
+  spk.onclick=()=>speakText(w.e,spk);
+
+  // 4 word options
+  const opts=[w];
+  shuf(WORDS.filter(x=>x.e!==w.e)).slice(0,3).forEach(x=>opts.push(x));
+  shuf(opts);
+  const c=document.getElementById('fill-opts');c.innerHTML='';
+  opts.forEach(opt=>{
+    const b=document.createElement('button');
+    b.className='fill-opt-btn';
+    b.innerHTML=`<span class="fob-eng">${opt.e}</span><span class="fob-heb">${opt.h}</span>`;
+    b.onclick=()=>answerFill(b,opt.e,w);
+    c.appendChild(b);
+  });
+
+  document.getElementById('fill-feedback').style.display='none';
+  document.getElementById('fill-next-btn').style.display='none';
+  document.getElementById('fill-skip-btn').style.display='block';
+
+  // Auto-speak
+  setTimeout(()=>speakText(w.e),400);
+}
+
+function answerFill(btn,chosen,w){
+  if(fillAnswered)return;
+  fillAnswered=true;
+  document.querySelectorAll('.fill-opt-btn').forEach(b=>b.disabled=true);
+  const isCorrect=chosen===w.e;
+  const fb=document.getElementById('fill-feedback');
+
+  // Highlight chosen
+  btn.classList.add(isCorrect?'fob-correct':'fob-wrong');
+  // Always show correct answer
+  if(!isCorrect){
+    document.querySelectorAll('.fill-opt-btn').forEach(b=>{
+      if(b.querySelector('.fob-eng').textContent===w.e) b.classList.add('fob-correct');
+    });
+  }
+
+  // Show completed sentence
+  document.getElementById('fill-sentence-box').innerHTML=
+    `<span style="font-size:15px">${w.ex.replace(new RegExp('\\b'+w.e+'\\b','i'),
+      `<strong style="color:#2E7D4F">${w.e}</strong>`)}</span>`;
+
+  if(isCorrect){
+    fillPass++;ss(w.e,'mastered');playTone('correct');
+    fb.style.cssText='display:block;background:#F0F7F3;border:1px solid #2E7D4F;border-radius:10px;padding:.6rem;text-align:center;color:#2E7D4F;font-weight:700';
+    fb.textContent='✓ נכון מאוד!';
+  } else {
+    fillFail++;ss(w.e,'failed');playTone('wrong');
+    fb.style.cssText='display:block;background:#FDF2F2;border:1px solid #C94040;border-radius:10px;padding:.6rem;text-align:center;color:#C94040;font-weight:700';
+    fb.textContent='✗ לא נכון. התשובה: '+w.e+' = '+w.h;
+  }
+
+  document.getElementById('fill-score-wrap').textContent=fillPass+' ✓  '+fillFail+' ✗';
+  document.getElementById('fill-next-btn').style.display='block';
+  document.getElementById('fill-skip-btn').style.display='none';
+  speakText(w.e);
+}
+
+function skipFill(){
+  if(fillAnswered)return;
+  const w=fillQ[fillI];
+  fillFail++;ss(w.e,'failed');fillAnswered=true;
+  document.querySelectorAll('.fill-opt-btn').forEach(b=>{
+    b.disabled=true;
+    if(b.querySelector('.fob-eng').textContent===w.e) b.classList.add('fob-correct');
+  });
+  document.getElementById('fill-sentence-box').innerHTML=
+    `<span style="font-size:15px">${w.ex.replace(new RegExp('\\b'+w.e+'\\b','i'),
+      `<strong style="color:#2E7D4F">${w.e}</strong>`)}</span>`;
+  const fb=document.getElementById('fill-feedback');
+  fb.style.cssText='display:block;background:#FFF8E1;border:1px solid #F9A825;border-radius:10px;padding:.6rem;text-align:center;';
+  fb.innerHTML=`דילגת. התשובה: <strong style="color:#2E7D4F">${w.e}</strong> = ${w.h}`;
+  document.getElementById('fill-next-btn').style.display='block';
+  document.getElementById('fill-skip-btn').style.display='none';
+}
+
+function nextFill(){
+  fillI++;
+  if(fillI>=fillQ.length)showResults('fill');else renderFill();
+}
+
+// ========== CAMERA & TRANSLATION ==========
+let camStream=null;
+
+function triggerCamera(){
+  document.getElementById('cam-file').click();
+}
+
+function translateTyped(){
+  const text=document.getElementById('cam-text-input').value.trim();
+  if(!text){alert('הקלד טקסט לתרגום');return;}
+  document.getElementById('cam-result').style.display='none';
+  document.getElementById('cam-loading').style.display='block';
+  translateText(text);
+}
+
+async function translateText(text){
   try{
-    const ctx=getAudioCtx();
-    const now=ctx.currentTime;
-    const osc=ctx.createOscillator();
-    const gain=ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-
-    if(type==='correct'){
-      // עולה בשני צלילים — ניצחון
-      osc.type='sine';
-      osc.frequency.setValueAtTime(440,now);
-      osc.frequency.setValueAtTime(660,now+0.12);
-      gain.gain.setValueAtTime(0,now);
-      gain.gain.linearRampToValueAtTime(0.25,now+0.02);
-      gain.gain.setValueAtTime(0.25,now+0.18);
-      gain.gain.linearRampToValueAtTime(0,now+0.35);
-      osc.start(now);osc.stop(now+0.35);
-
-    } else if(type==='wrong'){
-      // יורד — שגיאה
-      osc.type='sawtooth';
-      osc.frequency.setValueAtTime(320,now);
-      osc.frequency.linearRampToValueAtTime(180,now+0.25);
-      gain.gain.setValueAtTime(0,now);
-      gain.gain.linearRampToValueAtTime(0.18,now+0.02);
-      gain.gain.linearRampToValueAtTime(0,now+0.28);
-      osc.start(now);osc.stop(now+0.28);
-
-    } else if(type==='flip'){
-      // קליק עדין — הפיכת כרטיסייה
-      osc.type='sine';
-      osc.frequency.setValueAtTime(800,now);
-      osc.frequency.linearRampToValueAtTime(600,now+0.08);
-      gain.gain.setValueAtTime(0,now);
-      gain.gain.linearRampToValueAtTime(0.1,now+0.01);
-      gain.gain.linearRampToValueAtTime(0,now+0.1);
-      osc.start(now);osc.stop(now+0.1);
-
-    } else if(type==='complete'){
-      // סיום סשן — מנצח!
-      const notes=[523,659,784,1047];
-      notes.forEach((freq,i)=>{
-        const o=ctx.createOscillator();
-        const g=ctx.createGain();
-        o.connect(g);g.connect(ctx.destination);
-        o.type='sine';
-        const t=now+i*0.13;
-        o.frequency.setValueAtTime(freq,t);
-        g.gain.setValueAtTime(0,t);
-        g.gain.linearRampToValueAtTime(0.2,t+0.02);
-        g.gain.linearRampToValueAtTime(0,t+0.18);
-        o.start(t);o.stop(t+0.2);
-      });
-
-    } else if(type==='match'){
-      // שידוך נכון — פינג נעים
-      osc.type='sine';
-      osc.frequency.setValueAtTime(523,now);
-      osc.frequency.setValueAtTime(784,now+0.08);
-      gain.gain.setValueAtTime(0,now);
-      gain.gain.linearRampToValueAtTime(0.2,now+0.02);
-      gain.gain.setValueAtTime(0.2,now+0.1);
-      gain.gain.linearRampToValueAtTime(0,now+0.22);
-      osc.start(now);osc.stop(now+0.22);
-
-    } else if(type==='skip'){
-      // דילוג — טיק
-      osc.type='square';
-      osc.frequency.setValueAtTime(200,now);
-      gain.gain.setValueAtTime(0,now);
-      gain.gain.linearRampToValueAtTime(0.07,now+0.01);
-      gain.gain.linearRampToValueAtTime(0,now+0.07);
-      osc.start(now);osc.stop(now+0.07);
-
-    } else if(type==='save'){
-      // שמירת הערה — טון קצר נעים
-      osc.type='sine';
-      osc.frequency.setValueAtTime(660,now);
-      gain.gain.setValueAtTime(0,now);
-      gain.gain.linearRampToValueAtTime(0.12,now+0.01);
-      gain.gain.linearRampToValueAtTime(0,now+0.12);
-      osc.start(now);osc.stop(now+0.12);
-    }
-  }catch(e){}
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:800,
+        system:`You are a Hebrew translator. The user will give you English text.
+Respond ONLY in this exact JSON (no markdown):
+{"translation":"תרגום לעברית","words":[{"eng":"word","heb":"מילה"}]}
+Keep words list to max 6 most useful/interesting words.`,
+        messages:[{role:'user',content:'Translate this to Hebrew: '+text}]
+      })
+    });
+    const data=await resp.json();
+    document.getElementById('cam-loading').style.display='none';
+    const raw=data.content?.[0]?.text||'{}';
+    let result;
+    try{result=JSON.parse(raw.replace(/```json|```/g,'').trim());}
+    catch(e){result={translation:'שגיאה בתרגום',words:[]};}
+    document.getElementById('cam-extracted').textContent=text;
+    document.getElementById('cam-translation').textContent=result.translation||'—';
+    renderCamWords(result.words||[]);
+    document.getElementById('cam-result').style.display='block';
+  }catch(err){
+    document.getElementById('cam-loading').style.display='none';
+    document.getElementById('cam-extracted').textContent=text;
+    document.getElementById('cam-translation').textContent='שגיאה: '+err.message;
+    document.getElementById('cam-result').style.display='block';
+  }
 }
 
-function saveNoteFromResult(eng){
-  const val=document.getElementById('note-res-'+eng).value.trim();
-  if(val) S.ws[eng+'_note']=val;
-  else delete S.ws[eng+'_note'];
+function renderCamWords(words){
+  const wordSec=document.getElementById('cam-word-section');
+  const wordList=document.getElementById('cam-word-list');
+  wordList.innerHTML='';
+  if(words&&words.length>0){
+    wordSec.style.display='block';
+    words.forEach(w=>{
+      const known=WORDS.find(x=>x.e.toLowerCase()===w.eng.toLowerCase());
+      const d=document.createElement('div');d.className='cam-word';
+      d.innerHTML=`<div class="cam-word-eng">${w.eng}</div>
+        <div class="cam-word-heb">${w.heb}</div>
+        <button class="cam-speak" onclick="speakText('${w.eng.replace(/'/g,"\\'")}',this)">🔊</button>
+        ${known?`<span style="font-size:11px;color:#2E7D4F">✓ במאגר</span>`
+               :`<button class="cam-save" onclick="saveScannedWord('${w.eng.replace(/'/g,"\\'")}','${w.heb.replace(/'/g,"\\'")}',this)">+ שמור</button>`}`;
+      wordList.appendChild(d);
+    });
+  }else{wordSec.style.display='none';}
+}
+
+function openCamera(){
+  showScreen('camera');
+  document.getElementById('cam-result').style.display='none';
+  document.getElementById('cam-loading').style.display='none';
+  document.getElementById('cam-text-input').value='';
+}
+
+// old startCamera / stopCamera kept for goHome reference
+function startCamera(){}
+function stopCamera(){}
+
+function snapPhoto(){
+  const video=document.getElementById('cam-video');
+  const canvas=document.getElementById('cam-canvas');
+  canvas.width=video.videoWidth||640;
+  canvas.height=video.videoHeight||480;
+  canvas.getContext('2d').drawImage(video,0,0);
+  const dataUrl=canvas.toDataURL('image/jpeg',0.85);
+  processImage(dataUrl);
+}
+
+function handleFileUpload(e){
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>processImage(ev.target.result);
+  reader.readAsDataURL(file);
+}
+
+async function processImage(dataUrl){
+  document.getElementById('cam-result').style.display='none';
+  document.getElementById('cam-loading').style.display='block';
+  const base64=dataUrl.split(',')[1];
+  const mediaType=dataUrl.startsWith('data:image/png')?'image/png':'image/jpeg';
+
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:`You are a helpful translator. The user will send you an image.
+Your tasks:
+1. Extract ALL English text visible in the image.
+2. Translate every piece of text to Hebrew.
+3. List any individual English words (not common Hebrew words) that could be useful to learn.
+
+Respond ONLY in this exact JSON format (no markdown, no extra text):
+{
+  "extracted": "the english text you found",
+  "translation": "התרגום לעברית של כל הטקסט",
+  "words": [
+    {"eng": "word", "heb": "מילה"},
+    {"eng": "another", "heb": "עוד"}
+  ]
+}
+If no English text found, set extracted to "לא נמצא טקסט אנגלי בתמונה", translation to empty, words to [].`,
+        messages:[{
+          role:'user',
+          content:[
+            {type:'image',source:{type:'base64',media_type:mediaType,data:base64}},
+            {type:'text',text:'Please extract and translate all English text in this image.'}
+          ]
+        }]
+      })
+    });
+
+    const data=await resp.json();
+    document.getElementById('cam-loading').style.display='none';
+
+    const raw=data.content?.[0]?.text||'{}';
+    let result;
+    try{result=JSON.parse(raw.replace(/```json|```/g,'').trim());}
+    catch(e){result={extracted:'לא הצלחתי לקרוא את התמונה',translation:'',words:[]};}
+
+    document.getElementById('cam-extracted').textContent=result.extracted||'—';
+    document.getElementById('cam-translation').textContent=result.translation||'—';
+    renderCamWords(result.words||[]);
+    document.getElementById('cam-result').style.display='block';
+
+  }catch(err){
+    document.getElementById('cam-loading').style.display='none';
+    document.getElementById('cam-extracted').textContent='שגיאה בעיבוד התמונה: '+err.message;
+    document.getElementById('cam-translation').textContent='';
+    document.getElementById('cam-result').style.display='block';
+  }
+}
+
+function saveScannedWord(eng,heb,btn){
+  // Mark as a word we know and add note
+  ss(eng,'new');
+  // Add to scanned list in storage
+  if(!S.scanned) S.scanned=[];
+  if(!S.scanned.find(w=>w.e===eng)){
+    S.scanned.push({e:eng,h:heb,p:'',ex:'',t:'נסרק מתמונה',cat:'📷 נסרק'});
+  }
   saveS();
-  const msg=document.getElementById('note-res-saved-'+eng);
-  msg.style.display='inline';
-  setTimeout(()=>{msg.style.display='none';},1500);
+  btn.textContent='✓ נשמר';
+  btn.style.background='#F0F7F3';
+  btn.style.color='#2E7D4F';
+  btn.disabled=true;
+}
+
+function startCamera(){
+  showScreen('camera');
+  document.getElementById('cam-result').style.display='none';
+  document.getElementById('cam-loading').style.display='none';
+  document.getElementById('cam-snap-btn').disabled=true;
+  document.getElementById('cam-start-btn').disabled=false;
+  document.getElementById('cam-start-btn').textContent='🎥 הפעל מצלמה';
+  const video=document.getElementById('cam-video');
+  video.style.display='none';
+  document.getElementById('cam-placeholder').style.display='block';
 }
 
 function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
