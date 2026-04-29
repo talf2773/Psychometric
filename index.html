@@ -493,13 +493,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <!-- המשפט עם החסר -->
   <div id="fill-sentence-box" style="background:#f9f9f9;border:1px solid #e0e0e0;border-radius:12px;padding:1.1rem 1.25rem;font-size:17px;line-height:2;text-align:center;margin-bottom:.6rem;direction:ltr;min-height:70px"></div>
 
-  <!-- הגייה בלבד -->
-  <div style="text-align:center;margin-bottom:.75rem">
-    <button id="fill-speak-btn" onclick="speakText(fillCorrect,this)" class="speak-btn" style="margin:0 auto">🔊 שמע הגייה</button>
-  </div>
-
-  <!-- 4 אפשרויות מילים -->
+  <!-- 4 אפשרויות מילים — רק אנגלית, ללא עברית -->
   <div id="fill-opts" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem"></div>
+
+  <!-- הגייה — רק אחרי תשובה -->
+  <div id="fill-speak-wrap" style="display:none;text-align:center;margin-bottom:.75rem">
+    <button id="fill-speak-btn" class="speak-btn" style="margin:0 auto">🔊 שמע את המשפט</button>
+  </div>
 
   <!-- משוב -->
   <div id="fill-feedback" style="display:none;border-radius:10px;padding:.75rem 1rem;margin-bottom:.75rem;text-align:center"></div>
@@ -1619,8 +1619,22 @@ function selMatch(card){
   const prev=matchSel;
   const ok=prev.dataset.pair===card.dataset.id&&card.dataset.pair===prev.dataset.id;
   prev.classList.remove('selected');matchSel=null;
-  if(ok){prev.classList.add('matched');card.classList.add('matched');matchPairs--;document.getElementById('mpairs').textContent=matchPairs;playTone('match');if(matchPairs===0){playTone('complete');setTimeout(()=>alert('מעולה! 🎉'),200);}}
-  else{prev.classList.add('wrong-s');card.classList.add('wrong-s');playTone('wrong');setTimeout(()=>{prev.classList.remove('wrong-s');card.classList.remove('wrong-s');},500);}
+  if(ok){
+    prev.classList.add('matched');card.classList.add('matched');
+    matchPairs--;document.getElementById('mpairs').textContent=matchPairs;
+    // Mark as mastered — find the English word
+    const engId=prev.dataset.type==='eng'?prev.dataset.id:card.dataset.id;
+    ss(engId,'mastered');
+    playTone('match');
+    if(matchPairs===0){playTone('complete');setTimeout(()=>alert('מעולה! 🎉'),200);}
+  } else {
+    // Mark as failed — find the English word
+    const engId=prev.dataset.type==='eng'?prev.dataset.id:card.dataset.id;
+    ss(engId,'failed');
+    prev.classList.add('wrong-s');card.classList.add('wrong-s');
+    playTone('wrong');
+    setTimeout(()=>{prev.classList.remove('wrong-s');card.classList.remove('wrong-s');},500);
+  }
 }
 
 // ========== CONVO MODE ==========
@@ -1761,18 +1775,15 @@ function renderFill(){
   document.getElementById('fill-ctr').textContent=(fillI+1)+' / '+tot;
   document.getElementById('fill-score-wrap').textContent=fillPass+' ✓  '+fillFail+' ✗';
 
-  // Sentence with blank
+  // Sentence with blank — NO word shown
   const sentence=w.ex.replace(new RegExp('\\b'+w.e+'\\b','i'),'________');
   document.getElementById('fill-sentence-box').innerHTML=
-    `<span style="color:#555;font-size:15px">${sentence}</span>`;
+    `<span style="color:#1a1a1a;font-size:15px">${sentence}</span>`;
 
-  // Speak button
-  const spk=document.getElementById('fill-speak-btn');
-  spk.innerHTML='🔊 שמע הגייה';
-  spk.classList.remove('speaking');
-  spk.onclick=()=>speakText(w.e,spk);
+  // Hide speak until after answer
+  document.getElementById('fill-speak-wrap').style.display='none';
 
-  // 4 word options
+  // 4 word options — English ONLY, no Hebrew hint
   const opts=[w];
   shuf(WORDS.filter(x=>x.e!==w.e)).slice(0,3).forEach(x=>opts.push(x));
   shuf(opts);
@@ -1780,7 +1791,8 @@ function renderFill(){
   opts.forEach(opt=>{
     const b=document.createElement('button');
     b.className='fill-opt-btn';
-    b.innerHTML=`<span class="fob-eng">${opt.e}</span><span class="fob-heb">${opt.h}</span>`;
+    b.textContent=opt.e;
+    b.style.fontSize='16px';b.style.fontWeight='700';
     b.onclick=()=>answerFill(b,opt.e,w);
     c.appendChild(b);
   });
@@ -1788,9 +1800,6 @@ function renderFill(){
   document.getElementById('fill-feedback').style.display='none';
   document.getElementById('fill-next-btn').style.display='none';
   document.getElementById('fill-skip-btn').style.display='block';
-
-  // Auto-speak
-  setTimeout(()=>speakText(w.e),400);
 }
 
 function answerFill(btn,chosen,w){
@@ -1800,12 +1809,10 @@ function answerFill(btn,chosen,w){
   const isCorrect=chosen===w.e;
   const fb=document.getElementById('fill-feedback');
 
-  // Highlight chosen
   btn.classList.add(isCorrect?'fob-correct':'fob-wrong');
-  // Always show correct answer
   if(!isCorrect){
     document.querySelectorAll('.fill-opt-btn').forEach(b=>{
-      if(b.querySelector('.fob-eng').textContent===w.e) b.classList.add('fob-correct');
+      if(b.textContent===w.e) b.classList.add('fob-correct');
     });
   }
 
@@ -1817,17 +1824,24 @@ function answerFill(btn,chosen,w){
   if(isCorrect){
     fillPass++;ss(w.e,'mastered');playTone('correct');
     fb.style.cssText='display:block;background:#F0F7F3;border:1px solid #2E7D4F;border-radius:10px;padding:.6rem;text-align:center;color:#2E7D4F;font-weight:700';
-    fb.textContent='✓ נכון מאוד!';
+    fb.textContent='✓ נכון מאוד!  '+w.e+' = '+w.h;
   } else {
     fillFail++;ss(w.e,'failed');playTone('wrong');
     fb.style.cssText='display:block;background:#FDF2F2;border:1px solid #C94040;border-radius:10px;padding:.6rem;text-align:center;color:#C94040;font-weight:700';
-    fb.textContent='✗ לא נכון. התשובה: '+w.e+' = '+w.h;
+    fb.textContent='✗ לא נכון.  '+w.e+' = '+w.h;
   }
+
+  // NOW show speak button — for the full sentence
+  const spkWrap=document.getElementById('fill-speak-wrap');
+  const spkBtn=document.getElementById('fill-speak-btn');
+  spkWrap.style.display='block';
+  spkBtn.innerHTML='🔊 שמע את המשפט';
+  spkBtn.classList.remove('speaking');
+  spkBtn.onclick=()=>speakText(w.ex,spkBtn);
 
   document.getElementById('fill-score-wrap').textContent=fillPass+' ✓  '+fillFail+' ✗';
   document.getElementById('fill-next-btn').style.display='block';
   document.getElementById('fill-skip-btn').style.display='none';
-  speakText(w.e);
 }
 
 function skipFill(){
@@ -1836,7 +1850,7 @@ function skipFill(){
   fillFail++;ss(w.e,'failed');fillAnswered=true;
   document.querySelectorAll('.fill-opt-btn').forEach(b=>{
     b.disabled=true;
-    if(b.querySelector('.fob-eng').textContent===w.e) b.classList.add('fob-correct');
+    if(b.textContent===w.e) b.classList.add('fob-correct');
   });
   document.getElementById('fill-sentence-box').innerHTML=
     `<span style="font-size:15px">${w.ex.replace(new RegExp('\\b'+w.e+'\\b','i'),
@@ -1844,6 +1858,13 @@ function skipFill(){
   const fb=document.getElementById('fill-feedback');
   fb.style.cssText='display:block;background:#FFF8E1;border:1px solid #F9A825;border-radius:10px;padding:.6rem;text-align:center;';
   fb.innerHTML=`דילגת. התשובה: <strong style="color:#2E7D4F">${w.e}</strong> = ${w.h}`;
+  // Show speak
+  const spkWrap=document.getElementById('fill-speak-wrap');
+  const spkBtn=document.getElementById('fill-speak-btn');
+  spkWrap.style.display='block';
+  spkBtn.innerHTML='🔊 שמע את המשפט';
+  spkBtn.classList.remove('speaking');
+  spkBtn.onclick=()=>speakText(w.ex,spkBtn);
   document.getElementById('fill-next-btn').style.display='block';
   document.getElementById('fill-skip-btn').style.display='none';
 }
@@ -1872,15 +1893,18 @@ async function translateText(text){
   try{
     const resp=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{
+        'Content-Type':'application/json',
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:800,
-        system:`You are a Hebrew translator. The user will give you English text.
-Respond ONLY in this exact JSON (no markdown):
+        system:`You are a Hebrew translator. Respond ONLY in this exact JSON with no extra text:
 {"translation":"תרגום לעברית","words":[{"eng":"word","heb":"מילה"}]}
-Keep words list to max 6 most useful/interesting words.`,
-        messages:[{role:'user',content:'Translate this to Hebrew: '+text}]
+Keep words list to max 6 most interesting words. No markdown.`,
+        messages:[{role:'user',content:'Translate this English text to Hebrew: '+text}]
       })
     });
     const data=await resp.json();
@@ -1888,9 +1912,9 @@ Keep words list to max 6 most useful/interesting words.`,
     const raw=data.content?.[0]?.text||'{}';
     let result;
     try{result=JSON.parse(raw.replace(/```json|```/g,'').trim());}
-    catch(e){result={translation:'שגיאה בתרגום',words:[]};}
+    catch(e){result={translation:raw,words:[]};}
     document.getElementById('cam-extracted').textContent=text;
-    document.getElementById('cam-translation').textContent=result.translation||'—';
+    document.getElementById('cam-translation').textContent=result.translation||raw;
     renderCamWords(result.words||[]);
     document.getElementById('cam-result').style.display='block';
   }catch(err){
@@ -1958,7 +1982,11 @@ async function processImage(dataUrl){
   try{
     const resp=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{
+        'Content-Type':'application/json',
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:1000,
