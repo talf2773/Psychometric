@@ -357,17 +357,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
     <div class="fc-back">
       <div class="fc-meaning" id="fc-meaning"></div>
       <button class="speak-btn" id="speak-back-btn" onclick="speakWord(event)">🔊 שמע הגייה</button>
-      <div class="fc-example" id="fc-example" style="cursor:pointer" onclick="speakExample(event)" title="לחץ לשמוע את המשפט">
-      </div>
+      <div class="fc-example" id="fc-example" style="cursor:pointer" onclick="speakExample(event)" title="לחץ לשמוע את המשפט"></div>
       <div style="font-size:11px;color:#aaa;text-align:center;margin-bottom:.5rem">לחץ על המשפט לשמוע אותו</div>
       <div class="trick-box"><div class="trick-lbl">💡 טיפ לזכירה</div><div class="trick-txt" id="fc-trick"></div></div>
     </div>
   </div>
-  <div class="ar" id="fc-ar" style="display:none">
-    <button class="btn-fail" onclick="markCard(false)">✗ לא ידעתי</button>
-    <button class="btn-pass" onclick="markCard(true)">✓ ידעתי!</button>
-  </div>
   <button class="btn-flip" id="btn-flip" onclick="flipCard()">🔄 גלה משמעות</button>
+  <!-- ניווט קדימה ואחורה — ללא ידעתי/לא ידעתי -->
+  <div style="display:flex;gap:10px;margin-top:8px" id="fc-nav">
+    <button onclick="prevCard()" style="flex:1;padding:12px;border:1px solid #e0e0e0;background:#f5f5f5;color:#555;border-radius:8px;font-size:15px;cursor:pointer" id="fc-prev-btn">← הקודם</button>
+    <button onclick="nextCard()" style="flex:1;padding:12px;border:1px solid #1565C0;background:#E3F2FD;color:#1565C0;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer">הבא →</button>
+  </div>
   <div id="fc-note-wrap" style="display:none;margin-top:10px">
     <div class="note-box">
       <div class="note-label">📝 הערה אישית</div>
@@ -447,36 +447,45 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 
 <!-- CAMERA / SCAN -->
 <div id="screen-camera" class="screen">
-  <button class="btn-back" onclick="stopCamera();goHome()">← חזרה</button>
+  <button class="btn-back" onclick="goHome()">← חזרה</button>
   <div class="cam-header">
-    <div class="cam-title">📷 תרגומון</div>
-    <div class="cam-sub">צלם או הקלד — וקבל תרגום מיידי לעברית</div>
+    <div class="cam-title">🌍 תרגומון</div>
+    <div class="cam-sub">הקלד טקסט לתרגום לכל כיוון</div>
   </div>
 
-  <!-- כפתור אחד לצילום/גלריה -->
-  <button class="cam-snap-btn" onclick="triggerCamera()">📷 צלם תמונה / בחר מהגלריה</button>
-  <input type="file" id="cam-file" accept="image/*" capture="environment" style="display:none" onchange="handleFileUpload(event)"/>
+  <!-- כיוון תרגום -->
+  <div style="display:flex;align-items:center;background:#f5f5f5;border-radius:12px;padding:5px;margin-bottom:.75rem;gap:4px">
+    <div id="lang-a-label" style="flex:1;text-align:center;font-size:14px;font-weight:700;padding:8px;border-radius:8px;background:#1565C0;color:white">עברית 🇮🇱</div>
+    <button onclick="swapLangs()" style="padding:6px 10px;border:none;background:none;font-size:20px;cursor:pointer">⇄</button>
+    <div id="lang-b-label" style="flex:1;text-align:center;font-size:14px;font-weight:700;padding:8px;border-radius:8px;background:#fff;color:#555">English 🇬🇧</div>
+  </div>
 
-  <!-- הקלדה ידנית -->
-  <div style="margin:.5rem 0;text-align:center;font-size:13px;color:#888">— או הקלד טקסט —</div>
-  <textarea id="cam-text-input" placeholder="הקלד מילים או משפט באנגלית..."
-    style="width:100%;padding:12px;border:1px solid #CE93D8;border-radius:10px;font-size:14px;direction:ltr;text-align:left;resize:none;outline:none;font-family:inherit;min-height:80px;margin-bottom:.5rem"></textarea>
-  <button class="cam-upload-btn" onclick="translateTyped()">🌍 תרגם טקסט</button>
+  <!-- קלט -->
+  <textarea id="cam-text-input" placeholder="הקלד כאן בעברית..."
+    style="width:100%;padding:12px;border:1.5px solid #CE93D8;border-radius:10px;font-size:16px;direction:rtl;text-align:right;resize:none;outline:none;font-family:inherit;height:100px;margin-bottom:.5rem"></textarea>
+  <button onclick="doTranslate()" style="width:100%;padding:13px;background:#6A1B9A;color:white;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:.75rem">🌍 תרגם</button>
 
-  <div class="cam-result" id="cam-result">
-    <div class="cam-result-title">📝 טקסט מקורי:</div>
-    <div class="cam-extracted" id="cam-extracted"></div>
-    <div class="cam-result-title" style="margin-top:.5rem">🇮🇱 תרגום לעברית:</div>
-    <div class="cam-translation" id="cam-translation"></div>
+  <!-- תוצאה -->
+  <div id="cam-result" style="display:none">
+    <div style="background:#fff;border:1.5px solid #2E7D4F;border-radius:12px;padding:1rem;margin-bottom:.75rem;position:relative">
+      <div style="font-size:12px;color:#888;margin-bottom:.4rem" id="trans-result-lang">תרגום לאנגלית:</div>
+      <div id="cam-translation" style="font-size:17px;color:#1a1a1a;line-height:1.6"></div>
+      <button id="cam-speak-trans" onclick="speakTransResult()" style="position:absolute;top:10px;left:10px;font-size:18px;background:none;border:none;cursor:pointer">🔊</button>
+    </div>
     <div id="cam-word-section" style="display:none">
-      <div class="cam-result-title" style="margin-top:.5rem">💾 מילים — שמור ללימוד:</div>
+      <div style="font-size:12px;font-weight:700;color:#444;margin-bottom:.4rem">💾 מילים — שמור ללימוד:</div>
       <div class="cam-word-list" id="cam-word-list"></div>
     </div>
   </div>
 
-  <div class="cam-loading" id="cam-loading" style="display:none">
-    <span class="spinner">⏳</span>
-    מתרגם...
+  <!-- תמונה -->
+  <div style="border-top:1px solid #e0e0e0;padding-top:.75rem;margin-top:.25rem">
+    <button class="cam-upload-btn" onclick="triggerCamera()">📷 צלם / בחר תמונה מהגלריה</button>
+    <input type="file" id="cam-file" accept="image/*" capture="environment" style="display:none" onchange="handleFileUpload(event)"/>
+  </div>
+
+  <div class="cam-loading" id="cam-loading" style="display:none;text-align:center;padding:1rem">
+    <span style="font-size:24px">⏳</span><br>מתרגם...
   </div>
 </div>
 
@@ -1429,32 +1438,34 @@ function renderFlash(){
   document.getElementById('fc-meaning').textContent=w.h;
   document.getElementById('fc-example').textContent='"'+w.ex+'"';
   document.getElementById('fc-trick').textContent=w.t;
-  const card=document.getElementById('flashcard');
-  card.classList.remove('flipped');
-  document.getElementById('btn-flip').style.display='';
-  document.getElementById('fc-ar').style.display='none';
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('btn-flip').style.display='block';
   document.getElementById('fc-note-wrap').style.display='none';
-  // Reset speak buttons
   document.querySelectorAll('.speak-btn').forEach(b=>{b.classList.remove('speaking');b.innerHTML='🔊 שמע הגייה';});
   document.getElementById('speak-front-btn').style.display='inline-flex';
+  // Prev button disabled on first card
+  const prevBtn=document.getElementById('fc-prev-btn');
+  prevBtn.disabled=flashI===0;
+  prevBtn.style.opacity=flashI===0?'0.35':'1';
   flashFlipped=false;
-  // Auto-speak the word after a short delay
-  setTimeout(()=>speakText(w.e), 400);
+  setTimeout(()=>speakText(w.e),400);
 }
+
 function flipCard(){
-  if(flashFlipped)return;flashFlipped=true;playTone('flip');
+  if(flashFlipped)return;
+  flashFlipped=true;playTone('flip');
   document.getElementById('flashcard').classList.add('flipped');
   document.getElementById('btn-flip').style.display='none';
-  document.getElementById('fc-ar').style.display='flex';
   showNoteSection(flashQ[flashI].e);
 }
 
-function markCard(passed){
-  const w=flashQ[flashI];
-  if(passed){sPass++;ss(w.e,'mastered');playTone('correct');}
-  else{sFail++;ss(w.e,'failed');playTone('wrong');}
-  flashI++;
-  if(flashI>=flashQ.length)showResults('flash');else renderFlash();
+function nextCard(){
+  if(flashI<flashQ.length-1){flashI++;renderFlash();}
+  else goHome();
+}
+
+function prevCard(){
+  if(flashI>0){flashI--;renderFlash();}
 }
 
 // ========== NOTES ==========
@@ -1874,7 +1885,104 @@ function nextFill(){
   if(fillI>=fillQ.length)showResults('fill');else renderFill();
 }
 
-// ========== CAMERA & TRANSLATION ==========
+// ========== TRANSLATOR ==========
+let transFromHe=true; // true = עברית→English, false = English→עברית
+let lastTransResult='';
+
+function swapLangs(){
+  transFromHe=!transFromHe;
+  const ta=document.getElementById('cam-text-input');
+  const la=document.getElementById('lang-a-label');
+  const lb=document.getElementById('lang-b-label');
+  // Swap labels
+  if(transFromHe){
+    la.textContent='עברית 🇮🇱';lb.textContent='English 🇬🇧';
+    ta.placeholder='הקלד כאן בעברית...';
+    ta.style.direction='rtl';ta.style.textAlign='right';
+  } else {
+    la.textContent='English 🇬🇧';lb.textContent='עברית 🇮🇱';
+    ta.placeholder='Type in English here...';
+    ta.style.direction='ltr';ta.style.textAlign='left';
+  }
+  // If there's a result, swap it into input
+  if(lastTransResult){ta.value=lastTransResult;lastTransResult='';}
+  document.getElementById('cam-result').style.display='none';
+}
+
+function doTranslate(){
+  const text=document.getElementById('cam-text-input').value.trim();
+  if(!text){alert(transFromHe?'הקלד טקסט בעברית':'Type some English text');return;}
+  document.getElementById('cam-result').style.display='none';
+  document.getElementById('cam-loading').style.display='block';
+  const toLang=transFromHe?'English':'Hebrew';
+  performTranslate(text,toLang);
+}
+
+function speakTransResult(){
+  const text=document.getElementById('cam-translation').textContent;
+  if(!text||text==='—') return;
+  // Speak in correct language
+  const lang=transFromHe?'en-US':'he-IL';
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.lang=lang;utter.rate=0.85;
+  const voices=window.speechSynthesis.getVoices();
+  const v=voices.find(x=>x.lang.startsWith(transFromHe?'en':'he'));
+  if(v) utter.voice=v;
+  window.speechSynthesis.speak(utter);
+}
+
+async function performTranslate(text,toLang){
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:600,
+        system:`You are a translator. Translate the text to ${toLang}. 
+Respond ONLY with this JSON, no markdown:
+{"translation":"the translated text","words":[{"eng":"word","heb":"מילה"}]}
+words: up to 5 useful English-Hebrew pairs from the text. Keep it short.`,
+        messages:[{role:'user',content:text}]
+      })
+    });
+    const data=await resp.json();
+    document.getElementById('cam-loading').style.display='none';
+    const raw=data.content?.[0]?.text||'{}';
+    let result;
+    try{result=JSON.parse(raw.replace(/```json|```/g,'').trim());}
+    catch(e){result={translation:raw,words:[]};}
+    lastTransResult=result.translation||'—';
+    const transEl=document.getElementById('cam-translation');
+    transEl.textContent=lastTransResult;
+    transEl.style.direction=transFromHe?'ltr':'rtl';
+    transEl.style.textAlign=transFromHe?'left':'right';
+    document.getElementById('trans-result-lang').textContent=
+      transFromHe?'תרגום לאנגלית:':'Translation to Hebrew:';
+    renderCamWords(result.words||[]);
+    document.getElementById('cam-result').style.display='block';
+  }catch(err){
+    document.getElementById('cam-loading').style.display='none';
+    document.getElementById('cam-translation').textContent='שגיאה: '+err.message;
+    document.getElementById('cam-result').style.display='block';
+  }
+}
+
+// legacy wrappers
+function translateTyped(){doTranslate();}
+async function translateText(text){
+  document.getElementById('cam-loading').style.display='block';
+  await performTranslate(text,'Hebrew');
+}
+async function translateTextFull(text){await translateText(text);}
+
+
 let camStream=null;
 
 function triggerCamera(){
@@ -1890,39 +1998,7 @@ function translateTyped(){
 }
 
 async function translateText(text){
-  try{
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'anthropic-version':'2023-06-01',
-        'anthropic-dangerous-direct-browser-access':'true'
-      },
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:800,
-        system:`You are a Hebrew translator. Respond ONLY in this exact JSON with no extra text:
-{"translation":"תרגום לעברית","words":[{"eng":"word","heb":"מילה"}]}
-Keep words list to max 6 most interesting words. No markdown.`,
-        messages:[{role:'user',content:'Translate this English text to Hebrew: '+text}]
-      })
-    });
-    const data=await resp.json();
-    document.getElementById('cam-loading').style.display='none';
-    const raw=data.content?.[0]?.text||'{}';
-    let result;
-    try{result=JSON.parse(raw.replace(/```json|```/g,'').trim());}
-    catch(e){result={translation:raw,words:[]};}
-    document.getElementById('cam-extracted').textContent=text;
-    document.getElementById('cam-translation').textContent=result.translation||raw;
-    renderCamWords(result.words||[]);
-    document.getElementById('cam-result').style.display='block';
-  }catch(err){
-    document.getElementById('cam-loading').style.display='none';
-    document.getElementById('cam-extracted').textContent=text;
-    document.getElementById('cam-translation').textContent='שגיאה: '+err.message;
-    document.getElementById('cam-result').style.display='block';
-  }
+  await translateTextFull(text,'Hebrew','🇮🇱');
 }
 
 function renderCamWords(words){
@@ -1946,9 +2022,15 @@ function renderCamWords(words){
 
 function openCamera(){
   showScreen('camera');
+  transFromHe=true;
   document.getElementById('cam-result').style.display='none';
   document.getElementById('cam-loading').style.display='none';
   document.getElementById('cam-text-input').value='';
+  document.getElementById('cam-text-input').placeholder='הקלד כאן בעברית...';
+  document.getElementById('cam-text-input').style.direction='rtl';
+  document.getElementById('cam-text-input').style.textAlign='right';
+  document.getElementById('lang-a-label').textContent='עברית 🇮🇱';
+  document.getElementById('lang-b-label').textContent='English 🇬🇧';
 }
 
 // old startCamera / stopCamera kept for goHome reference
