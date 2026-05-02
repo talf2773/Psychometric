@@ -4,6 +4,55 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>אנגלית בחיי היומיום</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="אנגלית">
+<meta name="theme-color" content="#60A5FA">
+<script>
+// Generate icon as canvas and set as apple-touch-icon + favicon
+(function(){
+  try{
+    const c=document.createElement('canvas');
+    c.width=180;c.height=180;
+    const ctx=c.getContext('2d');
+    // rounded rect background
+    const r=36;
+    ctx.beginPath();
+    ctx.moveTo(r,0);ctx.lineTo(180-r,0);ctx.quadraticCurveTo(180,0,180,r);
+    ctx.lineTo(180,180-r);ctx.quadraticCurveTo(180,180,180-r,180);
+    ctx.lineTo(r,180);ctx.quadraticCurveTo(0,180,0,180-r);
+    ctx.lineTo(0,r);ctx.quadraticCurveTo(0,0,r,0);ctx.closePath();
+    // gradient background
+    const g=ctx.createLinearGradient(0,0,180,180);
+    g.addColorStop(0,'#60A5FA');g.addColorStop(1,'#3B82F6');
+    ctx.fillStyle=g;ctx.fill();
+    // white circle for globe
+    ctx.fillStyle='rgba(255,255,255,0.15)';
+    ctx.beginPath();ctx.arc(90,82,52,0,Math.PI*2);ctx.fill();
+    // globe emoji style — draw letters A ע
+    ctx.fillStyle='white';
+    ctx.font='bold 52px Arial';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText('A',62,76);
+    ctx.font='bold 44px Arial';
+    ctx.fillText('ע',118,88);
+    // small arrow between
+    ctx.fillStyle='rgba(255,255,255,0.85)';
+    ctx.font='bold 22px Arial';
+    ctx.fillText('⇄',90,130);
+    const url=c.toDataURL('image/png');
+    // favicon
+    let lnk=document.querySelector("link[rel='icon']");
+    if(!lnk){lnk=document.createElement('link');lnk.rel='icon';document.head.appendChild(lnk);}
+    lnk.href=url;
+    // apple touch icon
+    let al=document.querySelector("link[rel='apple-touch-icon']");
+    if(!al){al=document.createElement('link');al.rel='apple-touch-icon';document.head.appendChild(al);}
+    al.href=url;
+  }catch(e){}
+})();
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f5f5f5;color:#1a1a1a;min-height:100vh;}
