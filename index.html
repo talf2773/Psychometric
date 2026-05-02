@@ -269,111 +269,114 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
     </div>
   </div>
 
-  <div class="stats-dash">
-    <div class="stats-dash-title">📊 ההתקדמות שלי</div>
-    <div class="stats-grid">
-      <div class="sc green"><div class="sc-num" id="d-mastered">0</div><div class="sc-lbl">ידעתי</div></div>
-      <div class="sc red"><div class="sc-num" id="d-failed">0</div><div class="sc-lbl">לתרגול</div></div>
-      <div class="sc blue"><div class="sc-num" id="d-sessions">0</div><div class="sc-lbl">סשנים</div></div>
+  <!-- 1. תרגול אוצר מילים — תכלת רך -->
+  <div onclick="startFlash('all')" style="background:#EFF6FF;border:1.5px solid #BFDBFE;border-radius:16px;margin-bottom:.75rem;overflow:hidden;box-shadow:0 2px 8px rgba(96,165,250,.15);cursor:pointer">
+    <div style="background:#60A5FA;padding:.65rem 1rem;display:flex;align-items:center;gap:8px">
+      <span style="font-size:20px">📖</span>
+      <div style="font-size:15px;font-weight:700;color:white">תרגול אוצר מילים</div>
+      <div style="margin-right:auto;color:rgba(255,255,255,.85);font-size:18px">←</div>
     </div>
-    <div class="prog-row">
-      <div class="prog-lbl">ידעתי</div>
-      <div class="prog-out"><div class="prog-in" id="prog-mastered" style="background:#2E7D4F;width:0%"></div></div>
-      <div class="prog-pct" id="prog-mastered-pct" style="color:#2E7D4F">0%</div>
-    </div>
-    <div class="sec-title">סשנים אחרונים</div>
-    <div class="session-list" id="session-list"></div>
+    <div style="padding:.75rem 1rem;font-size:13px;color:#4B6A8A">למד מילים לפי קטגוריה — עם הגייה וטיפים לזכירה</div>
   </div>
 
+  <!-- 2. שלוש כרטיסיות — סגלגל, כתום-אפרסק, ירוק-זית -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-bottom:.75rem">
 
-  <!-- שורה 1: אוצר מילים — רוחב מלא -->
-  <div class="mode-card-wide" onclick="startFlash('all')">
-    <div style="font-size:28px">📖</div>
-    <div>
-      <div class="mode-title" style="font-size:15px">אוצר מילים</div>
-      <div class="mode-desc">למד מילים לפי קטגוריה — עם הגייה וטיפים</div>
+    <!-- חידון — סגלגל רך -->
+    <div onclick="startQuiz()" style="background:#F5F0FF;border:1.5px solid #D8B4FE;border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 2px 6px rgba(167,139,250,.15)">
+      <div style="background:#A78BFA;padding:.5rem;text-align:center">
+        <span style="font-size:20px">❓</span>
+      </div>
+      <div style="padding:.5rem .6rem">
+        <div style="font-size:13px;font-weight:700;color:#3B1F6A;margin-bottom:2px">חידון</div>
+        <div style="font-size:10px;color:#7C5CBF">4 אפשרויות</div>
+      </div>
     </div>
-    <div style="margin-right:auto;font-size:20px;color:#1565C0">←</div>
+
+    <!-- התאמת זוגות — צהוב רך -->
+    <div onclick="startMatch()" style="background:#FFFBEB;border:1.5px solid #FDE68A;border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 2px 6px rgba(251,191,36,.15)">
+      <div style="background:#FBBF24;padding:.5rem;text-align:center">
+        <span style="font-size:20px">🎯</span>
+      </div>
+      <div style="padding:.5rem .6rem">
+        <div style="font-size:13px;font-weight:700;color:#6B4E00;margin-bottom:2px">התאמת זוגות</div>
+        <div style="font-size:10px;color:#A07820">חבר מילה לתרגום</div>
+      </div>
+    </div>
+
+    <!-- השלמת מילים — ירוק-מנטה רך -->
+    <div onclick="startFill()" style="background:#F0FDF4;border:1.5px solid #A7F3C6;border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 2px 6px rgba(52,211,153,.15)">
+      <div style="background:#34D399;padding:.5rem;text-align:center">
+        <span style="font-size:20px">✏️</span>
+      </div>
+      <div style="padding:.5rem .6rem">
+        <div style="font-size:13px;font-weight:700;color:#064E2E;margin-bottom:2px">השלמת מילים</div>
+        <div style="font-size:10px;color:#2A7A52">השלם את החסר</div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- שורה 2: חידון + התאמת זוגות + השלמת מילים -->
-  <div class="mode-grid" style="margin:.6rem 0;grid-template-columns:1fr 1fr 1fr">
-    <div class="mode-card" onclick="startQuiz()">
-      <div class="mode-icon">❓</div>
-      <div class="mode-title">חידון</div>
-      <div class="mode-desc">4 אפשרויות</div>
+  <!-- 3. חזרה על שגיאות — ורדרד רך -->
+  <div onclick="startFlash('failed')" style="background:#FFF1F2;border:1.5px solid #FECDD3;border-radius:16px;margin-bottom:.75rem;overflow:hidden;box-shadow:0 2px 8px rgba(251,113,133,.15);cursor:pointer">
+    <div style="background:#FB7185;padding:.65rem 1rem;display:flex;align-items:center;gap:8px">
+      <span style="font-size:20px">🔁</span>
+      <div style="font-size:15px;font-weight:700;color:white">חזרה על שגיאות</div>
+      <div class="mode-badge red" id="failed-badge" style="display:none;position:static;margin-right:4px;margin-left:0;background:rgba(255,255,255,.3);color:white">0</div>
+      <div style="margin-right:auto;color:rgba(255,255,255,.85);font-size:18px">←</div>
     </div>
-    <div class="mode-card" onclick="startMatch()">
-      <div class="mode-icon">🎯</div>
-      <div class="mode-title">התאמת זוגות</div>
-      <div class="mode-desc">חבר מילה לתרגום</div>
-    </div>
-    <div class="mode-card" onclick="startFill()">
-      <div class="mode-icon">✏️</div>
-      <div class="mode-title">השלמת מילים</div>
-      <div class="mode-desc">השלם את החסר</div>
-    </div>
+    <div style="padding:.75rem 1rem;font-size:13px;color:#7A2A35">כל מה שלא ידעת — מכל המשחקים</div>
   </div>
 
-  <!-- שורה 3: חזרה על שגיאות — רוחב מלא, בצבע שונה -->
-  <div class="mode-card-errors" onclick="startFlash('failed')">
-    <div class="mode-badge red" id="failed-badge" style="display:none;position:static;margin-left:4px">0</div>
-    <div style="font-size:24px">🔁</div>
-    <div>
-      <div class="mode-title" style="color:#C94040">חזרה על שגיאות</div>
-      <div class="mode-desc">כל מה שלא ידעת — מכל המשחקים</div>
-    </div>
-  </div>
-
-  <!-- תרגומון ישירות במסך הבית -->
-  <div style="background:#fff;border:2px solid #1565C0;border-radius:16px;margin-bottom:1rem;overflow:hidden;box-shadow:0 4px 16px rgba(21,101,192,.15)">
+  <!-- 4. תרגומון — אפור כהה/שחור -->
+  <div style="background:#F8F8F8;border:1.5px solid #D1D5DB;border-radius:16px;margin-bottom:1rem;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,.12)">
     <!-- כותרת תרגומון -->
-    <div style="background:#1565C0;padding:.75rem 1rem;display:flex;align-items:center;gap:8px">
+    <div style="background:#374151;padding:.75rem 1rem;display:flex;align-items:center;gap:8px">
       <span style="font-size:22px">🌐</span>
       <div>
         <div style="font-size:16px;font-weight:700;color:white;letter-spacing:.3px">תרגומון</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.75)">עברית ↔ אנגלית</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7)">עברית ↔ אנגלית</div>
       </div>
     </div>
     <div style="padding:.85rem">
       <!-- בורר כיוון -->
-      <div style="display:flex;align-items:center;background:#f0f4ff;border:1.5px solid #c5d5f5;border-radius:10px;padding:4px;gap:4px;margin-bottom:.6rem">
+      <div style="display:flex;align-items:center;background:#F3F4F6;border:1.5px solid #D1D5DB;border-radius:10px;padding:4px;gap:4px;margin-bottom:.6rem">
         <button id="ht-he" onclick="htSetDir('he')"
-          style="flex:1;padding:8px;border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;background:#1565C0;color:white;transition:.15s">עברית 🇮🇱</button>
+          style="flex:1;padding:8px;border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;background:#374151;color:white;transition:.15s">עברית 🇮🇱</button>
         <button onclick="htSwap()"
-          style="padding:4px 10px;border:1px solid #c5d5f5;background:white;border-radius:7px;font-size:16px;cursor:pointer;color:#1565C0;font-weight:700">⇄</button>
+          style="padding:4px 10px;border:1px solid #D1D5DB;background:white;border-radius:7px;font-size:16px;cursor:pointer;color:#374151;font-weight:700">⇄</button>
         <button id="ht-en" onclick="htSetDir('en')"
-          style="flex:1;padding:8px;border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;background:transparent;color:#888;transition:.15s">English 🇬🇧</button>
+          style="flex:1;padding:8px;border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;background:transparent;color:#6B7280;transition:.15s">English 🇬🇧</button>
       </div>
       <!-- שדה קלט -->
       <div style="position:relative;margin-bottom:.5rem">
         <textarea id="ht-inp" placeholder="הקלד כאן בעברית..."
-          style="width:100%;padding:10px 12px;border:1.5px solid #c5d5f5;border-radius:10px;font-size:15px;direction:rtl;text-align:right;resize:none;outline:none;font-family:inherit;height:80px;background:#fafbff;transition:.15s"
-          onfocus="this.style.borderColor='#1565C0'" onblur="this.style.borderColor='#c5d5f5'"></textarea>
+          style="width:100%;padding:10px 12px;border:1.5px solid #D1D5DB;border-radius:10px;font-size:15px;direction:rtl;text-align:right;resize:none;outline:none;font-family:inherit;height:80px;background:#fff;transition:.15s"
+          onfocus="this.style.borderColor='#374151'" onblur="this.style.borderColor='#D1D5DB'"></textarea>
       </div>
       <!-- כפתור תרגום -->
       <button onclick="htTranslate()"
-        style="width:100%;padding:11px;background:#1565C0;color:white;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:.5rem;display:flex;align-items:center;justify-content:center;gap:6px;transition:.15s"
-        onmouseover="this.style.background='#0D47A1'" onmouseout="this.style.background='#1565C0'">
+        style="width:100%;padding:11px;background:#374151;color:white;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:.5rem;display:flex;align-items:center;justify-content:center;gap:6px;transition:.15s"
+        onmouseover="this.style.background='#1F2937'" onmouseout="this.style.background='#374151'">
         <span>🌐</span> תרגם
       </button>
       <!-- טעינה -->
-      <div id="ht-load" style="display:none;text-align:center;color:#1565C0;font-size:13px;padding:.3rem">⏳ מתרגם...</div>
+      <div id="ht-load" style="display:none;text-align:center;color:#374151;font-size:13px;padding:.3rem">⏳ מתרגם...</div>
       <!-- שגיאה -->
-      <div id="ht-err" style="display:none;background:#FDF2F2;border:1px solid #C94040;border-radius:8px;padding:.5rem;font-size:12px;color:#C94040;margin-top:.3rem"></div>
+      <div id="ht-err" style="display:none;background:#FFF1F2;border:1px solid #FECDD3;border-radius:8px;padding:.5rem;font-size:12px;color:#BE3A48;margin-top:.3rem"></div>
       <!-- תוצאה -->
-      <div id="ht-result" style="display:none;background:#f0f7f0;border:1.5px solid #2E7D4F;border-radius:10px;padding:.85rem 1rem;position:relative;margin-top:.2rem">
-        <div style="font-size:10px;font-weight:700;color:#2E7D4F;margin-bottom:.35rem;letter-spacing:.5px">✓ תרגום:</div>
+      <div id="ht-result" style="display:none;background:#F3F4F6;border:1.5px solid #9CA3AF;border-radius:10px;padding:.85rem 1rem;position:relative;margin-top:.2rem">
+        <div style="font-size:10px;font-weight:700;color:#374151;margin-bottom:.35rem;letter-spacing:.5px">✓ תרגום:</div>
         <div id="ht-text" style="font-size:17px;color:#1a1a1a;font-weight:600;line-height:1.5;padding-left:30px"></div>
-        <button onclick="htSpeak()" style="position:absolute;top:10px;left:10px;background:#2E7D4F;border:none;border-radius:50%;width:26px;height:26px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white" title="השמע תרגום">🔊</button>
+        <button onclick="htSpeak()" style="position:absolute;top:10px;left:10px;background:#374151;border:none;border-radius:50%;width:26px;height:26px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white" title="השמע תרגום">🔊</button>
       </div>
     </div>
   </div>
 
-  <div class="wbh">
+  <div class="wbh" style="display:none">
     <h3>📂 קטגוריות — בחר נושא לתרגול</h3>
   </div>
-  <div id="cat-cards"></div>
+  <div id="cat-cards" style="display:none"></div>
 </div>
 
 <!-- FLASHCARD -->
@@ -526,11 +529,54 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
     </div>
   </div>
 
-  <!-- צילום תמונה — קו הפרדה -->
-  <div style="border-top:1px solid #e0e0e0;padding-top:.75rem;margin-top:.25rem">
-    <div style="font-size:12px;color:#888;margin-bottom:.5rem;text-align:center">📷 תרגם טקסט מתמונה</div>
-    <button class="cam-upload-btn" onclick="triggerCamera()">📷 צלם / בחר תמונה מהגלריה</button>
-    <input type="file" id="cam-file" accept="image/*" capture="environment" style="display:none" onchange="handleFileUpload(event)"/>
+  <!-- הפרדה -->
+  <div style="display:flex;align-items:center;gap:8px;margin:.25rem 0 .75rem">
+    <div style="flex:1;height:1px;background:#e0e0e0"></div>
+    <div style="font-size:12px;color:#aaa;white-space:nowrap">או תרגם מתמונה</div>
+    <div style="flex:1;height:1px;background:#e0e0e0"></div>
+  </div>
+
+  <!-- אזור תרגום מתמונה -->
+  <div style="background:#fff;border:2px dashed #c5d5f5;border-radius:14px;padding:1rem;text-align:center" id="img-upload-area">
+    <div style="font-size:36px;margin-bottom:.4rem">📷</div>
+    <div style="font-size:14px;font-weight:700;color:#1565C0;margin-bottom:.25rem">תרגום מתמונה</div>
+    <div style="font-size:12px;color:#888;margin-bottom:.75rem">צלם שלט, תפריט, שלט, מוצר — כל טקסט באנגלית</div>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button onclick="triggerImgCamera()" style="padding:9px 16px;background:#1565C0;color:white;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer">📸 צלם עכשיו</button>
+      <button onclick="triggerImgGallery()" style="padding:9px 16px;background:#f0f4ff;color:#1565C0;border:1.5px solid #c5d5f5;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer">🖼️ בחר מהגלריה</button>
+    </div>
+    <input type="file" id="cam-file-camera" accept="image/*" capture="environment" style="display:none" onchange="handleFileUpload(event)"/>
+    <input type="file" id="cam-file-gallery" accept="image/*" style="display:none" onchange="handleFileUpload(event)"/>
+  </div>
+
+  <!-- תצוגה מקדימה של תמונה -->
+  <div id="img-preview-wrap" style="display:none;margin-top:.75rem;position:relative">
+    <img id="img-preview" style="width:100%;border-radius:10px;border:1.5px solid #c5d5f5;max-height:200px;object-fit:cover"/>
+    <button onclick="clearImage()" style="position:absolute;top:6px;left:6px;background:rgba(0,0,0,.55);color:white;border:none;border-radius:50%;width:24px;height:24px;font-size:13px;cursor:pointer;line-height:1">✕</button>
+  </div>
+
+  <!-- תוצאת תמונה -->
+  <div id="img-result" style="display:none;margin-top:.75rem">
+    <div style="background:#f0f7ff;border:1.5px solid #1565C0;border-radius:12px;padding:1rem;margin-bottom:.6rem">
+      <div style="font-size:11px;font-weight:700;color:#1565C0;margin-bottom:.4rem">📝 טקסט שנמצא בתמונה:</div>
+      <div id="img-extracted" style="font-size:13px;color:#333;line-height:1.6;direction:ltr;text-align:left;background:#fff;border-radius:8px;padding:.5rem .7rem"></div>
+    </div>
+    <div style="background:#f0f7f0;border:2px solid #2E7D4F;border-radius:12px;padding:1rem;position:relative">
+      <div style="font-size:11px;font-weight:700;color:#2E7D4F;margin-bottom:.4rem">✓ תרגום לעברית:</div>
+      <div id="img-translation" style="font-size:16px;color:#1a1a1a;font-weight:600;line-height:1.6;padding-left:32px"></div>
+      <button onclick="speakImgResult()" style="position:absolute;top:10px;left:10px;background:#2E7D4F;border:none;border-radius:50%;width:26px;height:26px;font-size:14px;cursor:pointer;color:white" title="השמע תרגום">🔊</button>
+    </div>
+    <!-- מילים ללמידה -->
+    <div id="img-words-wrap" style="display:none;margin-top:.6rem">
+      <div style="font-size:12px;font-weight:700;color:#444;margin-bottom:.4rem">💡 מילים שכדאי ללמוד:</div>
+      <div class="cam-word-list" id="img-word-list"></div>
+    </div>
+  </div>
+
+  <!-- טעינה לתמונה -->
+  <div id="img-loading" style="display:none;text-align:center;padding:1.5rem;color:#1565C0">
+    <div style="font-size:30px;margin-bottom:.4rem;animation:spin 1s linear infinite;display:inline-block">⏳</div>
+    <div style="font-size:14px">קורא את התמונה ומתרגם...</div>
   </div>
 </div>
 
@@ -2014,13 +2060,13 @@ function htSetDir(d){
   if(htFromHe){
     inp.placeholder='הקלד כאן בעברית...';
     inp.style.direction='rtl';inp.style.textAlign='right';
-    bhe.style.background='white';bhe.style.color='#6A1B9A';
-    ben.style.background='rgba(255,255,255,.2)';ben.style.color='white';
+    bhe.style.background='#374151';bhe.style.color='white';
+    ben.style.background='transparent';ben.style.color='#6B7280';
   } else {
     inp.placeholder='Type in English here...';
     inp.style.direction='ltr';inp.style.textAlign='left';
-    ben.style.background='white';ben.style.color='#6A1B9A';
-    bhe.style.background='rgba(255,255,255,.2)';bhe.style.color='white';
+    ben.style.background='#374151';ben.style.color='white';
+    bhe.style.background='transparent';bhe.style.color='#6B7280';
   }
   document.getElementById('ht-result').style.display='none';
   document.getElementById('ht-err').style.display='none';
@@ -2137,27 +2183,40 @@ function openCamera(){
 function startCamera(){}
 function stopCamera(){}
 
-function snapPhoto(){
-  const video=document.getElementById('cam-video');
-  const canvas=document.getElementById('cam-canvas');
-  canvas.width=video.videoWidth||640;
-  canvas.height=video.videoHeight||480;
-  canvas.getContext('2d').drawImage(video,0,0);
-  const dataUrl=canvas.toDataURL('image/jpeg',0.85);
-  processImage(dataUrl);
+function triggerImgCamera(){document.getElementById('cam-file-camera').click();}
+function triggerImgGallery(){document.getElementById('cam-file-gallery').click();}
+
+// old triggerCamera kept for compatibility
+function triggerCamera(){triggerImgGallery();}
+
+function clearImage(){
+  document.getElementById('img-preview-wrap').style.display='none';
+  document.getElementById('img-result').style.display='none';
+  document.getElementById('img-loading').style.display='none';
+  document.getElementById('cam-file-camera').value='';
+  document.getElementById('cam-file-gallery').value='';
 }
 
 function handleFileUpload(e){
   const file=e.target.files[0];
   if(!file) return;
   const reader=new FileReader();
-  reader.onload=ev=>processImage(ev.target.result);
+  reader.onload=ev=>{
+    // show preview
+    const prev=document.getElementById('img-preview');
+    prev.src=ev.target.result;
+    document.getElementById('img-preview-wrap').style.display='block';
+    document.getElementById('img-result').style.display='none';
+    processImage(ev.target.result);
+  };
   reader.readAsDataURL(file);
 }
 
+let lastImgTranslation='';
+
 async function processImage(dataUrl){
-  document.getElementById('cam-result').style.display='none';
-  document.getElementById('cam-loading').style.display='block';
+  document.getElementById('img-result').style.display='none';
+  document.getElementById('img-loading').style.display='block';
   const base64=dataUrl.split(',')[1];
   const mediaType=dataUrl.startsWith('data:image/png')?'image/png':'image/jpeg';
 
@@ -2172,51 +2231,77 @@ async function processImage(dataUrl){
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:1000,
-        system:`You are a helpful translator. The user will send you an image.
-Your tasks:
-1. Extract ALL English text visible in the image.
-2. Translate every piece of text to Hebrew.
-3. List any individual English words (not common Hebrew words) that could be useful to learn.
+        system:`You are a helpful translator. The user sends an image.
+Tasks:
+1. Extract ALL text visible in the image (any language).
+2. Translate everything to Hebrew.
+3. List up to 6 individual English words from the image that are useful to learn.
 
-Respond ONLY in this exact JSON format (no markdown, no extra text):
-{
-  "extracted": "the english text you found",
-  "translation": "התרגום לעברית של כל הטקסט",
-  "words": [
-    {"eng": "word", "heb": "מילה"},
-    {"eng": "another", "heb": "עוד"}
-  ]
-}
-If no English text found, set extracted to "לא נמצא טקסט אנגלי בתמונה", translation to empty, words to [].`,
+Respond ONLY in this exact JSON (no markdown, no extra text):
+{"extracted":"all text found in image","translation":"התרגום לעברית","words":[{"eng":"word","heb":"מילה"}]}
+If no text found: extracted="לא נמצא טקסט בתמונה", translation="", words=[]`,
         messages:[{
           role:'user',
           content:[
             {type:'image',source:{type:'base64',media_type:mediaType,data:base64}},
-            {type:'text',text:'Please extract and translate all English text in this image.'}
+            {type:'text',text:'Extract and translate all text in this image.'}
           ]
         }]
       })
     });
 
     const data=await resp.json();
-    document.getElementById('cam-loading').style.display='none';
+    document.getElementById('img-loading').style.display='none';
+
+    if(data.error){throw new Error(data.error.message||'API error');}
 
     const raw=data.content?.[0]?.text||'{}';
     let result;
     try{result=JSON.parse(raw.replace(/```json|```/g,'').trim());}
     catch(e){result={extracted:'לא הצלחתי לקרוא את התמונה',translation:'',words:[]};}
 
-    document.getElementById('cam-extracted').textContent=result.extracted||'—';
-    document.getElementById('cam-translation').textContent=result.translation||'—';
-    renderCamWords(result.words||[]);
-    document.getElementById('cam-result').style.display='block';
+    lastImgTranslation=result.translation||'';
+    document.getElementById('img-extracted').textContent=result.extracted||'—';
+    document.getElementById('img-translation').textContent=result.translation||'—';
+    renderImgWords(result.words||[]);
+    document.getElementById('img-result').style.display='block';
 
   }catch(err){
-    document.getElementById('cam-loading').style.display='none';
-    document.getElementById('cam-extracted').textContent='שגיאה בעיבוד התמונה: '+err.message;
-    document.getElementById('cam-translation').textContent='';
-    document.getElementById('cam-result').style.display='block';
+    document.getElementById('img-loading').style.display='none';
+    document.getElementById('img-extracted').textContent='שגיאה: '+err.message;
+    document.getElementById('img-translation').textContent='';
+    document.getElementById('img-words-wrap').style.display='none';
+    document.getElementById('img-result').style.display='block';
   }
+}
+
+function renderImgWords(words){
+  const wrap=document.getElementById('img-words-wrap');
+  const list=document.getElementById('img-word-list');
+  if(!words||!words.length){wrap.style.display='none';return;}
+  wrap.style.display='block';
+  list.innerHTML='';
+  words.forEach(w=>{
+    const known=S.words&&S.words[w.eng];
+    const d=document.createElement('div');
+    d.className='cam-word';
+    d.innerHTML=`<div class="cam-word-eng">${w.eng}</div>
+      <div class="cam-word-heb">${w.heb}</div>
+      <button class="cam-speak" onclick="speakText('${w.eng.replace(/'/g,"\\'")}',this)">🔊</button>
+      ${known?`<span style="font-size:11px;color:#2E7D4F">✓ במאגר</span>`
+             :`<button class="cam-save" onclick="saveScannedWord('${w.eng.replace(/'/g,"\\'")}','${w.heb.replace(/'/g,"\\'")}',this)">+ שמור</button>`}`;
+    list.appendChild(d);
+  });
+}
+
+function speakImgResult(){
+  if(!lastImgTranslation||!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(lastImgTranslation);
+  u.lang='he-IL';u.rate=0.85;
+  const v=window.speechSynthesis.getVoices().find(x=>x.lang.startsWith('he'));
+  if(v) u.voice=v;
+  window.speechSynthesis.speak(u);
 }
 
 function saveScannedWord(eng,heb,btn){
